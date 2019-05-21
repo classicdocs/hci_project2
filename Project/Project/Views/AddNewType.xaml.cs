@@ -47,6 +47,7 @@ namespace Project.Views
             id = "";
             name = "";
             fileName = "";
+            description = "";
         }
 
         private void ChooseIcon_Click(object sender, RoutedEventArgs e)
@@ -81,21 +82,21 @@ namespace Project.Views
             {
                 if (rt.Id == type.Id)
                 {
-                    MessageBox.Show("Id you entered is already in use. Please try again");
+                    MessageBox.Show("Id you entered is already in use. Please choose another.");
                     return;
                 } else if (rt.Name == type.Name)
                 {
-                    MessageBox.Show("Name you entered is already in use. Please try again");
+                    MessageBox.Show("Name you entered is already in use. Please choose another.");
                     return;
                 } else if (rt.Icon == type.Icon)
                 {
-                    MessageBox.Show("Icon you choose is already in use. Please try again");
+                    MessageBox.Show("Icon you choose is already in use. Please choose another.");
                     return;
                 }
             }
             MainWindow.types.Add(type);
             this.Close();
-            MessageBox.Show("You have successfully add new resource type");
+            MessageBox.Show("You have successfully add new resource type.");
         }
 
     }

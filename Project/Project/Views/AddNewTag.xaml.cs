@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Project.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,10 +22,18 @@ namespace Project.Views
     /// </summary>
     public partial class AddNewTag : Window, INotifyPropertyChanged
     {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+
         public AddNewTag()
         {
             InitializeComponent();
-            Colors.ItemsSource = typeof(Colors).GetProperties();
+            this.DataContext = this;
+            id = "";
+            name = "";
+            description = "";
+            cmbColors.ItemsSource = typeof(Colors).GetProperties();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,6 +43,39 @@ namespace Project.Views
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (id.Equals("") || name.Equals("") || cmbColors == null)
+            {
+                MessageBox.Show("You must fill all required fields");
+                return;
+            }
+            Color selectedColor = (Color)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
+
+            Tag tag = new Tag(id, name, selectedColor.ToString(),description);
+            foreach (Tag t in MainWindow.tags)
+            {
+                if (t.Id == tag.Id)
+                {
+                    MessageBox.Show("Id you entered is already in use. Please choose another.");
+                    return;
+                }
+                else if (t.Name == tag.Name)
+                {
+                    MessageBox.Show("Name you entered is already in use. Please choose another.");
+                    return;
+                }
+                else if (t.Color == tag.Color)
+                {
+                    MessageBox.Show("Color you choose is already in use. Please choose another.");
+                    return;
+                }
+            }
+            MainWindow.tags.Add(tag);
+            this.Close();
+            MessageBox.Show("You have successfully add new resource type.");
         }
     }
 }

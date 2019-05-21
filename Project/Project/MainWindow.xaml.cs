@@ -23,6 +23,7 @@ namespace Project
     public partial class MainWindow : Window
     {
         public static HashSet<ResourceType> types { get; set; }
+        public static HashSet<Tag> tags { get; set; }
 
         public MainWindow()
         {
@@ -33,6 +34,7 @@ namespace Project
         private void InitializeData()
         {
             types = new HashSet<ResourceType>();
+            tags = new HashSet<Tag>();
         }
 
         private void AllResources_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
-    class Tag
+    public class Tag
     {
         private string id { get; set; }
         private string name { get; set; }
@@ -21,6 +21,29 @@ namespace Project.Models
             this.name = name;
             this.color = color;
             this.description = description;
+        }
+
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public string Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
         }
     }
 }
