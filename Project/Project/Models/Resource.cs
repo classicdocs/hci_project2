@@ -11,7 +11,7 @@ namespace Project.Models
         private string id { get; set; }
         private string name { get; set; } 
         private string description { get; set; }
-        private Type type { get; set; }
+        private ResourceType type { get; set; }
         private ResourceFrequency frequency { get; set; }
         private string icon { get; set; }
         private bool renewable { get; set; }
@@ -24,7 +24,7 @@ namespace Project.Models
 
         public Resource() { }
 
-        public Resource(string id, string name, string description, Type type, ResourceFrequency frequency,
+        public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency,
                         string icon, bool renewable, bool strategicImportance, bool currentlyExploited, ResourceUnit unit,
                         ResourcePrice price, string dateOfDiscovery, HashSet<Tag> tags)
         {

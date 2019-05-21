@@ -10,22 +10,17 @@ namespace Project.Models
     {
         private string id { get; set; }
         private string name { get; set; }
-        private TagColor color { get; set; }
+        private string color { get; set; }
         private string description { get; set; }
 
         public Tag() { }
 
-        public Tag(string id, string name, TagColor color, string description)
+        public Tag(string id, string name, string color, string description)
         {
             this.id = id;
             this.name = name;
             this.color = color;
             this.description = description;
         }
-    }
-
-    enum TagColor
-    {
-        Red, Blue, Yellow, Green, White
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Project.Models;
+using Project.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,55 @@ namespace Project
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static HashSet<ResourceType> types { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeData();
         }
+
+        private void InitializeData()
+        {
+            types = new HashSet<ResourceType>();
+        }
+
+        private void AllResources_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new ViewAllResources();
+            s.Show();
+        }
+
+        private void AllTypes_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new ViewAllTypes();
+            s.Show();
+        }
+
+        private void AllTags_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new ViewAllTags();
+            s.Show();
+        }
+
+        private void NewResource_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new AddNewResource();
+            s.Show();
+        }
+
+        private void NewType_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new AddNewType();
+            s.Show();
+        }
+
+        private void NewTag_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new AddNewTag();
+            s.Show();
+        }
+
+        
     }
 }
