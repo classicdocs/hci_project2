@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ResourceType.cs" />
+    <Compile Include="Views\AddNewResource.xaml.cs">
+      <DependentUpon>AddNewResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewResourceDetails.xaml.cs">
+      <DependentUpon>AddNewResourceDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewTag.xaml.cs">
+      <DependentUpon>AddNewTag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewType.xaml.cs">
+      <DependentUpon>AddNewType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewAllResources.xaml.cs">
+      <DependentUpon>ViewAllResources.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewAllTags.xaml.cs">
+      <DependentUpon>ViewAllTags.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewAllTypes.xaml.cs">
+      <DependentUpon>ViewAllTypes.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,8 +90,39 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddNewResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewResourceDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewAllResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewAllTags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewAllTypes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Resource.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\ResourceTypeWithResources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +148,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\map.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\folder.png" />
+    <Resource Include="Resource\foldero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Icons\icons8-copper-bars-48.png" />
+    <Resource Include="Resource\Icons\icons8-silver-bars-48.png" />
+    <Resource Include="Resource\Icons\pick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Icons\coal.png" />
+    <Resource Include="Resource\Icons\ecological.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

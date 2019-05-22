@@ -3,10 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Project"
+        xmlns:local="clr-namespace:Project.Models"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        >
+    <Window.Resources>
+        <Style x:Key="SmallIcon" TargetType="Image">
+            <Setter Property="MaxWidth" Value="16"/>
+            <Setter Property="MaxHeight" Value="16"/>
+            <Setter Property="Margin" Value="1"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="View">
+                    <MenuItem Header="All resources" Click="AllResources_Click"></MenuItem>
+                    <MenuItem Header="All types" Click="AllTypes_Click"></MenuItem>
+                    <MenuItem Header="All tags" Click="AllTags_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Add">
+                    <MenuItem Header="New resource" Click="NewResource_Click"></MenuItem>
+                    <MenuItem Header="New type" Click="NewType_Click"></MenuItem>
+                    <MenuItem Header="New tag" Click="NewTag_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TreeView Grid.Row="0" Grid.Column="0" Name="trvResources" ItemsSource="{Binding types}" Width="Auto">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type local:ResourceTypeWithResources}" ItemsSource="{Binding Resources}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="0,0,5,0">
+                                    <Image.Style>
+                                        <Style BasedOn="{StaticResource ResourceKey=SmallIcon}" TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger 
+                                                Binding="{Binding 
+                                                        RelativeSource={RelativeSource 
+                                                                AncestorType={x:Type TreeViewItem}}, 
+                                                                Path=IsExpanded}" 
+                                                Value="True">
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type local:Resource}">
+                            <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
+                                <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                <TextBlock Text="{Binding Name}"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+                <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Image x:Name="MapImg" Source="Resource/map.jpg" AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"></Image>
+                        <Canvas x:Name="Cnv" ></Canvas>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            
+        </DockPanel>
     </Grid>
 </Window>
