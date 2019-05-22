@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -74,6 +76,12 @@ namespace Project.Views
                 }
             }
             MainWindow.tags.Add(tag);
+            var json = new JavaScriptSerializer().Serialize(MainWindow.tags);
+
+            using (StreamWriter sw = new StreamWriter("../../Data/tags.json"))
+            {
+                sw.Write(json);
+            }
             this.Close();
             MessageBox.Show("You have successfully add new resource type.");
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
-    class Resource
+    public class Resource
     {
         private string id { get; set; }
         private string name { get; set; } 
@@ -25,36 +25,62 @@ namespace Project.Models
         public Resource() { }
 
         public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency,
-                        string icon, bool renewable, bool strategicImportance, bool currentlyExploited, ResourceUnit unit,
-                        ResourcePrice price, string dateOfDiscovery, HashSet<Tag> tags)
+                        string icon, bool renewable, ResourcePrice price)
         {
             this.id = id;
             this.name = name;
             this.description = description;
             this.type = type;
             this.frequency = frequency;
+            if (icon.Equals(""))
+                this.icon = type.Icon;
             this.icon = icon;
             this.renewable = renewable;
-            this.strategicImportance = strategicImportance;
-            this.currentlyExploited = currentlyExploited;
-            this.unit = unit;
             this.price = price;
-            this.dateOfDiscovery = dateOfDiscovery;
-            this.tags = tags;
+            this.tags = new HashSet<Tag>();
+        }
+
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public string Icon
+        {
+            get { return icon; }
+            set { icon = value; }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        public ResourceType ResourceType
+        {
+            get { return type; }
+            set { type = value; }
         }
     };
 
-    enum ResourceFrequency
+    public enum ResourceFrequency
     {
         Infrequent, Common, Universal
     };
 
-    enum ResourceUnit
+    public enum ResourceUnit
     {
         Merica, Barrel, Ton, Kilogram
     };
 
-    enum ResourcePrice
+    public enum ResourcePrice
     {
         Dollar
     }
