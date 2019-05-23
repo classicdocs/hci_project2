@@ -32,6 +32,8 @@ namespace Project
         public static ObservableCollection<ResourcePoint> resources { get; set; }
         Point startPoint = new Point();
 
+        public static bool addNewResourceDialog { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,6 +47,7 @@ namespace Project
             types = new ObservableCollection<ResourceTypeWithResources>();
             tags = new ObservableCollection<Tag>();
             resources = new ObservableCollection<ResourcePoint>();
+            addNewResourceDialog = false;
         }
 
         private void AllResources_Click(object sender, RoutedEventArgs e)
@@ -96,6 +99,8 @@ namespace Project
         {
             string tags_file = "../../Data/tags.json";
             string types_file = "../../Data/types.json";
+            string resources_file = "../../Data/resources.json";
+
             if (File.Exists(tags_file))
             {
                 using (StreamReader sr = new StreamReader(tags_file))
@@ -105,7 +110,6 @@ namespace Project
                     tags = serializer.Deserialize<ObservableCollection<Tag>>(s);
                 }
             }
-
             if (File.Exists(types_file))
             {
                 using (StreamReader sr = new StreamReader(types_file))
@@ -115,7 +119,118 @@ namespace Project
                     types = serializer.Deserialize<ObservableCollection<ResourceTypeWithResources>>(s);
                 }
             }
+            if (File.Exists(resources_file))
+            {
+                using (StreamReader sr = new StreamReader(resources_file))
+                {
+                    string s = sr.ReadToEnd();
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    resources = serializer.Deserialize<ObservableCollection<ResourcePoint>>(s);
+                }
+                drawResources();
+            }
 
+        }
+
+        private Image drawResource(Resource resource)
+        {
+            Grid grid = new Grid();
+            for (int i = 0; i < 15; i++)
+            {
+                RowDefinition rd = new RowDefinition();
+                rd.Height = System.Windows.GridLength.Auto;
+                grid.RowDefinitions.Add(rd);
+            }
+            ColumnDefinition cd1 = new ColumnDefinition();
+            cd1.Width = System.Windows.GridLength.Auto;
+            grid.ColumnDefinitions.Add(cd1);
+            ColumnDefinition cd2 = new ColumnDefinition();
+            grid.ColumnDefinitions.Add(cd2);
+
+            grid = tooltipInfo(grid, "Id", resource.Id, 0);
+            grid = tooltipInfo(grid, "Name", resource.Name, 1);
+            grid = tooltipInfo(grid, "Description", resource.Description, 2);
+            grid = tooltipInfo(grid, "Type", resource.ResourceType, 3);
+            grid = tooltipInfo(grid, "Frequency", resource.Frequency, 4);
+            grid = tooltipInfo(grid, "Icon", resource.Icon, 5);
+            grid = tooltipInfo(grid, "Renewable", resource.Renewable, 6);
+            grid = tooltipInfo(grid, "Strategic importance", resource.StrategicImportance, 7);
+            grid = tooltipInfo(grid, "Currently exploited", resource.CurrentlyExploited, 8);
+            grid = tooltipInfo(grid, "Unit", resource.Unit, 9);
+            grid = tooltipInfo(grid, "Price", resource.Price, 10);
+            grid = tooltipInfo(grid, "Date of discovery", resource.DateOfDiscovery, 11);
+            grid = tooltipInfo(grid, "Tags", resource.Tags, 12);
+
+            Image img = new Image()
+            {
+                Source = new BitmapImage(new Uri(resource.Icon)),
+                Width = 20,
+                Height = 20,
+                ToolTip = grid
+            };
+            Cnv.Children.Add(img);
+            return img;
+        }
+
+        private Grid tooltipInfo(Grid grid, string label, Object content, int row)
+        {
+            Label l = new Label();
+            grid.Children.Add(l);
+            l.Content = label + ":";
+            Grid.SetRow(l, row);
+            Grid.SetColumn(l, 0);
+
+            if (content is List<Tag>)
+            {
+                StackPanel stack = new StackPanel();
+                foreach(Tag tag in (List<Tag>) content)
+                {
+                    StackPanel stack2 = new StackPanel();
+                    stack2.Orientation = Orientation.Horizontal;
+                    Label la = new Label();
+                    la.Content = tag.Name;
+                    Rectangle rect = new Rectangle();
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var brush = (Brush)converter.ConvertFromString(tag.Color);
+                    rect.Fill = brush;
+                    rect.Width = 20;
+                    rect.Height = 20;
+
+                    stack2.Children.Add(rect);
+                    stack2.Children.Add(la);
+                    stack.Children.Add(stack2);
+                }
+                grid.Children.Add(stack);
+                Grid.SetRow(stack, row);
+                Grid.SetColumn(stack, 1);
+
+                return grid;
+            } else
+            {
+                
+                Label l2 = new Label();
+                if (content is bool)
+                    l2.Content = (bool)content ? "Yes" : "No";
+                else
+                    l2.Content = content;
+                grid.Children.Add(l2);
+                Grid.SetRow(l2, row);
+                Grid.SetColumn(l2, 1);
+
+                return grid;
+            }
+            
+        }
+
+        private void drawResources()
+        {
+            foreach(ResourcePoint rp in resources)
+            {
+                Image img = drawResource(rp.resource);
+
+                Canvas.SetLeft(img, rp.point.X);
+                Canvas.SetTop(img, rp.point.Y);
+            }
         }
 
         private void Resourse_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -160,27 +275,23 @@ namespace Project
         {
             if (e.Data.GetDataPresent("myFormat"))
             {
+                addNewResourceDialog = false;
+
                 Resource resource = e.Data.GetData("myFormat") as Resource;
-
-                Label name = new Label() { Content = resource.Name };
-                StackPanel stackPanel = new StackPanel();
-                stackPanel.Children.Add(name);
-
-                Image img = new Image()
-                {
-                    Source = new BitmapImage(new Uri(resource.Icon)),
-                    Width = 20,
-                    Height = 20,
-                    ToolTip = stackPanel
-                };
-                Cnv.Children.Add(img);
-
-                Canvas.SetLeft(img, e.GetPosition(MapImg).X);
-                Canvas.SetTop(img, e.GetPosition(MapImg).Y);
 
                 Point p = new Point(e.GetPosition(MapImg).X, e.GetPosition(MapImg).Y);
                 AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
-                add.Show();
+                add.ShowDialog();
+                if (addNewResourceDialog)
+                {
+                    Image img = drawResource(resource);
+
+                    Canvas.SetLeft(img, e.GetPosition(MapImg).X);
+                    Canvas.SetTop(img, e.GetPosition(MapImg).Y);
+
+                    MessageBox.Show("You have successfully add new resource on map.");
+                }
+                
             }
         }
 
