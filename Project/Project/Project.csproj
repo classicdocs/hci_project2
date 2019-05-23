@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ResourcePoint.cs" />
     <Compile Include="Models\ResourceType.cs" />
     <Compile Include="Views\AddNewResource.xaml.cs">
       <DependentUpon>AddNewResource.xaml</DependentUpon>

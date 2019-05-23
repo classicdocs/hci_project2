@@ -20,9 +20,11 @@ namespace Project.Models
         private ResourceUnit unit { get; set; }
         private ResourcePrice price { get; set; }
         private string dateOfDiscovery { get; set; }
-        private HashSet<Tag> tags { get; set; }
+        private List<Tag> tags { get; set; }
 
-        public Resource() { }
+        public Resource() {
+            this.tags = new List<Tag>();
+        }
 
         public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency,
                         string icon, bool renewable, ResourcePrice price)
@@ -37,7 +39,7 @@ namespace Project.Models
             this.icon = icon;
             this.renewable = renewable;
             this.price = price;
-            this.tags = new HashSet<Tag>();
+            this.tags = new List<Tag>();
         }
 
         public string Id
@@ -67,6 +69,54 @@ namespace Project.Models
         {
             get { return type; }
             set { type = value; }
+        }
+
+        public bool Renewable
+        {
+            get { return renewable; }
+            set { renewable = value; }
+        }
+
+        public ResourceFrequency Frequency
+        {
+            get { return frequency; }
+            set { frequency = value; }
+        }
+
+        public ResourcePrice Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+
+        public ResourceUnit Unit
+        {
+            get { return unit; }
+            set { unit = value; }
+        }
+
+        public string DateOfDiscovery
+        {
+            get { return dateOfDiscovery; }
+            set { dateOfDiscovery = value; }
+        }
+
+        public bool StrategicImportance
+        {
+            get { return strategicImportance; }
+            set { strategicImportance = value; }
+        }
+
+        public bool CurrentlyExploited
+        {
+            get { return currentlyExploited; }
+            set { currentlyExploited = value; }
+        }
+
+        public List<Tag> Tags
+        {
+            get { return tags; }
+            set { tags = value; }
         }
     };
 
