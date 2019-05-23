@@ -68,6 +68,48 @@ namespace Project.Models
             get { return type; }
             set { type = value; }
         }
+
+        public bool Renewable
+        {
+            get { return renewable; }
+            set { renewable = value; }
+        }
+
+        public ResourceFrequency Frequency
+        {
+            get { return frequency; }
+            set { frequency = value; }
+        }
+
+        public ResourcePrice Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+
+        public ResourceUnit Unit
+        {
+            get { return unit; }
+            set { unit = value; }
+        }
+
+        public string DateOfDiscovery
+        {
+            get { return dateOfDiscovery; }
+            set { dateOfDiscovery = value; }
+        }
+
+        public bool StrategicImportance
+        {
+            get { return strategicImportance; }
+            set { strategicImportance = value; }
+        }
+
+        public bool CurrentlyExploited
+        {
+            get { return currentlyExploited; }
+            set { currentlyExploited = value; }
+        }
     };
 
     public enum ResourceFrequency

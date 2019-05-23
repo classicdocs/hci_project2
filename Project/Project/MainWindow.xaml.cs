@@ -29,7 +29,7 @@ namespace Project
         public static ObservableCollection<ResourceTypeWithResources> types { get; set; }
         public static ObservableCollection<Tag> tags { get; set; }
 
-        public static ObservableCollection<Resource> resources { get; set; }
+        public static ObservableCollection<ResourcePoint> resources { get; set; }
         Point startPoint = new Point();
 
         public MainWindow()
@@ -44,7 +44,7 @@ namespace Project
         {
             types = new ObservableCollection<ResourceTypeWithResources>();
             tags = new ObservableCollection<Tag>();
-            resources = new ObservableCollection<Resource>();
+            resources = new ObservableCollection<ResourcePoint>();
         }
 
         private void AllResources_Click(object sender, RoutedEventArgs e)
@@ -161,7 +161,6 @@ namespace Project
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Resource resource = e.Data.GetData("myFormat") as Resource;
-                resources.Add(resource);
 
                 Label name = new Label() { Content = resource.Name };
                 StackPanel stackPanel = new StackPanel();
@@ -179,7 +178,8 @@ namespace Project
                 Canvas.SetLeft(img, e.GetPosition(MapImg).X);
                 Canvas.SetTop(img, e.GetPosition(MapImg).Y);
 
-                AddNewResourceDetails add = new AddNewResourceDetails();
+                Point p = new Point(e.GetPosition(MapImg).X, e.GetPosition(MapImg).Y);
+                AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
                 add.Show();
             }
         }
