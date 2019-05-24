@@ -46,10 +46,8 @@ namespace Project.Views
             TypeOfResource.Content = resource.ResourceType.Name;
             Icon.Source = new BitmapImage(new Uri(resource.Icon));
             Renewable.Content = resource.Renewable ? "Yes" : "No";
-            Frequency.Content = resource.Frequency; 
-            cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
-            cmbUnit.SelectedItem = ResourceUnit.Kilogram;
-            //cmbTags.ItemsSource = MainWindow.tags;
+            Frequency.Content = resource.Frequency;
+            Unit.Content = resource.Unit;
             Price.Content = resource.Price;
             dateOfDiscovery = "";
         }
@@ -67,7 +65,6 @@ namespace Project.Views
         {
             Console.Write("ASF");
 
-            this.resource.Unit = (ResourceUnit)cmbUnit.SelectedItem;
             if (dateOfDiscovery.Equals(""))
                 this.resource.DateOfDiscovery = "Unknown";
             else

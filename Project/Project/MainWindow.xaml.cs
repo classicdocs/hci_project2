@@ -50,6 +50,14 @@ namespace Project
             addNewResourceDialog = false;
         }
 
+        public ImageSource MapImage
+        {
+            get
+            {
+                return new BitmapImage(new Uri("Resource/map.jpg"));
+            }
+        }
+
         private void AllResources_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllResources();
@@ -200,6 +208,13 @@ namespace Project
                     stack2.Children.Add(la);
                     stack.Children.Add(stack2);
                 }
+                List<Tag> list = (List<Tag>)content;
+                if (list.Count == 0)
+                {
+                    Label la = new Label();
+                    la.Content = "None";
+                    stack.Children.Add(la);
+                }
                 grid.Children.Add(stack);
                 Grid.SetRow(stack, row);
                 Grid.SetColumn(stack, 1);
@@ -279,19 +294,18 @@ namespace Project
 
                 Resource resource = e.Data.GetData("myFormat") as Resource;
 
-                Point p = new Point(e.GetPosition(MapImg).X, e.GetPosition(MapImg).Y);
+                Point p = new Point(e.GetPosition(Cnv).X, e.GetPosition(Cnv).Y);
                 AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
                 add.ShowDialog();
                 if (addNewResourceDialog)
                 {
                     Image img = drawResource(resource);
 
-                    Canvas.SetLeft(img, e.GetPosition(MapImg).X);
-                    Canvas.SetTop(img, e.GetPosition(MapImg).Y);
+                    Canvas.SetLeft(img, e.GetPosition(Cnv).X);
+                    Canvas.SetTop(img, e.GetPosition(Cnv).Y);
 
                     MessageBox.Show("You have successfully add new resource on map.");
                 }
-                
             }
         }
 
@@ -303,4 +317,5 @@ namespace Project
             }
         }
     }
+
 }

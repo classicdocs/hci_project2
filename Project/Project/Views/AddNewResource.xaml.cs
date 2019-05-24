@@ -32,7 +32,8 @@ namespace Project.Views
         public ObservableCollection<ResourceTypeWithResources> types { get; set; }
         public ResourceType type { get; set; }
         public ResourceFrequency frequency { get; set; }
-        public ResourcePrice price { get; set; }
+        public ResourceUnit unit { get; set; }
+        public string price { get; set; }
         public bool? renewable { get; set; }
         public string _icon;
         public string icon
@@ -60,15 +61,16 @@ namespace Project.Views
         {
             types = MainWindow.types;
             cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
-            cmbPrice.ItemsSource = Enum.GetValues(typeof(ResourcePrice)).Cast<ResourcePrice>();
             id = "";
             name = "";
             description = "";
             icon = "";
+            price = "";
             frequency = ResourceFrequency.Infrequent;
-            price = ResourcePrice.Dollar;
+            unit = ResourceUnit.Kilogram;
+            cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
+            cmbUnit.SelectedItem = unit;
             cmbFrequency.SelectedItem = frequency;
-            cmbPrice.SelectedItem = price;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -86,17 +88,17 @@ namespace Project.Views
             type =  new ResourceType(rs);
 
             frequency = (ResourceFrequency)cmbFrequency.SelectedItem;
-            price = (ResourcePrice)cmbPrice.SelectedItem;
+            unit = (ResourceUnit)cmbUnit.SelectedItem;
             renewable = checkRenewable.IsChecked;
 
-            if (id.Equals("") || name.Equals("") || type == null)
+            if (id.Equals("") || name.Equals("") || price.Equals("") || type == null)
             {
                 MessageBox.Show("You must fill all required fields");
                 return;
             }
 
             bool ren = renewable.Value;
-            Resource resource = new Resource(id, name, description, type, frequency, icon, ren, price);
+            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price);
             foreach(ResourceTypeWithResources rt in MainWindow.types)
             {
                 foreach(Resource r in rt.Resources)

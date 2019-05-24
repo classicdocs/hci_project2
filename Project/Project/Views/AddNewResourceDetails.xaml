@@ -47,19 +47,12 @@
         <Label Grid.Row="8" Grid.Column="0">*Currently exploited:</Label>
         <CheckBox Grid.Row="8" Grid.Column="1" Name="CurrentlyExploited"></CheckBox>
         <Label Grid.Row="9" Grid.Column="0">*Unit:</Label>
-        <ComboBox Grid.Row="9" Grid.Column="1" Name="cmbUnit"/>
+        <Label Grid.Row="9" Grid.Column="1" Name="Unit"></Label>
         <Label Grid.Row="10" Grid.Column="0">Price:</Label>
         <Label Grid.Row="10" Grid.Column="1" Name="Price"></Label>
         <Label Grid.Row="11" Grid.Column="0">*Date of discovery:</Label>
         <TextBox Grid.Row="11" Grid.Column="1" Name="DateOfDicovery" Text="{Binding dateOfDiscovery}"></TextBox>
         <Label Grid.Row="12" Grid.Column="0">Tags:</Label>
-        <!--<ComboBox Grid.Row="12" Grid.Column="1" ItemsSource="{Binding Path=tags}" Name="cmbTags">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>-->
         <ScrollViewer Grid.Row="12" Grid.Column="1">
             <ListView ItemsSource="{Binding tags}" Name="tagsList" SelectionChanged="tagsList_SelectionChanged">
                 <ListView.ItemTemplate>
