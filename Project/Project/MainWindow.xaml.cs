@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.Commands;
+using Project.Models;
 using Project.Views;
 using System;
 using System.Collections.Generic;
@@ -176,6 +177,19 @@ namespace Project
                 Height = 20,
                 ToolTip = grid
             };
+
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem edit = new MenuItem();
+            edit.Header = "Edit";
+
+            MenuItem delete = new MenuItem();
+            delete.Header = "Delete";
+            delete.Command = new DeleteResourceCommand(resource, Cnv);
+
+            contextMenu.Items.Add(edit);
+            contextMenu.Items.Add(delete);
+            img.ContextMenu = contextMenu;
+
             Cnv.Children.Add(img);
             return img;
         }
@@ -293,6 +307,7 @@ namespace Project
                 addNewResourceDialog = false;
 
                 Resource resource = e.Data.GetData("myFormat") as Resource;
+                var canvas = sender as Canvas;
 
                 Point p = new Point(e.GetPosition(Cnv).X, e.GetPosition(Cnv).Y);
                 AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
@@ -300,7 +315,7 @@ namespace Project
                 if (addNewResourceDialog)
                 {
                     Image img = drawResource(resource);
-
+                   
                     Canvas.SetLeft(img, e.GetPosition(Cnv).X);
                     Canvas.SetTop(img, e.GetPosition(Cnv).Y);
 

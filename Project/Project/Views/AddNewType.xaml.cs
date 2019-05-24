@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Project.Models;
 using System.Web.Script.Serialization;
 using System.IO;
+using Project.FileHandler;
 
 namespace Project.Views
 {
@@ -100,12 +101,8 @@ namespace Project.Views
                 }
             }
             MainWindow.types.Add(type);
-            var json = new JavaScriptSerializer().Serialize(MainWindow.types);
-
-            using (StreamWriter sw = new StreamWriter("../../Data/types.json"))
-            {
-                sw.Write(json);
-            }
+            ReadWrite rw = new ReadWrite();
+            rw.writeToFile("../../Data/types.json", MainWindow.resources);
 
             this.Close();
             MessageBox.Show("You have successfully add new resource type.");
