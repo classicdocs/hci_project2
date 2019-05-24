@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Project.Commands;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Project.Models
 {
@@ -42,6 +45,7 @@ namespace Project.Models
             this.unit = unit;
             this.price = price;
             this.tags = new List<Tag>();
+
         }
 
         public string Id
@@ -120,6 +124,8 @@ namespace Project.Models
             get { return tags; }
             set { tags = value; }
         }
+
+        
     };
 
     public enum ResourceFrequency

@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.FileHandler;
+using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,12 +77,10 @@ namespace Project.Views
                 }
             }
             MainWindow.tags.Add(tag);
-            var json = new JavaScriptSerializer().Serialize(MainWindow.tags);
 
-            using (StreamWriter sw = new StreamWriter("../../Data/tags.json"))
-            {
-                sw.Write(json);
-            }
+            ReadWrite rw = new ReadWrite();
+            rw.writeToFile("../../Data/tags.json", MainWindow.resources);
+
             this.Close();
             MessageBox.Show("You have successfully add new resource type.");
         }

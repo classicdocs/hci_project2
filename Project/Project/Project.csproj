@@ -56,6 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\DeleteResourceCommand.cs" />
+    <Compile Include="FileHandler\ReadWrite.cs" />
     <Compile Include="Models\ResourcePoint.cs" />
     <Compile Include="Models\ResourceType.cs" />
     <Compile Include="Views\AddNewResource.xaml.cs">

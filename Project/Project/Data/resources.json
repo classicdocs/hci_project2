@@ -1,1 +1,1 @@
-[{"resource":{"Id":"1","Name":"Gold","Icon":"C:\\Temp\\hci\\icons\\icons8-copper-bars-48.png","Description":"gold desc","ResourceType":{"Id":"1","Name":"Minerals","Icon":"C:\\Temp\\hci\\icons\\pick.png","Description":"minerals desc"},"Renewable":false,"Frequency":0,"Price":"1000","Unit":3,"DateOfDiscovery":"1998","StrategicImportance":true,"CurrentlyExploited":true,"Tags":[{"Id":"1","Name":"tag1","Color":"#FF00FFFF","Description":""},{"Id":"2","Name":"tag2","Color":"#FF8B0000","Description":""}]},"point":{"X":263.26848249027239,"Y":235.03718143094366}}]
+[]

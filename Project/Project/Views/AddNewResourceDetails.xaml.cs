@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.FileHandler;
+using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,6 +31,8 @@ namespace Project.Views
         public string dateOfDiscovery { get; set; }
         private Resource resource;
         private Point point;
+
+        public ResourcePoint resourcePoint { get; set; }
 
         private List<Tag> checkedTags = new List<Tag>();
 
@@ -74,13 +77,10 @@ namespace Project.Views
             this.resource.Tags = checkedTags;
 
             ResourcePoint rp = new ResourcePoint(resource, point);
+            resourcePoint = rp;
             MainWindow.resources.Add(rp);
-            var json = new JavaScriptSerializer().Serialize(MainWindow.resources);
-
-            using (StreamWriter sw = new StreamWriter("../../Data/resources.json"))
-            {
-                sw.Write(json);
-            }
+            ReadWrite rw = new ReadWrite();
+            rw.writeToFile("../../Data/resources.json", MainWindow.resources);
 
             MainWindow.addNewResourceDialog = true;
             this.Close();
