@@ -18,7 +18,7 @@ namespace Project.Models
         private bool strategicImportance { get; set; }
         private bool currentlyExploited { get; set; }
         private ResourceUnit unit { get; set; }
-        private ResourcePrice price { get; set; }
+        private string price { get; set; }
         private string dateOfDiscovery { get; set; }
         private List<Tag> tags { get; set; }
 
@@ -26,8 +26,8 @@ namespace Project.Models
             this.tags = new List<Tag>();
         }
 
-        public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency,
-                        string icon, bool renewable, ResourcePrice price)
+        public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency, ResourceUnit unit,
+                        string icon, bool renewable, string price)
         {
             this.id = id;
             this.name = name;
@@ -36,8 +36,10 @@ namespace Project.Models
             this.frequency = frequency;
             if (icon.Equals(""))
                 this.icon = type.Icon;
-            this.icon = icon;
+            else
+                this.icon = icon;
             this.renewable = renewable;
+            this.unit = unit;
             this.price = price;
             this.tags = new List<Tag>();
         }
@@ -83,7 +85,7 @@ namespace Project.Models
             set { frequency = value; }
         }
 
-        public ResourcePrice Price
+        public string Price
         {
             get { return price; }
             set { price = value; }
@@ -129,9 +131,4 @@ namespace Project.Models
     {
         Merica, Barrel, Ton, Kilogram
     };
-
-    public enum ResourcePrice
-    {
-        Dollar
-    }
 }
