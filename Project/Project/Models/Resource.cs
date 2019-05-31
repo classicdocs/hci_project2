@@ -24,13 +24,15 @@ namespace Project.Models
         private string price { get; set; }
         private string dateOfDiscovery { get; set; }
         private List<Tag> tags { get; set; }
+        private PageEnum onPage { get; set; }
+
 
         public Resource() {
             this.tags = new List<Tag>();
         }
 
         public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency, ResourceUnit unit,
-                        string icon, bool renewable, string price)
+                        string icon, bool renewable, string price, PageEnum onPage)
         {
             this.id = id;
             this.name = name;
@@ -45,6 +47,9 @@ namespace Project.Models
             this.unit = unit;
             this.price = price;
             this.tags = new List<Tag>();
+
+
+            this.onPage = onPage;
 
         }
 
@@ -125,7 +130,11 @@ namespace Project.Models
             set { tags = value; }
         }
 
-        
+        public PageEnum OnPage
+        {
+            get { return onPage; }
+            set { onPage = value; }
+        }
     };
 
     public enum ResourceFrequency
@@ -136,5 +145,10 @@ namespace Project.Models
     public enum ResourceUnit
     {
         Merica, Barrel, Ton, Kilogram
+    };
+    
+    public enum PageEnum
+    {
+        First, Second, Third, Fourth, NoInstance
     };
 }
