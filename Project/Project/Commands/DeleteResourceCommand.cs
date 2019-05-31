@@ -60,7 +60,7 @@ namespace Project.Commands
                 }
 
 
-                MessageBox.Show("You have successfully delete resource");
+                MessageBox.Show("You have successfully deleted resource");
             }
 
         }

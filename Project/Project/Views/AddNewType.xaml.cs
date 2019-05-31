@@ -102,7 +102,7 @@ namespace Project.Views
             }
             MainWindow.types.Add(type);
             ReadWrite rw = new ReadWrite();
-            rw.writeToFile("../../Data/types.json", MainWindow.resources);
+            rw.writeToFile("../../Data/types.json", MainWindow.types);
 
             this.Close();
             MessageBox.Show("You have successfully add new resource type.");

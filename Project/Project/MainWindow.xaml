@@ -58,6 +58,11 @@
                                 <StackPanel Orientation="Horizontal" >
                                     <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                                     <TextBlock Text="{Binding Name}"></TextBlock>
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Add new resource" Command="{Binding Add}"></MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
                                 </StackPanel>
                             </StackPanel>
                         </HierarchicalDataTemplate>
@@ -65,6 +70,7 @@
                             <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
                                 <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                                 <TextBlock Text="{Binding Name}"/>
+                                   
                             </WrapPanel>
                         </DataTemplate>
                     </TreeView.Resources>

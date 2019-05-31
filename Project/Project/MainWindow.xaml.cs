@@ -141,7 +141,7 @@ namespace Project
 
         }
 
-        private Image drawResource(Resource resource)
+        private static  Image drawResource(Resource resource)
         {
             Grid grid = new Grid();
             for (int i = 0; i < 15; i++)
@@ -159,7 +159,7 @@ namespace Project
             grid = tooltipInfo(grid, "Id", resource.Id, 0);
             grid = tooltipInfo(grid, "Name", resource.Name, 1);
             grid = tooltipInfo(grid, "Description", resource.Description, 2);
-            grid = tooltipInfo(grid, "Type", resource.ResourceType, 3);
+            grid = tooltipInfo(grid, "Type", resource.ResourceType.Name, 3);
             grid = tooltipInfo(grid, "Frequency", resource.Frequency, 4);
             grid = tooltipInfo(grid, "Icon", resource.Icon, 5);
             grid = tooltipInfo(grid, "Renewable", resource.Renewable, 6);
@@ -179,22 +179,24 @@ namespace Project
             };
 
             ContextMenu contextMenu = new ContextMenu();
+
             MenuItem edit = new MenuItem();
             edit.Header = "Edit";
+            edit.Command = new EditResourceCommand(resource);
 
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
-            delete.Command = new DeleteResourceCommand(resource, Cnv);
+            delete.Command = new DeleteResourceCommand(resource, ((MainWindow)Application.Current.MainWindow).Cnv);
 
             contextMenu.Items.Add(edit);
             contextMenu.Items.Add(delete);
             img.ContextMenu = contextMenu;
 
-            Cnv.Children.Add(img);
+            ((MainWindow)Application.Current.MainWindow).Cnv.Children.Add(img);
             return img;
         }
 
-        private Grid tooltipInfo(Grid grid, string label, Object content, int row)
+        private static Grid tooltipInfo(Grid grid, string label, Object content, int row)
         {
             Label l = new Label();
             grid.Children.Add(l);
@@ -251,7 +253,7 @@ namespace Project
             
         }
 
-        private void drawResources()
+        public static void drawResources()
         {
             foreach(ResourcePoint rp in resources)
             {
@@ -276,7 +278,6 @@ namespace Project
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
-
                 WrapPanel stackPanel = sender as WrapPanel;
 
                 TextBlock textBlock = (TextBlock)stackPanel.Children[1];
@@ -295,10 +296,12 @@ namespace Project
                 if (resource != null)
                 {
                     DataObject dragData = new DataObject("myFormat", resource);
+
                     DragDrop.DoDragDrop(stackPanel, dragData, DragDropEffects.Move);
                 }
             }
         }
+
 
         private void Cnv_Drop(object sender, DragEventArgs e)
         {
@@ -310,6 +313,16 @@ namespace Project
                 var canvas = sender as Canvas;
 
                 Point p = new Point(e.GetPosition(Cnv).X, e.GetPosition(Cnv).Y);
+
+                //foreach (ResourcePoint rp in resources)
+                //{
+                //    if (rp.point.X == p.X && rp.point.Y == p.Y)
+                //    {
+                //        MessageBox.Show("You can't put a resource on this site because there is already another");
+                //        return;
+                //    }
+                //}
+
                 AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
                 add.ShowDialog();
                 if (addNewResourceDialog)
@@ -319,7 +332,7 @@ namespace Project
                     Canvas.SetLeft(img, e.GetPosition(Cnv).X);
                     Canvas.SetTop(img, e.GetPosition(Cnv).Y);
 
-                    MessageBox.Show("You have successfully add new resource on map.");
+                    MessageBox.Show("You have successfully added new resource on map.");
                 }
             }
         }
@@ -330,7 +343,9 @@ namespace Project
             {
                 e.Effects = DragDropEffects.None;
             }
+
         }
+
     }
 
 }

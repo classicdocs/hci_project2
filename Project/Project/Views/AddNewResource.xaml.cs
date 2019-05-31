@@ -52,14 +52,31 @@ namespace Project.Views
         public AddNewResource()
         {
             InitializeComponent();
-            InitializeData();
+            InitializeData(null);
             this.DataContext = this;
            
         }
 
-        private void InitializeData()
+        public AddNewResource(ResourceTypeWithResources r)
         {
-            types = MainWindow.types;
+            InitializeComponent();
+            InitializeData(r);
+            this.DataContext = this;
+
+        }
+
+        private void InitializeData(ResourceTypeWithResources resourceType)
+        {
+            if (resourceType == null)
+                types = MainWindow.types;
+            else
+            {
+                ObservableCollection<ResourceTypeWithResources> list = new ObservableCollection<ResourceTypeWithResources>();
+                list.Add(resourceType);
+                types = list;
+                cmbType.SelectedItem = resourceType;
+            }
+
             cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
             id = "";
             name = "";
