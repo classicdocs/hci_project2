@@ -115,7 +115,34 @@ namespace Project.Views
             }
 
             bool ren = renewable.Value;
-            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price);
+            PageEnum page = (PageEnum) 1;       // za pocetak
+
+            Canvas currentCanvas = MainWindow.getCanvas();
+            switch (currentCanvas.Name)
+            {
+                case "Cnv":
+                {
+                    page = (PageEnum)0;
+                    break;
+                }
+                case "Cnv1":
+                {
+                    page = (PageEnum)1;
+                    break;
+                }
+                case "Cnv2":
+                {
+                    page = (PageEnum)2;
+                    break;
+                }
+                case "Cnv3":
+                {
+                    page = (PageEnum)3;
+                    break;
+                }
+            }
+
+            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price, page);
             foreach(ResourceTypeWithResources rt in MainWindow.types)
             {
                 foreach(Resource r in rt.Resources)
