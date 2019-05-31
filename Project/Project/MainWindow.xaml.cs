@@ -28,9 +28,11 @@ namespace Project
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public static ObservableCollection<ResourceTypeWithResources> types { get; set; }
+
         public static ObservableCollection<Tag> tags { get; set; }
 
         public static ObservableCollection<ResourcePoint> resources { get; set; }
+
         Point startPoint = new Point();
 
         public static bool addNewResourceDialog { get; set; }
@@ -169,6 +171,7 @@ namespace Project
             grid = tooltipInfo(grid, "Price", resource.Price, 10);
             grid = tooltipInfo(grid, "Date of discovery", resource.DateOfDiscovery, 11);
             grid = tooltipInfo(grid, "Tags", resource.Tags, 12);
+            grid = tooltipInfo(grid, "Page (this is for testing)", resource.OnPage, 13);
 
             Image img = new Image()
             {
@@ -184,13 +187,36 @@ namespace Project
 
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
-            delete.Command = new DeleteResourceCommand(resource, Cnv);
+            Canvas canv = Cnv;
+            if (resource.OnPage == (PageEnum)0)
+            {
+                canv = Cnv;
+            }
+            else if (resource.OnPage == (PageEnum)1)
+            {
+                canv = Cnv2;
+            }
+            else if (resource.OnPage == (PageEnum)2)
+            {
+                canv = Cnv3;
+            }
+            else if (resource.OnPage == (PageEnum)3)
+            {
+                canv = Cnv4;
+            }
+            else if (resource.OnPage == (PageEnum)4)            // TEST
+            {
+                return null;
+            }
+            delete.Command = new DeleteResourceCommand(resource, canv);
 
             contextMenu.Items.Add(edit);
             contextMenu.Items.Add(delete);
             img.ContextMenu = contextMenu;
 
-            Cnv.Children.Add(img);
+
+            canv.Children.Add(img);
+           
             return img;
         }
 
@@ -260,7 +286,7 @@ namespace Project
                 Canvas.SetLeft(img, rp.point.X);
                 Canvas.SetTop(img, rp.point.Y);
             }
-        }
+        } 
 
         private void Resourse_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -300,6 +326,37 @@ namespace Project
             }
         }
 
+        public static Canvas getCanvas()
+        {
+            TabItem tab = (TabItem)((MainWindow)Application.Current.MainWindow).Tab.SelectedItem;
+            Canvas currentCanvas = ((MainWindow)Application.Current.MainWindow).Cnv;
+            switch (tab.Name)
+            {
+                case "First":
+                    {
+                        currentCanvas = ((MainWindow)Application.Current.MainWindow).Cnv;
+                        break;
+                    }
+                case "Second":
+                    {
+                        currentCanvas = ((MainWindow)Application.Current.MainWindow).Cnv2;
+                        break;
+                    }
+                case "Third":
+                    {
+                        currentCanvas = ((MainWindow)Application.Current.MainWindow).Cnv3;
+                        break;
+                    }
+                case "Fourth":
+                    {
+                        currentCanvas = ((MainWindow)Application.Current.MainWindow).Cnv4;
+                        break;
+                    }
+            }
+
+            return currentCanvas;
+        }
+
         private void Cnv_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent("myFormat"))
@@ -309,15 +366,41 @@ namespace Project
                 Resource resource = e.Data.GetData("myFormat") as Resource;
                 var canvas = sender as Canvas;
 
-                Point p = new Point(e.GetPosition(Cnv).X, e.GetPosition(Cnv).Y);
+                Canvas currentCanvas = getCanvas();
+
+                switch (currentCanvas.Name)
+                {
+                    case "Cnv":
+                        {
+                            resource.OnPage = (PageEnum)0;
+                            break;
+                        }
+                    case "Cnv2":
+                        {
+                            resource.OnPage = (PageEnum)1;
+                            break;
+                        }
+                    case "Cnv3":
+                        {
+                            resource.OnPage = (PageEnum)2;
+                            break;
+                        }
+                    case "Cnv4":
+                        {
+                            resource.OnPage = (PageEnum)3;
+                            break;
+                        }
+                }
+
+                Point p = new Point(e.GetPosition(currentCanvas).X, e.GetPosition(currentCanvas).Y);
                 AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
                 add.ShowDialog();
                 if (addNewResourceDialog)
                 {
                     Image img = drawResource(resource);
-                   
-                    Canvas.SetLeft(img, e.GetPosition(Cnv).X);
-                    Canvas.SetTop(img, e.GetPosition(Cnv).Y);
+                    Canvas.SetLeft(img, e.GetPosition(currentCanvas).X);
+                    Canvas.SetTop(img, e.GetPosition(currentCanvas).Y);
+                    
 
                     MessageBox.Show("You have successfully add new resource on map.");
                 }
