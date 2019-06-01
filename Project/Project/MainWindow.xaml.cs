@@ -143,7 +143,7 @@ namespace Project
 
         }
 
-        private static  Image drawResource(Resource resource)
+        private static  Image drawResource(Resource resource, Point p)
         {
             Grid grid = new Grid();
             for (int i = 0; i < 15; i++)
@@ -185,32 +185,32 @@ namespace Project
 
             MenuItem edit = new MenuItem();
             edit.Header = "Edit";
-            edit.Command = new EditResourceCommand(resource);
+            edit.Command = new EditResourceCommand(resource, p);
 
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
-            Canvas canv = Cnv;
+            Canvas canv = ((MainWindow)Application.Current.MainWindow).Cnv;
             if (resource.OnPage == (PageEnum)0)
             {
-                canv = Cnv;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv;
             }
             else if (resource.OnPage == (PageEnum)1)
             {
-                canv = Cnv2;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv2;
             }
             else if (resource.OnPage == (PageEnum)2)
             {
-                canv = Cnv3;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv3;
             }
             else if (resource.OnPage == (PageEnum)3)
             {
-                canv = Cnv4;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv4;
             }
             else if (resource.OnPage == (PageEnum)4)            // TEST
             {
                 return null;
             }
-            delete.Command = new DeleteResourceCommand(resource, ((MainWindow)Application.Current.MainWindow).Cnv);
+            delete.Command = new DeleteResourceCommand(resource, p, canv);
 
             contextMenu.Items.Add(edit);
             contextMenu.Items.Add(delete);
@@ -219,7 +219,7 @@ namespace Project
 
             canv.Children.Add(img);
            
-            ((MainWindow)Application.Current.MainWindow).Cnv.Children.Add(img);
+            //((MainWindow)Application.Current.MainWindow).Cnv.Children.Add(img);
             return img;
         }
 
@@ -284,12 +284,18 @@ namespace Project
         {
             foreach(ResourcePoint rp in resources)
             {
-                Image img = drawResource(rp.resource);
-
+                Image img = drawResource(rp.resource, rp.point);
                 Canvas.SetLeft(img, rp.point.X);
                 Canvas.SetTop(img, rp.point.Y);
             }
         } 
+
+        public static void drawOneResource(ResourcePoint rp)
+        {
+            Image img = drawResource(rp.resource, rp.point);
+            Canvas.SetLeft(img, rp.point.X);
+            Canvas.SetTop(img, rp.point.Y);
+        }
 
         private void Resourse_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -400,7 +406,7 @@ namespace Project
                 add.ShowDialog();
                 if (addNewResourceDialog)
                 {
-                    Image img = drawResource(resource);
+                    Image img = drawResource(resource, p);
                     Canvas.SetLeft(img, e.GetPosition(currentCanvas).X);
                     Canvas.SetTop(img, e.GetPosition(currentCanvas).Y);
                     

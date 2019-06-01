@@ -1,5 +1,52 @@
-<<<<<<< HEAD
-[{"Resources":[{"Id":"1","Name":"Gold","Icon":"C:\\Temp\\hci\\icons\\icons8-copper-bars-48.png","Description":"gold desc","ResourceType":{"Id":"1","Name":"Minerals","Icon":"C:\\Temp\\hci\\icons\\pick.png","Description":""},"Renewable":false,"Frequency":0,"Price":"1000","Unit":3,"DateOfDiscovery":null,"StrategicImportance":false,"CurrentlyExploited":false,"Tags":[]}],"Id":"1","Name":"Minerals","Icon":"C:\\Temp\\hci\\icons\\pick.png","Description":""}]
-=======
-[{"Id":"a","Name":"a","Icon":"C:\\Temp\\hci\\Icons\\pick.png","Description":"a","Resources":[{"Id":"a","Name":"a","Icon":"C:\\Temp\\hci\\Icons\\pick.png","Description":"a","ResourceType":{"Id":"a","Name":"a","Icon":"C:\\Temp\\hci\\Icons\\pick.png","Description":"a"},"Renewable":false,"Frequency":1,"Price":"213","Unit":3,"DateOfDiscovery":"Unknown","StrategicImportance":false,"CurrentlyExploited":false,"Tags":[],"OnPage":1},{"Id":"wqee","Name":"qwewq","Icon":"C:\\Temp\\hci\\Icons\\icons8-copper-bars-48.png","Description":"eqw","ResourceType":{"Id":"a","Name":"a","Icon":"C:\\Temp\\hci\\Icons\\pick.png","Description":"a"},"Renewable":false,"Frequency":1,"Price":"123","Unit":3,"DateOfDiscovery":null,"StrategicImportance":false,"CurrentlyExploited":false,"Tags":[],"OnPage":2}]}]
->>>>>>> master
+[
+    {
+        "Resources": [
+            {
+                "Id": "1",
+                "Name": "Gold",
+                "Icon": "C:\\Temp\\hci\\icons\\icons8-copper-bars-48.png",
+                "Description": "",
+                "ResourceType": {
+                    "Id": "1",
+                    "Name": "Minerals",
+                    "Icon": "C:\\Temp\\hci\\icons\\pick.png",
+                    "Description": ""
+                },
+                "Renewable": false,
+                "Frequency": 0,
+                "Price": "100",
+                "Unit": 3,
+                "DateOfDiscovery": null,
+                "StrategicImportance": false,
+                "CurrentlyExploited": false,
+                "Tags": [ ],
+                "OnPage": 0
+            },
+            {
+                "Id": "2",
+                "Name": "Silver",
+                "Icon": "C:\\Temp\\hci\\icons\\icons8-silver-bars-48.png",
+                "Description": "",
+                "ResourceType": {
+                    "Id": "1",
+                    "Name": "Minerals",
+                    "Icon": "C:\\Temp\\hci\\icons\\pick.png",
+                    "Description": ""
+                },
+                "Renewable": false,
+                "Frequency": 1,
+                "Price": "50",
+                "Unit": 3,
+                "DateOfDiscovery": null,
+                "StrategicImportance": false,
+                "CurrentlyExploited": false,
+                "Tags": [ ],
+                "OnPage": 0
+            }
+        ],
+        "Id": "1",
+        "Name": "Minerals",
+        "Icon": "C:\\Temp\\hci\\icons\\pick.png",
+        "Description": ""
+    }
+]

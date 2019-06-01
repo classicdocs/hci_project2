@@ -29,16 +29,18 @@ namespace Project.Views
         public string dateOfDiscovery { get; set; }
 
         private List<Tag> checkedTags = new List<Tag>();
-       
-        public EditResource(Resource resource)
+        private Point point;
+
+        public EditResource(Resource resource, Point p)
         {
             InitializeComponent();
             this.DataContext = this;
-            InitializeData(resource);
+            InitializeData(resource, p);
         }
 
-        private void InitializeData(Resource resource)
+        private void InitializeData(Resource resource, Point p)
         {
+            this.point = p;
             this.resource = resource;
             tags = MainWindow.tags;
             Id.Content = resource.Id;
@@ -98,12 +100,29 @@ namespace Project.Views
                 this.resource.DateOfDiscovery = dateOfDiscovery;
             foreach(ResourcePoint rp in MainWindow.resources)
             {
-                if (rp.resource.Id == resource.Id)
+                if (rp.resource == resource && rp.point == point)
                 {
                     rp.resource = resource;
                     ReadWrite rw = new ReadWrite();
                     rw.writeToFile("../../Data/resources.json", MainWindow.resources);
-                    MainWindow.drawResources();
+
+                    Canvas canvas = MainWindow.getCanvas();
+
+                    var element = canvas.InputHitTest(rp.point) as UIElement;
+                    UIElement parent;
+
+                    while (element != null &&
+                        (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+                    {
+                        element = parent;
+                    }
+
+                    if (element != null)
+                    {
+                        canvas.Children.Remove(element);
+                    }
+
+                    MainWindow.drawOneResource(rp);
                     this.Close();
                     MessageBox.Show("You have successfully edited resource");
                 }

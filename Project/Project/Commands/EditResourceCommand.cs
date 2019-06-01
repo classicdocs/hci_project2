@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Project.Commands
@@ -12,9 +13,11 @@ namespace Project.Commands
     class EditResourceCommand : ICommand
     {
         private Resource resource;
-        public EditResourceCommand(Resource res)
+        private Point point;
+        public EditResourceCommand(Resource res, Point p)
         {
             resource = res;
+            point = p;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -26,7 +29,7 @@ namespace Project.Commands
 
         public void Execute(object parameter)
         {
-            EditResource dialog = new EditResource(resource);
+            EditResource dialog = new EditResource(resource, point);
             dialog.Show();
         }
     }

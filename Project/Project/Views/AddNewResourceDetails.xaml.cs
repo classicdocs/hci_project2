@@ -66,8 +66,6 @@ namespace Project.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.Write("ASF");
-
             if (dateOfDiscovery.Equals(""))
                 this.resource.DateOfDiscovery = "Unknown";
             else
