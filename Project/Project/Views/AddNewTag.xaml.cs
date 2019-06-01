@@ -79,7 +79,7 @@ namespace Project.Views
             MainWindow.tags.Add(tag);
 
             ReadWrite rw = new ReadWrite();
-            rw.writeToFile("../../Data/tags.json", MainWindow.resources);
+            rw.writeToFile("../../Data/tags.json", MainWindow.tags);
 
             this.Close();
             MessageBox.Show("You have successfully add new resource type.");

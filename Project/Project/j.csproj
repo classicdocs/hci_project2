@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -57,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DeleteResourceCommand.cs" />
+    <Compile Include="Commands\EditResourceCommand.cs" />
     <Compile Include="FileHandler\ReadWrite.cs" />
     <Compile Include="Models\ResourcePoint.cs" />
     <Compile Include="Models\ResourceType.cs" />
@@ -71,6 +75,9 @@
     </Compile>
     <Compile Include="Views\AddNewType.xaml.cs">
       <DependentUpon>AddNewType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditResource.xaml.cs">
+      <DependentUpon>EditResource.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewAllResources.xaml.cs">
       <DependentUpon>ViewAllResources.xaml</DependentUpon>
@@ -106,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddNewType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

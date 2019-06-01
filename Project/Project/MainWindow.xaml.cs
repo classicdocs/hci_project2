@@ -143,7 +143,7 @@ namespace Project
 
         }
 
-        private Image drawResource(Resource resource)
+        private static  Image drawResource(Resource resource, Point p)
         {
             Grid grid = new Grid();
             for (int i = 0; i < 15; i++)
@@ -161,7 +161,7 @@ namespace Project
             grid = tooltipInfo(grid, "Id", resource.Id, 0);
             grid = tooltipInfo(grid, "Name", resource.Name, 1);
             grid = tooltipInfo(grid, "Description", resource.Description, 2);
-            grid = tooltipInfo(grid, "Type", resource.ResourceType, 3);
+            grid = tooltipInfo(grid, "Type", resource.ResourceType.Name, 3);
             grid = tooltipInfo(grid, "Frequency", resource.Frequency, 4);
             grid = tooltipInfo(grid, "Icon", resource.Icon, 5);
             grid = tooltipInfo(grid, "Renewable", resource.Renewable, 6);
@@ -182,33 +182,35 @@ namespace Project
             };
 
             ContextMenu contextMenu = new ContextMenu();
+
             MenuItem edit = new MenuItem();
             edit.Header = "Edit";
+            edit.Command = new EditResourceCommand(resource, p);
 
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
-            Canvas canv = Cnv;
+            Canvas canv = ((MainWindow)Application.Current.MainWindow).Cnv;
             if (resource.OnPage == (PageEnum)0)
             {
-                canv = Cnv;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv;
             }
             else if (resource.OnPage == (PageEnum)1)
             {
-                canv = Cnv2;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv2;
             }
             else if (resource.OnPage == (PageEnum)2)
             {
-                canv = Cnv3;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv3;
             }
             else if (resource.OnPage == (PageEnum)3)
             {
-                canv = Cnv4;
+                canv = ((MainWindow)Application.Current.MainWindow).Cnv4;
             }
             else if (resource.OnPage == (PageEnum)4)            // TEST
             {
                 return null;
             }
-            delete.Command = new DeleteResourceCommand(resource, canv);
+            delete.Command = new DeleteResourceCommand(resource, p, canv);
 
             contextMenu.Items.Add(edit);
             contextMenu.Items.Add(delete);
@@ -217,10 +219,11 @@ namespace Project
 
             canv.Children.Add(img);
            
+            //((MainWindow)Application.Current.MainWindow).Cnv.Children.Add(img);
             return img;
         }
 
-        private Grid tooltipInfo(Grid grid, string label, Object content, int row)
+        private static Grid tooltipInfo(Grid grid, string label, Object content, int row)
         {
             Label l = new Label();
             grid.Children.Add(l);
@@ -277,16 +280,22 @@ namespace Project
             
         }
 
-        private void drawResources()
+        public static void drawResources()
         {
             foreach(ResourcePoint rp in resources)
             {
-                Image img = drawResource(rp.resource);
-
+                Image img = drawResource(rp.resource, rp.point);
                 Canvas.SetLeft(img, rp.point.X);
                 Canvas.SetTop(img, rp.point.Y);
             }
         } 
+
+        public static void drawOneResource(ResourcePoint rp)
+        {
+            Image img = drawResource(rp.resource, rp.point);
+            Canvas.SetLeft(img, rp.point.X);
+            Canvas.SetTop(img, rp.point.Y);
+        }
 
         private void Resourse_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -302,7 +311,6 @@ namespace Project
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
-
                 WrapPanel stackPanel = sender as WrapPanel;
 
                 TextBlock textBlock = (TextBlock)stackPanel.Children[1];
@@ -321,6 +329,7 @@ namespace Project
                 if (resource != null)
                 {
                     DataObject dragData = new DataObject("myFormat", resource);
+
                     DragDrop.DoDragDrop(stackPanel, dragData, DragDropEffects.Move);
                 }
             }
@@ -397,12 +406,12 @@ namespace Project
                 add.ShowDialog();
                 if (addNewResourceDialog)
                 {
-                    Image img = drawResource(resource);
+                    Image img = drawResource(resource, p);
                     Canvas.SetLeft(img, e.GetPosition(currentCanvas).X);
                     Canvas.SetTop(img, e.GetPosition(currentCanvas).Y);
                     
 
-                    MessageBox.Show("You have successfully add new resource on map.");
+                    MessageBox.Show("You have successfully added new resource on map.");
                 }
             }
         }
@@ -413,7 +422,9 @@ namespace Project
             {
                 e.Effects = DragDropEffects.None;
             }
+
         }
+
     }
 
 }
