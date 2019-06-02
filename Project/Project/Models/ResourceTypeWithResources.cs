@@ -21,6 +21,8 @@ namespace Project.Models
 
         public ResourceTypeWithResources() {
             Add = new AddResource(this);
+            Edit = new EditResourceTypeCommand(this);
+            Delete = new DeleteResourceTypeCommand(this);
         }
 
         public ResourceTypeWithResources(string id, string name, string icon, string description)
@@ -31,6 +33,8 @@ namespace Project.Models
             this.description = description;
             this.resources = new ObservableCollection<Resource>();
             Add = new AddResource(this);
+            Edit = new EditResourceTypeCommand(this);
+            Delete = new DeleteResourceTypeCommand(this);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,7 +47,7 @@ namespace Project.Models
             }
         }
 
-        /*public string Id
+        public string Id
         {
             get
             {
@@ -57,59 +61,42 @@ namespace Project.Models
                     OnPropertyChanged("Id");
                 }
             }
-        }*/
-
-        public string Id
-        {
-            get { return id; }
-            set { id = value; }
         }
-
-        //public string Name
-        //{
-        //    get
-        //    {
-        //        return name;
-        //    }
-        //    set
-        //    {
-        //        if (value != name)
-        //        {
-        //            name = value;
-        //            OnPropertyChanged("Name");
-        //        }
-        //    }
-        //}
 
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
         }
-
-        //public string Icon
-        //{
-        //    get
-        //    {
-        //        return icon;
-        //    }
-        //    set
-        //    {
-        //        if (value != icon)
-        //        {
-        //            icon = value;
-        //            OnPropertyChanged("Icon");
-        //        }
-        //    }
-        
 
         public string Icon
         {
-            get { return icon; }
-            set { icon = value; }
+            get
+            {
+                return icon;
+            }
+            set
+            {
+                if (value != icon)
+                {
+                    icon = value;
+                    OnPropertyChanged("Icon");
+                }
+            }
         }
 
-        /*public string Description
+
+        public string Description
         {
             get
             {
@@ -123,22 +110,14 @@ namespace Project.Models
                     OnPropertyChanged("Description");
                 }
             }
-        }*/
-
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
         }
-
-
 
         public ObservableCollection<Resource> Resources
         {
             get { return resources; }
             set { resources = value; }
         }
-        
+
         private AddResource _add;
         [ScriptIgnore]
         public AddResource Add
@@ -153,6 +132,41 @@ namespace Project.Models
                 {
                     _add = value;
                     OnPropertyChanged("Add");
+                }
+            }
+        }
+
+        private EditResourceTypeCommand _edit;
+        [ScriptIgnore]
+        public EditResourceTypeCommand Edit
+        {
+            get
+            {
+                return _edit;
+            }
+            set
+            {
+                if (_edit != value)
+                {
+                    _edit = value;
+                    OnPropertyChanged("Edit");
+                }
+            }
+        }
+        private DeleteResourceTypeCommand _delete;
+        [ScriptIgnore]
+        public DeleteResourceTypeCommand Delete
+        {
+            get
+            {
+                return _delete;
+            }
+            set
+            {
+                if (_delete != value)
+                {
+                    _delete = value;
+                    OnPropertyChanged("Delete");
                 }
             }
         }
@@ -178,6 +192,48 @@ namespace Project.Models
         {
             AddNewResource dialog = new AddNewResource(resourceTypeWithResource);
             dialog.Show();
+        }
+    }
+    public class EditResourceTypeCommand : ICommand
+    {
+        private ResourceTypeWithResources rt { get; set; }
+        public EditResourceTypeCommand(ResourceTypeWithResources rt)
+        {
+            this.rt = rt;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            EditResourceType dialog = new EditResourceType(rt);
+            dialog.Show();
+        }
+    }
+
+    public class DeleteResourceTypeCommand : ICommand
+    {
+        private ResourceTypeWithResources resourceType { get; set; }
+        public DeleteResourceTypeCommand(ResourceTypeWithResources rt)
+        {
+            resourceType = rt;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            DeleteResourceType msgBox = new DeleteResourceType(resourceType);
         }
     }
 }

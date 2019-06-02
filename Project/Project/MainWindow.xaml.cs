@@ -290,6 +290,25 @@ namespace Project
             }
         } 
 
+        public static void removeResourceFromMap(ResourcePoint rp)
+        {
+            Canvas canvas = MainWindow.getCanvas();
+
+            var element = canvas.InputHitTest(rp.point) as UIElement;
+            UIElement parent;
+
+            while (element != null &&
+                (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+            {
+                element = parent;
+            }
+
+            if (element != null)
+            {
+                canvas.Children.Remove(element);
+            }
+        }
+
         public static void drawOneResource(ResourcePoint rp)
         {
             Image img = drawResource(rp.resource, rp.point);

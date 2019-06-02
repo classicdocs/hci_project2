@@ -61,6 +61,8 @@
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Add new resource" Command="{Binding Add}"></MenuItem>
+                                            <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
+                                            <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
                                 </StackPanel>
