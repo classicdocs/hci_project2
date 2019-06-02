@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Project.Models
 {
-    public class Resource
+    public class Resource : INotifyPropertyChanged
     {
         private string id { get; set; }
         private string name { get; set; } 
@@ -59,11 +59,28 @@ namespace Project.Models
             set { id = value; }
         }
 
-        public string Name
+       /* public string Name
         {
             get { return name; }
             set { name = value; }
+        }*/
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
         }
+
         public string Icon
         {
             get { return icon; }
@@ -135,6 +152,16 @@ namespace Project.Models
             get { return onPage; }
             set { onPage = value; }
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
     };
 
     public enum ResourceFrequency

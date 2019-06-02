@@ -37,28 +37,105 @@ namespace Project.Models
             Delete = new DeleteResourceTypeCommand(this);
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        /*public string Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }*/
+
         public string Id
         {
             get { return id; }
             set { id = value; }
         }
 
+        //public string Name
+        //{
+        //    get
+        //    {
+        //        return name;
+        //    }
+        //    set
+        //    {
+        //        if (value != name)
+        //        {
+        //            name = value;
+        //            OnPropertyChanged("Name");
+        //        }
+        //    }
+        //}
+
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
+
+        //public string Icon
+        //{
+        //    get
+        //    {
+        //        return icon;
+        //    }
+        //    set
+        //    {
+        //        if (value != icon)
+        //        {
+        //            icon = value;
+        //            OnPropertyChanged("Icon");
+        //        }
+        //    }
+        
+
         public string Icon
         {
             get { return icon; }
             set { icon = value; }
         }
 
+        /*public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                if (value != description)
+                {
+                    description = value;
+                    OnPropertyChanged("Description");
+                }
+            }
+        }*/
+
         public string Description
         {
             get { return description; }
             set { description = value; }
         }
+
+
 
         public ObservableCollection<Resource> Resources
         {
