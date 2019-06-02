@@ -29,5 +29,18 @@ namespace Project.Views
             this.DataContext = this;
             TypesWithResources = MainWindow.types;
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceTypeWithResources rt = (ResourceTypeWithResources)((Button)sender).Tag;
+            EditResourceType dialog = new EditResourceType(rt);
+            dialog.Show();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceTypeWithResources rt = (ResourceTypeWithResources)((Button)sender).Tag;
+            DeleteResourceType dialog = new DeleteResourceType(rt);
+        }
     }
 }

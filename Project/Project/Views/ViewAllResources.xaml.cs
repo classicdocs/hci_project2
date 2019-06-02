@@ -40,5 +40,15 @@ namespace Project.Views
             this.DataContext = this;
             TypesWithResources = MainWindow.types;
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
