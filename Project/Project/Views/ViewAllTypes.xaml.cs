@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Project.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,13 @@ namespace Project.Views
     /// </summary>
     public partial class ViewAllTypes : Window
     {
+        public static ObservableCollection<ResourceTypeWithResources> TypesWithResources { get; set; }
+
         public ViewAllTypes()
         {
             InitializeComponent();
+            this.DataContext = this;
+            TypesWithResources = MainWindow.types;
         }
     }
 }
