@@ -19,7 +19,7 @@
                     
                     <StackPanel Background="White" Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Image Source="{Binding Icon}"></Image>    
+                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>    
                         <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
                     </StackPanel>
                     <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Resources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
@@ -27,7 +27,7 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Icon}"></Image>
+                                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

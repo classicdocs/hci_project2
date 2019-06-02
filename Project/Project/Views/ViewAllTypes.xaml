@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="View all types" Height="300" Width="300">
     <Grid>
-        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=TypesWithResources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
+        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=TypesWithResources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
