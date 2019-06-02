@@ -17,7 +17,7 @@ namespace Project.Models
         private ResourceType type { get; set; }
         private ResourceFrequency frequency { get; set; }
         private string icon { get; set; }
-        private bool renewable { get; set; }
+        private bool renewable { get; set;}
         private bool strategicImportance { get; set; }
         private bool currentlyExploited { get; set; }
         private ResourceUnit unit { get; set; }
@@ -97,6 +97,17 @@ namespace Project.Models
         {
             get { return type; }
             set { type = value; }
+        }
+
+        public string RenewableString
+        {
+            get
+            {
+                if (renewable)
+                    return "Yes";
+                else
+                    return "No";
+            }
         }
 
         public bool Renewable

@@ -47,7 +47,7 @@ namespace Project.Models
             }
         }
 
-        /*public string Id
+        public string Id
         {
             get
             {
@@ -61,59 +61,42 @@ namespace Project.Models
                     OnPropertyChanged("Id");
                 }
             }
-        }*/
-
-        public string Id
-        {
-            get { return id; }
-            set { id = value; }
         }
-
-        //public string Name
-        //{
-        //    get
-        //    {
-        //        return name;
-        //    }
-        //    set
-        //    {
-        //        if (value != name)
-        //        {
-        //            name = value;
-        //            OnPropertyChanged("Name");
-        //        }
-        //    }
-        //}
 
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
         }
-
-        //public string Icon
-        //{
-        //    get
-        //    {
-        //        return icon;
-        //    }
-        //    set
-        //    {
-        //        if (value != icon)
-        //        {
-        //            icon = value;
-        //            OnPropertyChanged("Icon");
-        //        }
-        //    }
-        
 
         public string Icon
         {
-            get { return icon; }
-            set { icon = value; }
+            get
+            {
+                return icon;
+            }
+            set
+            {
+                if (value != icon)
+                {
+                    icon = value;
+                    OnPropertyChanged("Icon");
+                }
+            }
         }
 
-        /*public string Description
+
+        public string Description
         {
             get
             {
@@ -127,29 +110,12 @@ namespace Project.Models
                     OnPropertyChanged("Description");
                 }
             }
-        }*/
-
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
         }
-
-
 
         public ObservableCollection<Resource> Resources
         {
             get { return resources; }
             set { resources = value; }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
 
         private AddResource _add;
