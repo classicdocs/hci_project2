@@ -157,7 +157,7 @@ namespace Project.Views
                         MessageBox.Show("Name you entered is already in use. Please choose another.");
                         return;
                     }
-                    else if (r.Icon == resource.Icon)
+                    else if (r.Icon == resource.Icon && resource.Icon != rt.Icon)
                     {
                         MessageBox.Show("Icon you choose is already in use. Please choose another.");
                         return;

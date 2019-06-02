@@ -21,6 +21,8 @@ namespace Project.Models
 
         public ResourceTypeWithResources() {
             Add = new AddResource(this);
+            Edit = new EditResourceTypeCommand(this);
+            Delete = new DeleteResourceTypeCommand(this);
         }
 
         public ResourceTypeWithResources(string id, string name, string icon, string description)
@@ -31,6 +33,8 @@ namespace Project.Models
             this.description = description;
             this.resources = new ObservableCollection<Resource>();
             Add = new AddResource(this);
+            Edit = new EditResourceTypeCommand(this);
+            Delete = new DeleteResourceTypeCommand(this);
         }
 
         public string Id
@@ -89,6 +93,41 @@ namespace Project.Models
             }
         }
 
+        private EditResourceTypeCommand _edit;
+        [ScriptIgnore]
+        public EditResourceTypeCommand Edit
+        {
+            get
+            {
+                return _edit;
+            }
+            set
+            {
+                if (_edit != value)
+                {
+                    _edit = value;
+                    OnPropertyChanged("Edit");
+                }
+            }
+        }
+        private DeleteResourceTypeCommand _delete;
+        [ScriptIgnore]
+        public DeleteResourceTypeCommand Delete
+        {
+            get
+            {
+                return _delete;
+            }
+            set
+            {
+                if (_delete != value)
+                {
+                    _delete = value;
+                    OnPropertyChanged("Delete");
+                }
+            }
+        }
+
     }
 
     public class AddResource : ICommand
@@ -110,6 +149,48 @@ namespace Project.Models
         {
             AddNewResource dialog = new AddNewResource(resourceTypeWithResource);
             dialog.Show();
+        }
+    }
+    public class EditResourceTypeCommand : ICommand
+    {
+        private ResourceTypeWithResources rt { get; set; }
+        public EditResourceTypeCommand(ResourceTypeWithResources rt)
+        {
+            this.rt = rt;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            EditResourceType dialog = new EditResourceType(rt);
+            dialog.Show();
+        }
+    }
+
+    public class DeleteResourceTypeCommand : ICommand
+    {
+        private ResourceTypeWithResources resourceType { get; set; }
+        public DeleteResourceTypeCommand(ResourceTypeWithResources rt)
+        {
+            resourceType = rt;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            DeleteResourceType msgBox = new DeleteResourceType(resourceType);
         }
     }
 }
