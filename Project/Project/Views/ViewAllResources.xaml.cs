@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Project.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +20,25 @@ namespace Project.Views
     /// <summary>
     /// Interaction logic for ViewAllResources.xaml
     /// </summary>
-    public partial class ViewAllResources : Window
+    public partial class ViewAllResources : Window, INotifyPropertyChanged
     {
-        public ViewAllResources()
+        public static ObservableCollection<ResourceTypeWithResources> TypesWithResources { get; set; }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name = null)
         {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public ViewAllResources()
+        {          
             InitializeComponent();
+            this.DataContext = this;
+            TypesWithResources = MainWindow.types;
         }
     }
 }

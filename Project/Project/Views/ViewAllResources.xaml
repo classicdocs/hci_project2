@@ -5,8 +5,135 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="View all resources" Height="300" Width="300">
+        Title="View all resources" Height="500" Width="850">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--<ListView Grid.Row="0" Grid.Column="0" x:Name="itemListView" ItemsSource="{Binding Path=Resources}">
+            <DataTemplate>
+                <TextBlock Text="{Binding Name}"></TextBlock>
+            </DataTemplate>
+        </ListView>-->
+        <!--<DataGrid x:Name="dgrMain" Grid.Row="0" Grid.Column="0"  ItemsSource="{Binding Path=TypesWithResources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Resurs Header" Width="SizeToCells">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Id:"/>
+                                <TextBlock Text="{Binding Id}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Name" Width="SizeToCells" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Width="SizeToCells" Binding="{Binding Description}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>-->
+
+        <!--<ListBox  Margin="10" ItemsSource="{Binding Path=TypesWithResources}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=Id}" />
+                        <TextBlock Text="{Binding Path=Name}"/>
+                        <TextBlock Text="{Binding Path=Description}"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Path=Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+
+        <ItemsControl Margin="5" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResources}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Background="White" Orientation="Vertical">
+                    <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
+                    <!--<ItemsControl ItemsSource="{Binding Path=Resources}">
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
+                                    <Setter Property="FrameworkElement.Margin" Value="0,0,0,13"/>
+                                    <Setter Property="Control.BorderThickness" Value="1" />
+                                    <Setter Property="Control.BorderBrush" Value="Gray" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Icon}" Width="30" Height="30"></Image>
+
+                                    <TextBlock Margin="7,0,0,0" Text="Id: "/>
+                                    <TextBlock Margin="1,0,0,0" Text="{Binding Id}" />
+
+                                    <TextBlock Margin="7,0,0,0" Text="Resource name: "/>
+                                    <TextBlock Margin="1,0,0,0" Text="{Binding Name}" />
+
+                                    <TextBlock Margin="7,0,0,0" Text="Description: "/>
+                                    <TextBlock Margin="1,0,0,0" Text="{Binding Description}" />
+
+                                    <TextBlock Margin="7,0,0,0" Text="Price: "/>
+                                    <TextBlock Margin="1,0,0,0" Text="{Binding Price}" />
+                                    
+                                    </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>-->
+                    <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Resources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
+                            <DataGrid.Columns>
+                                <!--<DataGridTemplateColumn Header="Id">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Id}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>-->
+                                <DataGridTextColumn Header="Id" Width="SizeToHeader" Binding="{Binding Id}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Name" Width="SizeToHeader" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Description" Width="SizeToCells" Binding="{Binding Description}"></DataGridTextColumn>
+                                <!--<DataGridTextColumn Header="Price" Width="SizeToHeader" Binding="{Binding Price}"></DataGridTextColumn>-->
+                                <DataGridTemplateColumn Header="Price">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Price}"/>
+                                                <TextBlock Margin="2,0,0,0" Text="$"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Renewable" Width="SizeToHeader" Binding="{Binding Renewable}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Date of discovery" Width="SizeToHeader" Binding="{Binding DateOfDiscovery}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Frequency" Width="SizeToHeader" Binding="{Binding Frequency}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Strategic importance" Width="SizeToHeader" Binding="{Binding StrategicImportance}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Currently exploited" Width="SizeToHeader" Binding="{Binding CurrentlyExploited}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Resource Unit" Width="SizeToHeader" Binding="{Binding Unit}"></DataGridTextColumn>
+
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button>Edit</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button>Delete</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
 </Window>
