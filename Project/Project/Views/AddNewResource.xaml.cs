@@ -52,14 +52,31 @@ namespace Project.Views
         public AddNewResource()
         {
             InitializeComponent();
-            InitializeData();
+            InitializeData(null);
             this.DataContext = this;
            
         }
 
-        private void InitializeData()
+        public AddNewResource(ResourceTypeWithResources r)
         {
-            types = MainWindow.types;
+            InitializeComponent();
+            InitializeData(r);
+            this.DataContext = this;
+
+        }
+
+        private void InitializeData(ResourceTypeWithResources resourceType)
+        {
+            if (resourceType == null)
+                types = MainWindow.types;
+            else
+            {
+                ObservableCollection<ResourceTypeWithResources> list = new ObservableCollection<ResourceTypeWithResources>();
+                list.Add(resourceType);
+                types = list;
+                cmbType.SelectedItem = resourceType;
+            }
+
             cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
             id = "";
             name = "";
@@ -98,7 +115,34 @@ namespace Project.Views
             }
 
             bool ren = renewable.Value;
-            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price);
+            PageEnum page = (PageEnum) 1;       // za pocetak
+
+            Canvas currentCanvas = MainWindow.getCanvas();
+            switch (currentCanvas.Name)
+            {
+                case "Cnv":
+                {
+                    page = (PageEnum)0;
+                    break;
+                }
+                case "Cnv1":
+                {
+                    page = (PageEnum)1;
+                    break;
+                }
+                case "Cnv2":
+                {
+                    page = (PageEnum)2;
+                    break;
+                }
+                case "Cnv3":
+                {
+                    page = (PageEnum)3;
+                    break;
+                }
+            }
+
+            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price, page);
             foreach(ResourceTypeWithResources rt in MainWindow.types)
             {
                 foreach(Resource r in rt.Resources)

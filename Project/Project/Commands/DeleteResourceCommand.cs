@@ -17,10 +17,12 @@ namespace Project.Commands
     {
         private Resource resource;
         private Canvas canvas;
-        public DeleteResourceCommand(Resource res, Canvas c)
+        private Point point;
+        public DeleteResourceCommand(Resource res, Point p, Canvas c)
         {
             resource = res;
             canvas = c;
+            point = p;
         }
 
         public bool CanExecute(object parameter)
@@ -36,8 +38,11 @@ namespace Project.Commands
 
             foreach(ResourcePoint rp in MainWindow.resources)
             {
-                if (rp.resource == resource)
+                if (rp.resource == resource && rp.point == point)
+                {
                     resToDelete = rp;
+                    break;
+                }
             }
             if (resToDelete != null)
             {
@@ -45,6 +50,7 @@ namespace Project.Commands
                 ReadWrite rw = new ReadWrite();
                 rw.writeToFile("../../Data/resources.json", MainWindow.resources);
 
+                Canvas canvas = MainWindow.getCanvas();
                 var element = canvas.InputHitTest(resToDelete.point) as UIElement;
                 UIElement parent;
 
@@ -60,7 +66,7 @@ namespace Project.Commands
                 }
 
 
-                MessageBox.Show("You have successfully delete resource");
+                MessageBox.Show("You have successfully deleted resource");
             }
 
         }
