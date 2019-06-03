@@ -1,1 +1,1 @@
-[{"resource":{"Id":"3","Name":"Oil","Icon":"C:\\Temp\\hci\\icons\\oil.png","Description":"","ResourceType":{"Id":"2","Name":"Energy resources","Icon":"C:\\Temp\\hci\\icons\\ecological.png","Description":""},"RenewableString":"No","Renewable":false,"Frequency":0,"Price":"32","Unit":1,"DateOfDiscovery":"Unknown","StrategicImportance":false,"CurrentlyExploited":false,"Tags":[]},"point":{"X":170.41538461538454,"Y":97.439999999999969},"ResourceName":"Oil","OnPage":0}]
+[]

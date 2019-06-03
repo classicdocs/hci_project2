@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="View all types" Height="300" Width="300">
     <Grid>
-        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=TypesWithResources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" >
+        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=TypesWithResources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -16,9 +16,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Id" Width="SizeToHeader" Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Width="SizeToCells" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Description" Width="SizeToHeader" Binding="{Binding Description}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Width="Auto" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Width="Auto" Binding="{Binding Description}"></DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
