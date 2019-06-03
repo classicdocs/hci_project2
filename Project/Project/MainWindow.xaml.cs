@@ -37,9 +37,142 @@ namespace Project
 
         public static bool addNewResourceDialog { get; set; }
 
+        private string _searchText;
+
+        private string minPrice;
+
+        private string maxPrice;
+
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+
+                OnPropertyChanged("SearchText");
+                OnPropertyChanged("TypesSearchResult");
+            }
+        }
+
+        public string MinPrice
+        {
+            get { return minPrice; }
+            set
+            {
+                minPrice = value;
+
+                OnPropertyChanged("MinPrice");
+            }
+        }
+
+        public string MaxPrice
+        {
+            get { return maxPrice; }
+            set
+            {
+                maxPrice = value;
+
+                OnPropertyChanged("MaxPrice");
+            }
+        }
+
+        public ObservableCollection<ResourceTypeWithResources> TypesSearchResult
+        {
+            get
+            {
+                if (SearchText == null)
+                {
+                    SearchText = "";
+                }
+
+                ObservableCollection<ResourceTypeWithResources> result = new ObservableCollection<ResourceTypeWithResources>();
+                ObservableCollection<Resource> resources = new ObservableCollection<Resource>();
+
+                foreach (ResourceTypeWithResources r in types)
+                {
+                    foreach (Resource res in r.Resources)
+                    {
+                        bool canAdd = false;
+                        if (res.Name.ToUpper().Contains(SearchText.ToUpper()) || res.Id.ToUpper().Contains(SearchText.ToUpper()))
+                        {
+                            canAdd = true;
+                            if (cmbUnit.SelectedItem != null)
+                            {
+                                if (!res.Unit.Equals(cmbUnit.SelectedItem))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (cmbFrequency.SelectedItem != null)
+                            {
+                                if (!res.Frequency.Equals(cmbFrequency.SelectedItem))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (cmbRenewable.SelectedItem != null)
+                            {
+                                bool renewableFilter = false;
+                                if (cmbRenewable.SelectedItem.Equals("Only renewable"))
+                                {
+                                    renewableFilter = true;
+                                }
+                                if (res.Renewable != renewableFilter)
+                                {
+                                    canAdd = false;
+                                }
+
+                            }
+
+                            if (MaxPrice != null)
+                            {
+                                if (Int32.Parse(res.Price) > Int32.Parse(MaxPrice))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (MinPrice != null)
+                            {
+                                if (Int32.Parse(res.Price) < Int32.Parse(MinPrice))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+                        }
+                        if (canAdd)
+                        {
+                            resources.Add(res);
+                        }
+                    }
+
+                    ResourceTypeWithResources newr = new ResourceTypeWithResources();
+                    newr.Id = r.Id;
+                    newr.Icon = r.Icon;
+                    newr.Name = r.Name;
+                    newr.Resources = resources;
+
+                    if (resources.Count > 0)
+                    {
+                        result.Add(newr);
+                    }
+
+                    resources = new ObservableCollection<Resource>();
+                }
+                return result;
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
+            cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
+            cmbRenewable.Items.Add("Only renewable");
+            cmbRenewable.Items.Add("Only nonrenewable");
             InitializeData();
             this.DataContext = this;
             LoadData();
@@ -513,7 +646,62 @@ namespace Project
 
         }
 
-       
+        private void ShowAdvancedSearch(object sender, RoutedEventArgs e)
+        {
+            AdvancedSearchFields.Visibility = Visibility.Visible;
+            ShowSearch.Visibility = Visibility.Hidden;
+            HideSearch.Visibility = Visibility.Visible;
+            RowForFilter.Height = new GridLength(200);
+        }
+
+        private void HideAdvancedSearch(object sender, RoutedEventArgs e)
+        {
+            AdvancedSearchFields.Visibility = Visibility.Hidden;
+            ShowSearch.Visibility = Visibility.Visible;
+            HideSearch.Visibility = Visibility.Hidden;
+            RowForFilter.Height = new GridLength(5);
+        }
+
+        private void DoFilter(object sender, RoutedEventArgs e)
+        {
+            if (MaxPrice != null)
+            {
+                try
+                {
+                    int max = Int32.Parse(MaxPrice);
+                }
+                catch (FormatException f)
+                {
+                    MessageBox.Show("Invalid input for maximum price!");
+                    return;
+                }
+            }
+
+            if (MinPrice != null)
+            {
+                try
+                {
+                    int min = Int32.Parse(MinPrice);
+                }
+                catch (FormatException f)
+                {
+                    MessageBox.Show("Invalid input for minimum price!");
+                    return;
+                }
+            }
+
+            OnPropertyChanged("TypesSearchResult");
+        }
+
+        private void RemoveFilters(object sender, RoutedEventArgs e)
+        {
+            cmbUnit.SelectedItem = null;
+            cmbFrequency.SelectedItem = null;
+            cmbRenewable.SelectedItem = null;
+            MinPrice = null;
+            MaxPrice = null;
+            OnPropertyChanged("TypesSearchResult");
+        }
     }
 
 }
