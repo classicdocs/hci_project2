@@ -8,21 +8,43 @@
         Title="View all resources" Height="500" Width="850">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ItemsControl Margin="5" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResources}">
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">Search:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,15"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                <ColumnDefinition Width="0.20*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" Margin="20,5,30,10" Name="cmbUnit"/>
+            <Button Grid.Column="1" Height="20" Width="50" Click="DoFilter">Filter</Button>
+            <Button Grid.Column="2" Height="20" Width="100" Click="RemoveFilters">Remove Filters</Button>
+        </Grid>
+        <ItemsControl Margin="5" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    
+
                     <StackPanel Background="White" Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>    
-                        <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
-                    </StackPanel>
-                    <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Resources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                            <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Resources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
