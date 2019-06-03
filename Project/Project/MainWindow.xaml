@@ -170,21 +170,21 @@
                                 </Canvas>
                                     </TabItem>
                             <TabItem x:Name ="Second" Header="Second Map">
-                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  Width="500" Height="500">
+                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
                             <TabItem x:Name ="Third" Header="Third Map">
-                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
+                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
                             <TabItem x:Name ="Fourth" Header="Fourth Map">
-                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
+                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="500" Height="500">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
