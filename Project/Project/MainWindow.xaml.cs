@@ -33,6 +33,10 @@ namespace Project
 
         public static ObservableCollection<ResourcePoint> resources { get; set; }
 
+        public static ObservableCollection<ResourcePoint> searchShownResources { get; set; }
+
+        public static bool searchIsActive { get; set; }
+
         Point startPoint = new Point();
 
         public static bool addNewResourceDialog { get; set; }
@@ -94,6 +98,11 @@ namespace Project
         private void NewTag_Click(object sender, RoutedEventArgs e)
         {
             var s = new AddNewTag();
+            s.Show();
+        }
+        private void SearchMap_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SearchMap();
             s.Show();
         }
 
@@ -365,6 +374,16 @@ namespace Project
 
             return currentCanvas;
         }
+        public static List<Canvas> getAllCanvases()
+        {
+            List<Canvas> canvases = new List<Canvas>();
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv2);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv3);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv4);
+            return canvases;
+
+        }
 
         private void Cnv_Drop(object sender, DragEventArgs e)
         {
@@ -409,9 +428,9 @@ namespace Project
                     Image img = drawResource(resource, p);
                     Canvas.SetLeft(img, e.GetPosition(currentCanvas).X);
                     Canvas.SetTop(img, e.GetPosition(currentCanvas).Y);
-                    
 
-                    MessageBox.Show("You have successfully added new resource on map.");
+                    MessageBox.Show("You have successfully added new resource on map.", "Added", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
             }
         }
@@ -425,6 +444,44 @@ namespace Project
 
         }
 
+        private void closeSearch(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+            foreach(ResourcePoint rp in searchShownResources)
+            {
+                Canvas canvas = getCanvas();
+                var element = canvas.InputHitTest(rp.point) as UIElement;
+                UIElement parent;
+                while (element != null &&
+                (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+                {
+                    element = parent;
+                }
+
+                if (element != null)
+                {
+                    canvas.Children.Remove(element);
+                }
+            }
+
+            MessageBox.Show("Your search results have been removed. All resources are now on the map", "Reverted search", MessageBoxButton.OK, MessageBoxImage.Information);
+            ((MainWindow)Application.Current.MainWindow).filterSearch.Visibility = Visibility.Hidden;
+            ((MainWindow)Application.Current.MainWindow).closeSearchBtn.Visibility = Visibility.Hidden;
+            ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = false;
+        }
+
+        public static void showCloseBtn()
+        {
+            ((MainWindow)Application.Current.MainWindow).filterSearch.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).closeSearchBtn.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = true;
+        }
+
+        private void FilterSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new FilterSearch();
+            s.Show();
+        }
     }
 
 }

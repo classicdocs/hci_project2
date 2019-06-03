@@ -8,6 +8,7 @@
         Title="MainWindow" Height="350" Width="525"
         >
     <Window.Resources>
+        <Image x:Key="SearchIcon" Source="/Resource/search-icon-large.png"/>
         <Style x:Key="SmallIcon" TargetType="Image">
             <Setter Property="MaxWidth" Value="16"/>
             <Setter Property="MaxHeight" Value="16"/>
@@ -15,6 +16,7 @@
         </Style>
     </Window.Resources>
     <Grid>
+
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="View">
@@ -27,6 +29,9 @@
                     <MenuItem Header="New type" Click="NewType_Click"></MenuItem>
                     <MenuItem Header="New tag" Click="NewTag_Click"></MenuItem>
                 </MenuItem>
+                <Button x:Name="searchMapBtn" Content="Search map" Width="auto" Click="SearchMap_Click"/>
+                <Button x:Name="filterSearch" Content="Filter search" Width="auto" Click="FilterSearch_Click" Visibility="Hidden"/>
+                <Button x:Name="closeSearchBtn" IsHitTestVisible="False" HorizontalAlignment="Right" Content="Revert search" Width="auto" Click="closeSearch" Visibility="Hidden"/>
             </Menu>
             <Grid DockPanel.Dock="Bottom">
                 <Grid.RowDefinitions>
@@ -70,39 +75,21 @@
                             <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
                                 <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                                 <TextBlock Text="{Binding Name}"/>
-                                   
+
                             </WrapPanel>
                         </DataTemplate>
                     </TreeView.Resources>
                 </TreeView>
-                    <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <Viewbox Stretch="Fill">
+                <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Viewbox Stretch="Fill">
                         <TabControl TabStripPlacement="Bottom" Name="Tab">
-                            <!--<TabControl.Resources>
-                                <DataTemplate x:Key="First Map" DataType="TabItem">
-                                    <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
-                                        <Canvas.Background>
-                                            <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
-                                        </Canvas.Background>
-                                    </Canvas>
-                                </DataTemplate>
-                                <DataTemplate x:Key="Second Map" DataType="TabItem">
-                                    <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
-                                        <Canvas.Background>
-                                            <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
-                                        </Canvas.Background>
-                                    </Canvas>
-                                </DataTemplate>
-                            </TabControl.Resources>-->
-                            <!--<Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">-->
-                                
-                                <TabItem x:Name ="First" Header="First Map">
+                            <TabItem x:Name ="First" Header="First Map">
                                 <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
-                                        <Canvas.Background>
-                                            <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
-                                        </Canvas.Background>
+                                    <Canvas.Background>
+                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                    </Canvas.Background>
                                 </Canvas>
-                                    </TabItem>
+                            </TabItem>
                             <TabItem x:Name ="Second" Header="Second Map">
                                 <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
                                     <Canvas.Background>
@@ -123,13 +110,13 @@
                                         <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
-                                </TabItem>
-                            <!--</Canvas>-->
+                            </TabItem>
                         </TabControl>
 
                     </Viewbox>
                 </ScrollViewer>
             </Grid>
         </DockPanel>
+        
     </Grid>
 </Window>

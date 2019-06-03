@@ -79,6 +79,12 @@
     <Compile Include="Views\EditResource.xaml.cs">
       <DependentUpon>EditResource.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FilterSearch.xaml.cs">
+      <DependentUpon>FilterSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchMap.xaml.cs">
+      <DependentUpon>SearchMap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewAllResources.xaml.cs">
       <DependentUpon>ViewAllResources.xaml</DependentUpon>
     </Compile>
@@ -117,6 +123,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FilterSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

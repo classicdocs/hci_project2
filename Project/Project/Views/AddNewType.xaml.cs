@@ -77,7 +77,8 @@ namespace Project.Views
         {
             if (id.Equals("") || name.Equals("") || fileName.Equals(""))
             {
-                MessageBox.Show("You must fill all required fields");
+                MessageBox.Show("You must fill all required fields", "Fields lacking", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return;
             }
             ResourceTypeWithResources type = new ResourceTypeWithResources(id, name, fileName, description);
@@ -86,17 +87,20 @@ namespace Project.Views
             {
                 if (rt.Id == type.Id)
                 {
-                    MessageBox.Show("Id you entered is already in use. Please choose another.");
+                    MessageBox.Show("Id you entered is already in use. Please choose another.", "Invalid id", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     return;
                 }
                 else if (rt.Name == type.Name)
                 {
-                    MessageBox.Show("Name you entered is already in use. Please choose another.");
+                    MessageBox.Show("Name you entered is already in use. Please choose another.", "Invalid name", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     return;
                 }
                 else if (rt.Icon == type.Icon)
                 {
-                    MessageBox.Show("Icon you choose is already in use. Please choose another.");
+                    MessageBox.Show("Icon you choose is already in use. Please choose another one.", "Invalid icon", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     return;
                 }
             }
@@ -105,7 +109,9 @@ namespace Project.Views
             rw.writeToFile("../../Data/types.json", MainWindow.types);
 
             this.Close();
-            MessageBox.Show("You have successfully add new resource type.");
+            MessageBox.Show("You have successfully add new resource type.", "Added resource", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            MessageBox.Show("You have successfully added a new resource type.");
         }
     }
 
