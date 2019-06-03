@@ -141,7 +141,9 @@ namespace Project.Views
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            Resource resource = (Resource)((Button)sender).Tag;
+            DeleteResource dialog = new DeleteResource(resource);
+            OnPropertyChanged("TypesWithResourcesSearchResult");
         }
     }
 }
