@@ -53,15 +53,15 @@ namespace Project.Views
         }
 
         private void DoFilter(object sender, RoutedEventArgs e)
-        {
-            //OnPropertyChanged("UnitFilter");
+        {            
             OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
         private void RemoveFilters(object sender, RoutedEventArgs e)
         {
             cmbUnit.SelectedItem = null;
-            //OnPropertyChanged("UnitFilter");
+            cmbFrequency.SelectedItem = null;
+            cmbRenewable.SelectedItem = null;
             OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
@@ -81,18 +81,43 @@ namespace Project.Views
                 {
                     foreach (Resource res in r.Resources)
                     {
+                        bool canAdd = false;
                         if (res.Name.ToUpper().Contains(SearchText.ToUpper()) || res.Id.ToUpper().Contains(SearchText.ToUpper()))
                         {
-                            if (cmbUnit.SelectedItem == null)
+                            canAdd = true;                            
+                            if (cmbUnit.SelectedItem != null)
                             {
-                                resources.Add(res);
-                            } else
-                            {
-                                if (res.Unit.Equals(cmbUnit.SelectedItem))
+                                if (!res.Unit.Equals(cmbUnit.SelectedItem))
                                 {
-                                    resources.Add(res);
+                                    canAdd = false;
                                 }
-                            }                            
+                            }
+
+                            if (cmbFrequency.SelectedItem != null)
+                            {
+                                if (!res.Frequency.Equals(cmbFrequency.SelectedItem))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (cmbRenewable.SelectedItem != null)
+                            {
+                                bool renewableFilter = false;
+                                if (cmbRenewable.SelectedItem.Equals("Only renewable"))
+                                {
+                                    renewableFilter = true;
+                                }
+                                if (res.Renewable != renewableFilter)
+                                {
+                                    canAdd = false;
+                                }
+                                
+                            }
+                        }
+                        if(canAdd)
+                        {
+                            resources.Add(res);
                         }
                     }                        
 
@@ -127,8 +152,11 @@ namespace Project.Views
         {          
             InitializeComponent();
             cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
+            cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
+            cmbRenewable.Items.Add("Only renewable");
+            cmbRenewable.Items.Add("Only nonrenewable");
             this.DataContext = this;
             TypesWithResources = MainWindow.types;
-        }
+        }        
     }
 }
