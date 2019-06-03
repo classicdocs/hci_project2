@@ -72,7 +72,12 @@
                             <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
                                 <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                                 <TextBlock Text="{Binding Name}"/>
-                                   
+                                <WrapPanel.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
+                                        <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
+                                    </ContextMenu>
+                                </WrapPanel.ContextMenu>
                             </WrapPanel>
                         </DataTemplate>
                     </TreeView.Resources>
