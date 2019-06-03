@@ -5,11 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="View all resources" Height="500" Width="1200">
+        FontSize="40"
+        Title="View all resources" 
+        WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="1400"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        Background="LightGray"
+        >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.12*"></RowDefinition>
+            <RowDefinition Height="0.13*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -17,20 +25,20 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                <ColumnDefinition Width="0.35*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0">Search:</Label>
+            <Label Grid.Row="0" Grid.Column="0" Margin="0,0,0,20">Search:</Label>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,15"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.13*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                <ColumnDefinition Width="0.18*"></ColumnDefinition>
+                <ColumnDefinition Width="0.07*"></ColumnDefinition>
+                <ColumnDefinition Width="0.16*"></ColumnDefinition>
                 <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                <ColumnDefinition Width="0.19*"></ColumnDefinition>
+                <ColumnDefinition Width="0.14*"></ColumnDefinition>
+                <ColumnDefinition Width="0.18*"></ColumnDefinition>
                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
 
                 <ColumnDefinition Width="0.15*"></ColumnDefinition>
@@ -43,27 +51,29 @@
                 <ColumnDefinition Width="0.025*"></ColumnDefinition>
                 
                 <ColumnDefinition Width="0.12*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
                 
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0">Filter by unit:</Label>
-            <ComboBox Grid.Column="1" Margin="5,5,10,10" Name="cmbUnit"/>
-            <Label Grid.Row="0" Grid.Column="2">Filter by frequency:</Label>
-            <ComboBox Grid.Column="3" Margin="5,5,0,10" Name="cmbFrequency"/>
-            <Label Grid.Row="0" Grid.Column="4">Filter by renewability:</Label>
-            <ComboBox Grid.Column="5" Margin="5,5,0,10" Name="cmbRenewable"/>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="25" Margin="0,15,0,0">Unit:</Label>
+            <ComboBox Grid.Column="1" Margin="5,5,10,10" Name="cmbUnit" FontSize="25" Height="35" Width="120"/>
+            <Label Grid.Row="0" Grid.Column="2" FontSize="25" Margin="0,15,0,0" >Frequency:</Label>
+            <ComboBox Grid.Column="3" Margin="5,5,0,10" Name="cmbFrequency" FontSize="25" Height="35"/>
+            <Label Grid.Row="0" Grid.Column="4" FontSize="25" Margin="0,15,0,0">Renewability:</Label>
+            <ComboBox Grid.Column="5" Margin="5,5,0,10" Name="cmbRenewable" FontSize="25" Height="35"/>
 
-            <Label Grid.Row="0" Grid.Column="6">Minimum price:</Label>
-            <TextBox Grid.Row="0" Grid.Column="7" Text="{Binding Path=MinPrice}" Margin="0,4,0,15"/>
-            <Label Grid.Row="0" Grid.Column="8">$</Label>
+            <Label Grid.Row="0" Grid.Column="6" FontSize="25" Margin="0,15,0,0">Min price:</Label>
+            <TextBox Grid.Row="0" Grid.Column="7" Text="{Binding Path=MinPrice}" Margin="0,4,0,15"  Height="35"/>
+            <Label Grid.Row="0" Grid.Column="8" FontSize="25" Margin="0,15,0,0">$</Label>
 
 
-            <Label Grid.Row="0" Grid.Column="9">Maximum price:</Label>
-            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding Path=MaxPrice}" Margin="0,4,0,15"/>
-            <Label Grid.Row="0" Grid.Column="11">$</Label>
+            <Label Grid.Row="0" Grid.Column="9" FontSize="25" Margin="0,15,0,0">Max price:</Label>
+            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding Path=MaxPrice}" Margin="0,4,0,15"  Height="35"/>
+            <Label Grid.Row="0" Grid.Column="11" FontSize="25" Margin="0,15,0,0">$</Label>
 
-            <Button Grid.Column="12" Height="20" Margin="10,0,0,5" Width="50" Click="DoFilter">Filter</Button>
-            <Button Grid.Column="13" Height="20" Margin="0,0,0,5" Width="100" Click="RemoveFilters">Remove Filters</Button>
+            <StackPanel Orientation="Vertical" Grid.Column="12">
+                <Button  Height="35" Margin="0,0,0,5" Width="100" Click="DoFilter" FontSize="25">Filter</Button>
+                <Button  Height="35" Margin="0,0,0,5" Width="100" Click="RemoveFilters" FontSize="25">Clear</Button>
+            </StackPanel>
+            
         </Grid>
         <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <ItemsControl Margin="5" PreviewMouseWheel="View_MouseWheel" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}">
@@ -71,26 +81,25 @@
                     <DataTemplate>
                         <StackPanel Background="White" Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                            <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                             <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
                         </StackPanel>
-                        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Resources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
+                        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=Resources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30" >
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                            <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Id" Width="Auto" Binding="{Binding Id}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}" ></DataGridTextColumn>
-                                <DataGridTextColumn Header="Description" Width="Auto" Binding="{Binding Description}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Frequency" Width="Auto" Binding="{Binding Frequency}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Icon" Width="Auto" Binding="{Binding Icon}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Renewable" Width="Auto" Binding="{Binding RenewableString}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Resource Unit" Width="Auto" Binding="{Binding Unit}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Price" Width="Auto" Binding="{Binding Price, StringFormat={}{0}$}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Resource Unit" Width="Auto" Binding="{Binding Unit}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Frequency" Width="Auto" Binding="{Binding Frequency}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Renewable" Width="Auto" Binding="{Binding RenewableString}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Description" Width="Auto" Binding="{Binding Description}"></DataGridTextColumn>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

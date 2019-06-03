@@ -42,7 +42,7 @@ namespace Project.Commands
             typeof(RoutedCommands),
             new InputGestureCollection()
             {
-                 new KeyGesture(Key.R, ModifierKeys.Control | ModifierKeys.Alt),
+                 new KeyGesture(Key.R, ModifierKeys.Alt),
             }
             );
         public static readonly RoutedUICommand ViewAllTypes = new RoutedUICommand(
@@ -51,7 +51,7 @@ namespace Project.Commands
             typeof(RoutedCommands),
             new InputGestureCollection()
             {
-                 new KeyGesture(Key.T, ModifierKeys.Control | ModifierKeys.Alt),
+                 new KeyGesture(Key.T, ModifierKeys.Alt),
             }
             );
         public static readonly RoutedUICommand ViewAllTags = new RoutedUICommand(
@@ -60,16 +60,7 @@ namespace Project.Commands
             typeof(RoutedCommands),
             new InputGestureCollection()
             {
-                 new KeyGesture(Key.G, ModifierKeys.Control | ModifierKeys.Alt),
-            }
-            );
-        public static readonly RoutedUICommand DeleteResourceType = new RoutedUICommand(
-            "Delete resource type",
-            "DeleteResourceType",
-            typeof(RoutedCommands),
-            new InputGestureCollection()
-            {
-                 new KeyGesture(Key.Delete),
+                 new KeyGesture(Key.G, ModifierKeys.Alt),
             }
             );
     }
