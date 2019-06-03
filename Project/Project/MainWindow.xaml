@@ -49,40 +49,137 @@
                     <ColumnDefinition Width="0.3*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TreeView Grid.Row="0" Grid.Column="0" Name="trvResources" ItemsSource="{Binding types}" Width="Auto">
-                    <TreeView.Resources>
-                        <HierarchicalDataTemplate DataType="{x:Type local:ResourceTypeWithResources}" ItemsSource="{Binding Resources}">
-                            <StackPanel Orientation="Horizontal" >
-                                <Image Margin="0,0,5,0">
-                                    <Image.Style>
-                                        <Style BasedOn="{StaticResource ResourceKey=SmallIcon}" TargetType="Image">
-                                            <Style.Triggers>
-                                                <DataTrigger 
-                                                Binding="{Binding 
-                                                        RelativeSource={RelativeSource 
-                                                                AncestorType={x:Type TreeViewItem}}, 
-                                                                Path=IsExpanded}" 
-                                                Value="True">
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <StackPanel Orientation="Horizontal" >
-                                    <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
-                                    <TextBlock Text="{Binding Name}" FontSize="40"></TextBlock>
-                                    <StackPanel.ContextMenu>
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.075*"></RowDefinition>
+                        <RowDefinition Name="RowForFilter" Height="5"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>                            
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Margin="0,15,0,0">Search:</Label>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="100" Margin="0,0,0,0" Height="25" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Click="ShowAdvancedSearch" Grid.Column="2" Height="20" Name="ShowSearch" Content="Advanced Search" Margin="45,0,5,0"></Button>
+                        <Button Click="HideAdvancedSearch" Grid.Column="2" Visibility="Hidden" Height="20" Name="HideSearch" Content="Close advanced search" Margin="25,0,5,0"></Button>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0" Visibility="Hidden" Name="AdvancedSearchFields">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0">Filter by unit:</Label>
+                        <ComboBox Grid.Row="0"  Name="cmbUnit" Margin="20,5,20,5" Grid.Column="1"/>
+                        <Label Grid.Row="1" Grid.Column="0">Filter by frequency:</Label>
+                        <ComboBox Grid.Row="1" Name="cmbFrequency" Margin="20,5,20,5" Grid.Column="1"/>
+                        <Label Grid.Row="2" Grid.Column="0">Filter by renewability:</Label>
+                        <ComboBox Grid.Row="2" Name="cmbRenewable" Margin="20,5,20,5" Grid.Column="1"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
+                            <Label Grid.Row="3" Grid.Column="0" Margin="0,5,0,0">Minimum price:</Label>
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=MinPrice}" Height="20" Width="50"/>
+                            <Label Grid.Row="0" Grid.Column="8" Margin="0,5,0,0">$</Label>
+
+                            <Label Grid.Row="4" Grid.Column="0" Margin="0,5,0,0">Maximum price:</Label>
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=MaxPrice}" Height="20" Width="50" />
+                            <Label Grid.Row="0" Grid.Column="11" Margin="0,5,0,0">$</Label>
+                        </StackPanel>
+                        <Button Grid.Row="5"  Grid.Column="0" Height="20" Margin="10,0,0,5" Width="50" Click="DoFilter">Filter</Button>
+                        <Button Grid.Row="5"  Grid.Column="1" Height="20" Margin="0,0,0,5" Width="100" Click="RemoveFilters">Remove Filters</Button>
+                    </Grid>
+                    <TreeView Grid.Row="2" Grid.Column="0" Name="trvResources" ItemsSource="{Binding TypesSearchResult}" Width="Auto">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                        <TreeView.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type local:ResourceTypeWithResources}" ItemsSource="{Binding Resources}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="0,0,5,0">
+                                        <Image.Style>
+                                            <Style BasedOn="{StaticResource ResourceKey=SmallIcon}" TargetType="Image">
+                                                <Style.Triggers>
+                                                    <DataTrigger 
+                                                    Binding="{Binding 
+                                                            RelativeSource={RelativeSource 
+                                                                    AncestorType={x:Type TreeViewItem}}, 
+                                                                    Path=IsExpanded}" 
+                                                    Value="True">
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <StackPanel.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Add new resource" Command="{Binding Add}"></MenuItem>
+                                                <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
+                                                <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
+                                            </ContextMenu>
+                                        </StackPanel.ContextMenu>
+                                        <StackPanel.ToolTip>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
+                                                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}"></Label>
+                                                <Label Grid.Row="1" Grid.Column="0">Name:</Label>
+                                                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
+                                                <Label Grid.Row="2" Grid.Column="0">Icon:</Label>
+                                                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Icon}"></Label>
+                                                <Label Grid.Row="3" Grid.Column="0">Description:</Label>
+                                                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Description}"></Label>
+                                            </Grid>
+                                        </StackPanel.ToolTip>
+                                    </StackPanel>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            <DataTemplate DataType="{x:Type local:Resource}">
+                                <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
+                                    <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <WrapPanel.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Add new resource" Command="{Binding Add}">
-                                            </MenuItem>
                                             <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
                                             <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                         </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    <StackPanel.ToolTip>
-                                        
+                                    </WrapPanel.ContextMenu>
+                                    <WrapPanel.ToolTip>
                                         <Grid>
                                             <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
@@ -92,70 +189,31 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0" Grid.Column="0">Id:</Label>
-                                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}" ></Label>
-                                            <Label Grid.Row="1" Grid.Column="0" >Name:</Label>
-                                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}" ></Label>
-                                            <Label Grid.Row="2" Grid.Column="0" >Icon:</Label>
-                                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Icon}" ></Label>
-                                            <Label Grid.Row="3" Grid.Column="0" >Description:</Label>
-                                            <Label Grid.Row="3" Grid.Column="1" Content="{Binding Description}"></Label>
+                                            <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
+                                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}"></Label>
+                                            <Label Grid.Row="1" Grid.Column="0">Name:</Label>
+                                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
+                                            <Label Grid.Row="2" Grid.Column="0">Description:</Label>
+                                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}"></Label>
+                                            <Label Grid.Row="3" Grid.Column="0">Type:</Label>
+                                            <Label Grid.Row="3" Grid.Column="1" Content="{Binding ResourceType.Name}"></Label>
+                                            <Label Grid.Row="4" Grid.Column="0">Frequency:</Label>
+                                            <Label Grid.Row="4" Grid.Column="1" Content="{Binding Frequency}"></Label>
+                                            <Label Grid.Row="5" Grid.Column="0">Icon:</Label>
+                                            <Label Grid.Row="5" Grid.Column="1" Content="{Binding Icon}"></Label>
+                                            <Label Grid.Row="6" Grid.Column="0">Renewable:</Label>
+                                            <Label Grid.Row="6" Grid.Column="1" Content="{Binding RenewableString}"></Label>
+                                            <Label Grid.Row="7" Grid.Column="0">Unit:</Label>
+                                            <Label Grid.Row="7" Grid.Column="1" Content="{Binding Unit}"></Label>
+                                            <Label Grid.Row="8" Grid.Column="0">Price:</Label>
+                                            <Label Grid.Row="8" Grid.Column="1" Content="{Binding Price}"></Label>
                                         </Grid>
-                                    </StackPanel.ToolTip>
-                                </StackPanel>
-                            </StackPanel>
-                        </HierarchicalDataTemplate>
-                        <DataTemplate DataType="{x:Type local:Resource}">
-                            <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove" >
-                                <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
-                                <TextBlock Text="{Binding Name}" FontSize="40"/>
-                                <WrapPanel.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
-                                        <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
-                                    </ContextMenu>
-                                </WrapPanel.ContextMenu>
-                                <WrapPanel.ToolTip >
-                                    <Grid >
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
-                                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}" ></Label>
-                                        <Label Grid.Row="1" Grid.Column="0" >Name:</Label>
-                                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
-                                        <Label Grid.Row="2" Grid.Column="0"  >Description:</Label>
-                                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}" ></Label>
-                                        <Label Grid.Row="3" Grid.Column="0" >Type:</Label>
-                                        <Label Grid.Row="3" Grid.Column="1" Content="{Binding ResourceType.Name}" ></Label>
-                                        <Label Grid.Row="4" Grid.Column="0" >Frequency:</Label>
-                                        <Label Grid.Row="4" Grid.Column="1" Content="{Binding Frequency}" ></Label>
-                                        <Label Grid.Row="5" Grid.Column="0" >Icon:</Label>
-                                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Icon}" ></Label>
-                                        <Label Grid.Row="6" Grid.Column="0" >Renewable:</Label>
-                                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding RenewableString}" ></Label>
-                                        <Label Grid.Row="7" Grid.Column="0" >Unit:</Label>
-                                        <Label Grid.Row="7" Grid.Column="1" Content="{Binding Unit}" ></Label>
-                                        <Label Grid.Row="8" Grid.Column="0" >Price:</Label>
-                                        <Label Grid.Row="8" Grid.Column="1" Content="{Binding Price}"></Label>
-                                    </Grid>
-                                </WrapPanel.ToolTip>
-                            </WrapPanel>
-                        </DataTemplate>
-                    </TreeView.Resources>
-                </TreeView>
+                                    </WrapPanel.ToolTip>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </TreeView.Resources>
+                    </TreeView>
+                </Grid>
                     <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Viewbox Stretch="Fill">
                         <TabControl TabStripPlacement="Bottom" Name="Tab" FontSize="30">

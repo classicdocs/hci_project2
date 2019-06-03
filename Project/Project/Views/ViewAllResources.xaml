@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="View all resources" Height="500" Width="850">
+        Title="View all resources" Height="500" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
@@ -26,20 +26,50 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                <ColumnDefinition Width="0.13*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.18*"></ColumnDefinition>
                 <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                <ColumnDefinition Width="0.20*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" Margin="20,5,30,10" Name="cmbUnit"/>
-            <Button Grid.Column="1" Height="20" Width="50" Click="DoFilter">Filter</Button>
-            <Button Grid.Column="2" Height="20" Width="100" Click="RemoveFilters">Remove Filters</Button>
-        </Grid>
-        <ItemsControl Margin="5" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
+                <ColumnDefinition Width="0.19*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
 
-                    <StackPanel Background="White" Orientation="Vertical">
+                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                <ColumnDefinition Width="0.07*"></ColumnDefinition>
+                <ColumnDefinition Width="0.025*"></ColumnDefinition>
+
+
+                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                <ColumnDefinition Width="0.07*"></ColumnDefinition>
+                <ColumnDefinition Width="0.025*"></ColumnDefinition>
+                
+                <ColumnDefinition Width="0.12*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">Filter by unit:</Label>
+            <ComboBox Grid.Column="1" Margin="5,5,10,10" Name="cmbUnit"/>
+            <Label Grid.Row="0" Grid.Column="2">Filter by frequency:</Label>
+            <ComboBox Grid.Column="3" Margin="5,5,0,10" Name="cmbFrequency"/>
+            <Label Grid.Row="0" Grid.Column="4">Filter by renewability:</Label>
+            <ComboBox Grid.Column="5" Margin="5,5,0,10" Name="cmbRenewable"/>
+
+            <Label Grid.Row="0" Grid.Column="6">Minimum price:</Label>
+            <TextBox Grid.Row="0" Grid.Column="7" Text="{Binding Path=MinPrice}" Margin="0,4,0,15"/>
+            <Label Grid.Row="0" Grid.Column="8">$</Label>
+
+
+            <Label Grid.Row="0" Grid.Column="9">Maximum price:</Label>
+            <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding Path=MaxPrice}" Margin="0,4,0,15"/>
+            <Label Grid.Row="0" Grid.Column="11">$</Label>
+
+            <Button Grid.Column="12" Height="20" Margin="10,0,0,5" Width="50" Click="DoFilter">Filter</Button>
+            <Button Grid.Column="13" Height="20" Margin="0,0,0,5" Width="100" Click="RemoveFilters">Remove Filters</Button>
+        </Grid>
+        <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <ItemsControl Margin="5" PreviewMouseWheel="View_MouseWheel" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}">
+            <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="White" Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                             <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
@@ -81,6 +111,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
+        </ScrollViewer>
     </Grid>
 </Window>

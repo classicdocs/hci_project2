@@ -24,21 +24,33 @@ namespace Project.Views
     {
         public static ObservableCollection<ResourceTypeWithResources> TypesWithResources { get; set; }
 
-        /*private ResourceUnit _unitFilter;
+        private string minPrice;
 
-        public ResourceUnit UnitFilter
+        private string maxPrice;
+        
+        private string _searchText;
+
+        public string MinPrice
         {
-            get { return _unitFilter; }
+            get { return minPrice; }
             set
             {
-                _unitFilter = value;
+                minPrice = value;
 
-                OnPropertyChanged("UnitFilter");
-                OnPropertyChanged("TypesWithResourcesSearchResult");
+                OnPropertyChanged("MinPrice");               
             }
-        }*/
+        }
 
-        private string _searchText;
+        public string MaxPrice
+        {
+            get { return maxPrice; }
+            set
+            {
+                maxPrice = value;
+
+                OnPropertyChanged("MaxPrice");
+            }
+        }
 
         public string SearchText
         {
@@ -54,14 +66,41 @@ namespace Project.Views
 
         private void DoFilter(object sender, RoutedEventArgs e)
         {
-            //OnPropertyChanged("UnitFilter");
+            if (MaxPrice != null)
+            {
+                try
+                {
+                    int max = Int32.Parse(MaxPrice);
+                } catch (FormatException f)
+                {
+                    MessageBox.Show("Invalid input for maximum price!");
+                    return;
+                }                
+            }
+
+            if (MinPrice != null)
+            {
+                try
+                {
+                    int min = Int32.Parse(MinPrice);
+                }
+                catch (FormatException f)
+                {
+                    MessageBox.Show("Invalid input for minimum price!");
+                    return;
+                }
+            }
+
             OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
         private void RemoveFilters(object sender, RoutedEventArgs e)
         {
             cmbUnit.SelectedItem = null;
-            //OnPropertyChanged("UnitFilter");
+            cmbFrequency.SelectedItem = null;
+            cmbRenewable.SelectedItem = null;
+            MinPrice = null;
+            MaxPrice = null;
             OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
@@ -81,18 +120,59 @@ namespace Project.Views
                 {
                     foreach (Resource res in r.Resources)
                     {
+                        bool canAdd = false;
                         if (res.Name.ToUpper().Contains(SearchText.ToUpper()) || res.Id.ToUpper().Contains(SearchText.ToUpper()))
                         {
-                            if (cmbUnit.SelectedItem == null)
+                            canAdd = true;                            
+                            if (cmbUnit.SelectedItem != null)
                             {
-                                resources.Add(res);
-                            } else
-                            {
-                                if (res.Unit.Equals(cmbUnit.SelectedItem))
+                                if (!res.Unit.Equals(cmbUnit.SelectedItem))
                                 {
-                                    resources.Add(res);
+                                    canAdd = false;
                                 }
-                            }                            
+                            }
+
+                            if (cmbFrequency.SelectedItem != null)
+                            {
+                                if (!res.Frequency.Equals(cmbFrequency.SelectedItem))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (cmbRenewable.SelectedItem != null)
+                            {
+                                bool renewableFilter = false;
+                                if (cmbRenewable.SelectedItem.Equals("Only renewable"))
+                                {
+                                    renewableFilter = true;
+                                }
+                                if (res.Renewable != renewableFilter)
+                                {
+                                    canAdd = false;
+                                }
+                                
+                            }
+
+                            if (MaxPrice != null)
+                            {
+                                if(Int32.Parse(res.Price) > Int32.Parse(MaxPrice))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (MinPrice != null)
+                            {
+                                if (Int32.Parse(res.Price) < Int32.Parse(MinPrice))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+                        }
+                        if(canAdd)
+                        {
+                            resources.Add(res);
                         }
                     }                        
 
@@ -127,6 +207,9 @@ namespace Project.Views
         {          
             InitializeComponent();
             cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
+            cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
+            cmbRenewable.Items.Add("Only renewable");
+            cmbRenewable.Items.Add("Only nonrenewable");
             this.DataContext = this;
             TypesWithResources = MainWindow.types;
 
@@ -152,6 +235,20 @@ namespace Project.Views
             Resource resource = (Resource)((Button)sender).Tag;
             DeleteResource dialog = new DeleteResource(resource);
             OnPropertyChanged("TypesWithResourcesSearchResult");
+        }
+
+        private void View_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                e.Handled = true;
+                var eventArg = new MouseWheelEventArgs(
+                    e.MouseDevice, e.Timestamp, e.Delta);
+                eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+                eventArg.Source = sender;
+                var parent = ((Control)sender).Parent as UIElement;
+                parent.RaiseEvent(eventArg);
+            }
         }
     }
 }
