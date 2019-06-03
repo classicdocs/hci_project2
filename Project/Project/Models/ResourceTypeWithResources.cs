@@ -45,7 +45,7 @@ namespace Project.Models
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
-        }
+        }     
 
         public string Id
         {
