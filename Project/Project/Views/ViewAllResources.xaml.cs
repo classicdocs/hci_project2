@@ -136,9 +136,7 @@ namespace Project.Views
             Resource resource = (Resource)((Button)sender).Tag;
             EditResource dialog = new EditResource(resource);
             dialog.ShowDialog();
-            CollectionViewSource.GetDefaultView(TypesWithResourcesSearchResult).Refresh();
-            CollectionViewSource.GetDefaultView(TypesWithResources).Refresh();
-            CollectionViewSource.GetDefaultView(MainWindow.types).Refresh();
+            OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

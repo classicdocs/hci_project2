@@ -121,7 +121,7 @@ namespace Project.Views
         private void editResource()
         {
             Resource resourceToChange = null;
-
+            ResourceType typeOfChangedResource = resource.ResourceType;
             foreach (ResourceTypeWithResources rt in MainWindow.types)
             {
                 foreach (Resource res in rt.Resources)
@@ -133,17 +133,19 @@ namespace Project.Views
                     }
                 }
             }
+            ResourceType resourceType = null;
+
             if (resourceToChange != null)
             {
                 resourceToChange.Id = Id.Text;
                 resourceToChange.Name = Name.Text;
                 resourceToChange.Description = Description.Text;
-                ResourceType resourceType = null;
+                
                 foreach(var rt in MainWindow.types)
                 {
                     if (rt == ResourceType.SelectedItem)
                     {
-                        resourceType = rt.Resources.First().ResourceType;
+                        resourceType = new ResourceType(rt);
                         break;
                     }
                 }
@@ -155,7 +157,7 @@ namespace Project.Views
                 resourceToChange.Price = Price.Text;
             }
 
-            if (ResourceType.SelectedItem != resource.ResourceType)
+            if (resourceType.Id != typeOfChangedResource.Id)
             {
                 Resource resourceToDelete = null;
                 ResourceTypeWithResources r = null;
@@ -182,16 +184,15 @@ namespace Project.Views
                         rt.Resources.Add(resourceToChange);
                     }
                 }
-
-                refreshView(resourceToChange);
             }
+            refreshView(resourceToChange, typeOfChangedResource);
         }
 
-        private void refreshView(Resource res)
+        private void refreshView(Resource res, ResourceType type)
         {
             foreach (var rp in MainWindow.resources)
             {
-                if (rp.resource.ResourceType.Id == resource.ResourceType.Id)
+                if (rp.resource.ResourceType.Id == type.Id && rp.resource.Id == res.Id)
                 {
                     rp.resource.Id = res.Id;
                     rp.resource.Name = res.Name;

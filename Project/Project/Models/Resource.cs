@@ -27,7 +27,7 @@ namespace Project.Models
         private string price { get; set; }
         private string dateOfDiscovery { get; set; }
         private List<Tag> tags { get; set; }
-        private PageEnum onPage { get; set; }
+        
 
 
         public Resource() {
@@ -37,7 +37,7 @@ namespace Project.Models
         }
 
         public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency, ResourceUnit unit,
-                        string icon, bool renewable, string price, PageEnum onPage)
+                        string icon, bool renewable, string price)
         {
             this.id = id;
             this.name = name;
@@ -53,7 +53,6 @@ namespace Project.Models
             this.price = price;
             this.tags = new List<Tag>();
 
-            this.onPage = onPage;
 
             Edit = new EditCommand(this);
             Delete = new DeleteCommand(this);
@@ -159,11 +158,7 @@ namespace Project.Models
             set { tags = value; }
         }
 
-        public PageEnum OnPage
-        {
-            get { return onPage; }
-            set { onPage = value; }
-        }
+        
 
         private EditCommand _edit;
         [ScriptIgnore]
@@ -265,8 +260,5 @@ namespace Project.Models
         Merica, Barrel, Ton, Kilogram
     };
     
-    public enum PageEnum
-    {
-        First, Second, Third, Fourth, NoInstance
-    };
+   
 }

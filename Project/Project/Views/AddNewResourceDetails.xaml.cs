@@ -31,15 +31,17 @@ namespace Project.Views
         public string dateOfDiscovery { get; set; }
         private Resource resource;
         private Point point;
+        private PageEnum onPage { get; set; }
 
         public ResourcePoint resourcePoint { get; set; }
 
         private List<Tag> checkedTags = new List<Tag>();
 
-        public AddNewResourceDetails(Resource res, Point p)
+        public AddNewResourceDetails(Resource res, Point p, PageEnum onPage)
         {
             resource = res;
             point = p;
+            this.onPage = onPage;
             tags = MainWindow.tags;
             InitializeComponent();
             this.DataContext = this;
@@ -74,8 +76,7 @@ namespace Project.Views
             this.resource.CurrentlyExploited = (bool)CurrentlyExploited.IsChecked;
             this.resource.Tags = checkedTags;
 
-            ResourcePoint rp = new ResourcePoint(resource, point);
-            resourcePoint = rp;
+            ResourcePoint rp = new ResourcePoint(resource, point, onPage);
             MainWindow.resources.Add(rp);
             ReadWrite rw = new ReadWrite();
             rw.writeToFile("../../Data/resources.json", MainWindow.resources);

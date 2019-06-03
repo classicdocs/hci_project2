@@ -48,7 +48,7 @@ namespace Project.Views
                             List<ResourcePoint> rpsToDel = new List<ResourcePoint>();
                             foreach(ResourcePoint rp in MainWindow.resources)
                             {
-                                if (rp.resource == resToDelete)
+                                if (rp.resource.Id == resToDelete.Id)
                                     rpsToDel.Add(rp);
                             }
                             if (rpsToDel.Count > 0)
@@ -56,10 +56,12 @@ namespace Project.Views
                                 foreach(var r in rpsToDel)
                                 {
                                     MainWindow.resources.Remove(r);
-                                    MainWindow.removeResourceFromMap(r);
+                                    //MainWindow.removeResourceFromMap(r);
                                 }
                             }
 
+                            MainWindow.removeAllResources();
+                            MainWindow.drawResources();
                             CollectionViewSource.GetDefaultView(MainWindow.types).Refresh();
 
                             ReadWrite rw = new ReadWrite();
