@@ -380,7 +380,6 @@ namespace Project
                 if (resource != null)
                 {
                     DataObject dragData = new DataObject("myFormat", resource);
-
                     DragDrop.DoDragDrop(stackPanel, dragData, DragDropEffects.Move);
                 }
             }
@@ -476,6 +475,15 @@ namespace Project
 
         }
 
+        private void Cnv_DragOver(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || sender != e.Source)
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
+            }
+
+        }
     }
 
 }
