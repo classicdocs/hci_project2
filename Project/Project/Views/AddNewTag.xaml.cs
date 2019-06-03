@@ -37,6 +37,14 @@ namespace Project.Views
             name = "";
             description = "";
             cmbColors.ItemsSource = typeof(Colors).GetProperties();
+
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Models"
+        xmlns:cmd="clr-namespace:Project.Commands"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="Managing the evidence of the map of world resources" WindowState="Maximized" ResizeMode="CanMinimize"
+        Icon="Resource/world.png"
         >
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.AddNewResource" CanExecute="NewResource_CanExecute" Executed="NewResource_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.AddNewType" CanExecute="NewType_CanExecute"  Executed="NewType_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.AddNewTag" CanExecute="NewTag_CanExecute" Executed="NewTag_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ViewAllResources" CanExecute="ViewAllResources_CanExecute" Executed="AllResources_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ViewAllTypes" CanExecute="ViewAllTypes_CanExecute" Executed="AllTypes_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ViewAllTags" CanExecute="ViewAllTags_CanExecute" Executed="AllTags_Click"></CommandBinding>
+    </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="SmallIcon" TargetType="Image">
             <Setter Property="MaxWidth" Value="16"/>
@@ -18,14 +28,14 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="View">
-                    <MenuItem Header="All resources" Click="AllResources_Click"></MenuItem>
-                    <MenuItem Header="All types" Click="AllTypes_Click"></MenuItem>
-                    <MenuItem Header="All tags" Click="AllTags_Click"></MenuItem>
+                    <MenuItem Header="All resources" Command="cmd:RoutedCommands.ViewAllResources"></MenuItem>
+                    <MenuItem Header="All types" Command="cmd:RoutedCommands.ViewAllTypes"></MenuItem>
+                    <MenuItem Header="All tags" Command="cmd:RoutedCommands.ViewAllTags"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Add">
-                    <MenuItem Header="New resource" Click="NewResource_Click"></MenuItem>
-                    <MenuItem Header="New type" Click="NewType_Click"></MenuItem>
-                    <MenuItem Header="New tag" Click="NewTag_Click"></MenuItem>
+                    <MenuItem Header="New resource" Command="cmd:RoutedCommands.AddNewResource"></MenuItem>
+                    <MenuItem Header="New type" Command="cmd:RoutedCommands.AddNewType"></MenuItem>
+                    <MenuItem Header="New tag" Command="cmd:RoutedCommands.AddNewTag"></MenuItem>
                 </MenuItem>
             </Menu>
             <Grid DockPanel.Dock="Bottom">
