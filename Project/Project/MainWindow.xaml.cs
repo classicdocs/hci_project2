@@ -61,10 +61,20 @@ namespace Project
             }
         }
 
+        private void ViewAllResources_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void AllResources_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllResources();
             s.Show();
+        }
+
+        private void ViewAllTypes_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void AllTypes_Click(object sender, RoutedEventArgs e)
@@ -73,10 +83,20 @@ namespace Project
             s.Show();
         }
 
+        private void ViewAllTags_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void AllTags_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllTags();
             s.Show();
+        }
+
+        private void NewResource_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void NewResource_Click(object sender, RoutedEventArgs e)
@@ -84,11 +104,19 @@ namespace Project
             var s = new AddNewResource();
             s.Show();
         }
+        private void NewType_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
         private void NewType_Click(object sender, RoutedEventArgs e)
         {
             var s = new AddNewType();
             s.Show();
+        }
+        private void NewTag_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void NewTag_Click(object sender, RoutedEventArgs e)
@@ -484,6 +512,8 @@ namespace Project
             }
 
         }
+
+       
     }
 
 }

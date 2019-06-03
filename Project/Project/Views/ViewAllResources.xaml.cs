@@ -129,6 +129,14 @@ namespace Project.Views
             cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
             this.DataContext = this;
             TypesWithResources = MainWindow.types;
+
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)

@@ -54,15 +54,23 @@ namespace Project.Views
             InitializeComponent();
             InitializeData(null);
             this.DataContext = this;
-           
-        }
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
+        }
+        
         public AddNewResource(ResourceTypeWithResources r)
         {
             InitializeComponent();
             InitializeData(r);
             this.DataContext = this;
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         private void InitializeData(ResourceTypeWithResources resourceType)

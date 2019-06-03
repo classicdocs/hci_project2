@@ -55,6 +55,14 @@ namespace Project.Views
             Unit.Content = resource.Unit;
             Price.Content = resource.Price;
             dateOfDiscovery = "";
+
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
