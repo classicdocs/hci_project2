@@ -65,6 +65,28 @@
                                             <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
+                                    <StackPanel.ToolTip>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
+                                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}"></Label>
+                                            <Label Grid.Row="1" Grid.Column="0">Name:</Label>
+                                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
+                                            <Label Grid.Row="2" Grid.Column="0">Icon:</Label>
+                                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Icon}"></Label>
+                                            <Label Grid.Row="3" Grid.Column="0">Description:</Label>
+                                            <Label Grid.Row="3" Grid.Column="1" Content="{Binding Description}"></Label>
+                                        </Grid>
+                                    </StackPanel.ToolTip>
                                 </StackPanel>
                             </StackPanel>
                         </HierarchicalDataTemplate>
@@ -78,6 +100,43 @@
                                         <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                     </ContextMenu>
                                 </WrapPanel.ContextMenu>
+                                <WrapPanel.ToolTip>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
+                                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}"></Label>
+                                        <Label Grid.Row="1" Grid.Column="0">Name:</Label>
+                                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
+                                        <Label Grid.Row="2" Grid.Column="0">Description:</Label>
+                                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}"></Label>
+                                        <Label Grid.Row="3" Grid.Column="0">Type:</Label>
+                                        <Label Grid.Row="3" Grid.Column="1" Content="{Binding ResourceType.Name}"></Label>
+                                        <Label Grid.Row="4" Grid.Column="0">Frequency:</Label>
+                                        <Label Grid.Row="4" Grid.Column="1" Content="{Binding Frequency}"></Label>
+                                        <Label Grid.Row="5" Grid.Column="0">Icon:</Label>
+                                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Icon}"></Label>
+                                        <Label Grid.Row="6" Grid.Column="0">Renewable:</Label>
+                                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding RenewableString}"></Label>
+                                        <Label Grid.Row="7" Grid.Column="0">Unit:</Label>
+                                        <Label Grid.Row="7" Grid.Column="1" Content="{Binding Unit}"></Label>
+                                        <Label Grid.Row="8" Grid.Column="0">Price:</Label>
+                                        <Label Grid.Row="8" Grid.Column="1" Content="{Binding Price}"></Label>
+                                    </Grid>
+                                </WrapPanel.ToolTip>
                             </WrapPanel>
                         </DataTemplate>
                     </TreeView.Resources>
