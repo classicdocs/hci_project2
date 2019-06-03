@@ -91,7 +91,14 @@ namespace Project.Views
             InitializeComponent();
             this.DataContext = this;
             allTags = MainWindow.tags;
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             cmbColors.ItemsSource = typeof(Colors).GetProperties();
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         private void tagsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

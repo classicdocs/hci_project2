@@ -52,6 +52,7 @@ namespace Project.Views
                                     MainWindow.removeResourceFromMap(r);
                                 }
                             }
+                            
                             ReadWrite rw = new ReadWrite();
                             rw.writeToFile("../../Data/types.json", MainWindow.types);
                             rw.writeToFile("../../Data/resources.json", MainWindow.resources);

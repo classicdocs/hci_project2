@@ -35,7 +35,7 @@ namespace Project.Views
         public ResourceUnit unit { get; set; }
         public string price { get; set; }
         public bool? renewable { get; set; }
-        public string _icon;
+        private string _icon;
         public string icon
         {
             get { return _icon; }
@@ -54,15 +54,23 @@ namespace Project.Views
             InitializeComponent();
             InitializeData(null);
             this.DataContext = this;
-           
-        }
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
+        }
+        
         public AddNewResource(ResourceTypeWithResources r)
         {
             InitializeComponent();
             InitializeData(r);
             this.DataContext = this;
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
 
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         private void InitializeData(ResourceTypeWithResources resourceType)
@@ -115,34 +123,8 @@ namespace Project.Views
             }
 
             bool ren = renewable.Value;
-            PageEnum page = (PageEnum) 1;       // za pocetak
 
-            Canvas currentCanvas = MainWindow.getCanvas();
-            switch (currentCanvas.Name)
-            {
-                case "Cnv":
-                {
-                    page = (PageEnum)0;
-                    break;
-                }
-                case "Cnv1":
-                {
-                    page = (PageEnum)1;
-                    break;
-                }
-                case "Cnv2":
-                {
-                    page = (PageEnum)2;
-                    break;
-                }
-                case "Cnv3":
-                {
-                    page = (PageEnum)3;
-                    break;
-                }
-            }
-
-            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price, page);
+            Resource resource = new Resource(id, name, description, type, frequency, unit, icon, ren, price);
             foreach(ResourceTypeWithResources rt in MainWindow.types)
             {
                 foreach(Resource r in rt.Resources)
