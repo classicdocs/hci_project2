@@ -43,6 +43,20 @@ namespace Project.Views
             }
         }
 
+        private int _font;
+        public int font
+        {
+            get { return _font; }
+            set
+            {
+                if (_font != value)
+                {
+                    _font = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public AddNewType()
         {
             InitializeComponent();
@@ -51,6 +65,8 @@ namespace Project.Views
             name = "";
             fileName = "";
             description = "";
+
+            font = 40;
 
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }

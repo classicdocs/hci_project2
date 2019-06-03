@@ -216,7 +216,7 @@ namespace Project.Models
         }
     }
 
-    public class DeleteResourceTypeCommand : ICommand
+    public class  DeleteResourceTypeCommand : ICommand
     {
         private ResourceTypeWithResources resourceType { get; set; }
         public DeleteResourceTypeCommand(ResourceTypeWithResources rt)

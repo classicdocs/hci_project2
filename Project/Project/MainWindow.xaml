@@ -23,16 +23,19 @@
             <Setter Property="MaxHeight" Value="16"/>
             <Setter Property="Margin" Value="1"/>
         </Style>
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="View">
+                <MenuItem Header="View" FontSize="30">
                     <MenuItem Header="All resources" Command="cmd:RoutedCommands.ViewAllResources"></MenuItem>
                     <MenuItem Header="All types" Command="cmd:RoutedCommands.ViewAllTypes"></MenuItem>
                     <MenuItem Header="All tags" Command="cmd:RoutedCommands.ViewAllTags"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Add">
+                <MenuItem Header="Add" FontSize="30">
                     <MenuItem Header="New resource" Command="cmd:RoutedCommands.AddNewResource"></MenuItem>
                     <MenuItem Header="New type" Command="cmd:RoutedCommands.AddNewType"></MenuItem>
                     <MenuItem Header="New tag" Command="cmd:RoutedCommands.AddNewTag"></MenuItem>
@@ -49,7 +52,7 @@
                 <TreeView Grid.Row="0" Grid.Column="0" Name="trvResources" ItemsSource="{Binding types}" Width="Auto">
                     <TreeView.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type local:ResourceTypeWithResources}" ItemsSource="{Binding Resources}">
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" >
                                 <Image Margin="0,0,5,0">
                                     <Image.Style>
                                         <Style BasedOn="{StaticResource ResourceKey=SmallIcon}" TargetType="Image">
@@ -66,16 +69,18 @@
                                     </Image.Style>
                                 </Image>
                                 <StackPanel Orientation="Horizontal" >
-                                    <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                    <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
+                                    <TextBlock Text="{Binding Name}" FontSize="40"></TextBlock>
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Add new resource" Command="{Binding Add}"></MenuItem>
+                                            <MenuItem Header="Add new resource" Command="{Binding Add}">
+                                            </MenuItem>
                                             <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
                                             <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
                                     <StackPanel.ToolTip>
+                                        
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition></RowDefinition>
@@ -87,13 +92,13 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
-                                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}"></Label>
-                                            <Label Grid.Row="1" Grid.Column="0">Name:</Label>
-                                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
-                                            <Label Grid.Row="2" Grid.Column="0">Icon:</Label>
-                                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Icon}"></Label>
-                                            <Label Grid.Row="3" Grid.Column="0">Description:</Label>
+                                            <Label Grid.Row="0" Grid.Column="0">Id:</Label>
+                                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}" ></Label>
+                                            <Label Grid.Row="1" Grid.Column="0" >Name:</Label>
+                                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}" ></Label>
+                                            <Label Grid.Row="2" Grid.Column="0" >Icon:</Label>
+                                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Icon}" ></Label>
+                                            <Label Grid.Row="3" Grid.Column="0" >Description:</Label>
                                             <Label Grid.Row="3" Grid.Column="1" Content="{Binding Description}"></Label>
                                         </Grid>
                                     </StackPanel.ToolTip>
@@ -101,17 +106,17 @@
                             </StackPanel>
                         </HierarchicalDataTemplate>
                         <DataTemplate DataType="{x:Type local:Resource}">
-                            <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
-                                <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
-                                <TextBlock Text="{Binding Name}"/>
+                            <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove" >
+                                <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
+                                <TextBlock Text="{Binding Name}" FontSize="40"/>
                                 <WrapPanel.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
                                         <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                     </ContextMenu>
                                 </WrapPanel.ContextMenu>
-                                <WrapPanel.ToolTip>
-                                    <Grid>
+                                <WrapPanel.ToolTip >
+                                    <Grid >
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
@@ -128,22 +133,22 @@
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Label Grid.Row="0" Grid.Column="0" >Id:</Label>
-                                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}"></Label>
-                                        <Label Grid.Row="1" Grid.Column="0">Name:</Label>
+                                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Id}" ></Label>
+                                        <Label Grid.Row="1" Grid.Column="0" >Name:</Label>
                                         <Label Grid.Row="1" Grid.Column="1" Content="{Binding Name}"></Label>
-                                        <Label Grid.Row="2" Grid.Column="0">Description:</Label>
-                                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}"></Label>
-                                        <Label Grid.Row="3" Grid.Column="0">Type:</Label>
-                                        <Label Grid.Row="3" Grid.Column="1" Content="{Binding ResourceType.Name}"></Label>
-                                        <Label Grid.Row="4" Grid.Column="0">Frequency:</Label>
-                                        <Label Grid.Row="4" Grid.Column="1" Content="{Binding Frequency}"></Label>
-                                        <Label Grid.Row="5" Grid.Column="0">Icon:</Label>
-                                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Icon}"></Label>
-                                        <Label Grid.Row="6" Grid.Column="0">Renewable:</Label>
-                                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding RenewableString}"></Label>
-                                        <Label Grid.Row="7" Grid.Column="0">Unit:</Label>
-                                        <Label Grid.Row="7" Grid.Column="1" Content="{Binding Unit}"></Label>
-                                        <Label Grid.Row="8" Grid.Column="0">Price:</Label>
+                                        <Label Grid.Row="2" Grid.Column="0"  >Description:</Label>
+                                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}" ></Label>
+                                        <Label Grid.Row="3" Grid.Column="0" >Type:</Label>
+                                        <Label Grid.Row="3" Grid.Column="1" Content="{Binding ResourceType.Name}" ></Label>
+                                        <Label Grid.Row="4" Grid.Column="0" >Frequency:</Label>
+                                        <Label Grid.Row="4" Grid.Column="1" Content="{Binding Frequency}" ></Label>
+                                        <Label Grid.Row="5" Grid.Column="0" >Icon:</Label>
+                                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Icon}" ></Label>
+                                        <Label Grid.Row="6" Grid.Column="0" >Renewable:</Label>
+                                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding RenewableString}" ></Label>
+                                        <Label Grid.Row="7" Grid.Column="0" >Unit:</Label>
+                                        <Label Grid.Row="7" Grid.Column="1" Content="{Binding Unit}" ></Label>
+                                        <Label Grid.Row="8" Grid.Column="0" >Price:</Label>
                                         <Label Grid.Row="8" Grid.Column="1" Content="{Binding Price}"></Label>
                                     </Grid>
                                 </WrapPanel.ToolTip>
@@ -153,7 +158,7 @@
                 </TreeView>
                     <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Viewbox Stretch="Fill">
-                        <TabControl TabStripPlacement="Bottom" Name="Tab">
+                        <TabControl TabStripPlacement="Bottom" Name="Tab" FontSize="30">
                             <!--<TabControl.Resources>
                                 <DataTemplate x:Key="First Map" DataType="TabItem">
                                     <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
@@ -171,38 +176,37 @@
                                 </DataTemplate>
                             </TabControl.Resources>-->
                             <!--<Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">-->
-                                
-                                <TabItem x:Name ="First" Header="First Map">
-                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver"  Width="500" Height="500">
+
+                            <TabItem x:Name ="First" Header="First Map" FontSize="30">
+                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                         <Canvas.Background>
-                                            <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                            <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>
                                 </Canvas>
                                     </TabItem>
-                            <TabItem x:Name ="Second" Header="Second Map">
-                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Second" Header="Second Map" FontSize="30">
+                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
-                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                        <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Third" Header="Third Map">
-                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Third" Header="Third Map" FontSize="30">
+                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
-                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                        <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Fourth" Header="Fourth Map">
-                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Fourth" Header="Fourth Map" FontSize="30">
+                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
-                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                        <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                                 </TabItem>
                             <!--</Canvas>-->
                         </TabControl>
-
                     </Viewbox>
                 </ScrollViewer>
             </Grid>

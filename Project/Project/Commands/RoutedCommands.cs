@@ -63,5 +63,14 @@ namespace Project.Commands
                  new KeyGesture(Key.G, ModifierKeys.Control | ModifierKeys.Alt),
             }
             );
+        public static readonly RoutedUICommand DeleteResourceType = new RoutedUICommand(
+            "Delete resource type",
+            "DeleteResourceType",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                 new KeyGesture(Key.Delete),
+            }
+            );
     }
 }

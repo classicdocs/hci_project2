@@ -4,6 +4,7 @@ using Project.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -22,12 +23,28 @@ using System.Windows.Shapes;
 
 namespace Project
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
+
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public static ObservableCollection<ResourceTypeWithResources> types { get; set; }
+       
+        private bool _enable;
+        public bool AddNewResourceEnabled
+        {
+            get
+            {
+                return _enable;
+            }
+            set
+            {
+                if (_enable != value)
+                {
+                    _enable = value;
+                    OnPropertyChanged("AddNewResourceEnabled");
+                }
+            }
+        }
 
         public static ObservableCollection<Tag> tags { get; set; }
 
@@ -36,6 +53,9 @@ namespace Project
         Point startPoint = new Point();
 
         public static bool addNewResourceDialog { get; set; }
+
+        public static double ScreenWidth { get; set; }
+        public static double ScreenHeight { get; set; }
 
         public MainWindow()
         {
@@ -48,9 +68,32 @@ namespace Project
         private void InitializeData()
         {
             types = new ObservableCollection<ResourceTypeWithResources>();
+            types.CollectionChanged += TypesChanged;
             tags = new ObservableCollection<Tag>();
             resources = new ObservableCollection<ResourcePoint>();
             addNewResourceDialog = false;
+            font = 40;
+        }
+        void TypesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (types.Count > 0)
+                AddNewResourceEnabled = true;
+            else
+                AddNewResourceEnabled = false;
+        }
+
+        private int _font;
+        public int font
+        {
+            get { return _font; }
+            set
+            {
+                if (_font != value)
+                {
+                    _font = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public ImageSource MapImage
@@ -96,13 +139,13 @@ namespace Project
 
         private void NewResource_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute = AddNewResourceEnabled;
         }
 
         private void NewResource_Click(object sender, RoutedEventArgs e)
         {
             var s = new AddNewResource();
-            s.Show();
+            s.ShowDialog();
         }
         private void NewType_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -124,6 +167,7 @@ namespace Project
             var s = new AddNewTag();
             s.Show();
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name = null)
@@ -156,6 +200,10 @@ namespace Project
                     string s = sr.ReadToEnd();
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     types = serializer.Deserialize<ObservableCollection<ResourceTypeWithResources>>(s);
+                    if (types.Count > 0)
+                        AddNewResourceEnabled = true;
+                    else
+                        AddNewResourceEnabled = false;
                 }
             }
             if (File.Exists(resources_file))
@@ -513,7 +561,6 @@ namespace Project
 
         }
 
-       
     }
 
 }

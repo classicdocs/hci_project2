@@ -37,8 +37,22 @@ namespace Project.Views
             name = "";
             description = "";
             cmbColors.ItemsSource = typeof(Colors).GetProperties();
-
+            font = 40;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        private int _font;
+        public int font
+        {
+            get { return _font; }
+            set
+            {
+                if (_font != value)
+                {
+                    _font = value;
+                    OnPropertyChanged("Font");
+                }
+            }
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

@@ -57,6 +57,21 @@ namespace Project.Views
             dateOfDiscovery = "";
 
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            font = 40;
+        }
+
+        private int _font;
+        public int font
+        {
+            get { return _font; }
+            set
+            {
+                if (_font != value)
+                {
+                    _font = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

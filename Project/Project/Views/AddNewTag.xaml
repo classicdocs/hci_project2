@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="Add new tag" Height="300" Width="300">
+        Title="Add new tag" WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="1400"
+        WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -19,12 +22,12 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0">*Id:</Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=id}"></TextBox>
-        <Label Grid.Row="1" Grid.Column="0">*Name:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}"></TextBox>
-        <Label Grid.Row="2" Grid.Column="0">*Color:</Label>
-        <ComboBox Grid.Row="2" Grid.Column="1" Name="cmbColors">
+        <Label Grid.Row="0" Grid.Column="0" FontSize="{Binding font}" >*Id:</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=id}" FontSize="{Binding font}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="{Binding font}">*Name:</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}" FontSize="{Binding font}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0" FontSize="{Binding font}">*Color:</Label>
+        <ComboBox Grid.Row="2" Grid.Column="1" Name="cmbColors" FontSize="{Binding font}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -34,9 +37,9 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Grid.Row="3" Grid.Column="0">Description:</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=description}"></TextBox>
-        <Label Grid.Row="4" Grid.Column="0">* Required fields</Label>
-        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
+        <Label Grid.Row="3" Grid.Column="0" FontSize="{Binding font}">Description:</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=description}" FontSize="{Binding font}"></TextBox>
+        <Label Grid.Row="4" Grid.Column="0" FontSize="{Binding font}">* Required fields</Label>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click" FontSize="{Binding font}">Submit</Button>
     </Grid>
 </Window>

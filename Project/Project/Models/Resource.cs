@@ -234,7 +234,7 @@ namespace Project.Models
             {
                 resource = r;
             }
-
+            
             public bool CanExecute(object parameter)
             {
                 return true;

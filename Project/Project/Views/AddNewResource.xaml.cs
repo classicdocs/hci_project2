@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Web.Script.Serialization;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Project.Views
 {
@@ -49,15 +50,35 @@ namespace Project.Views
             }
         }
 
+        private int _font;
+        public int font
+        {
+            get { return _font; }
+            set
+            {
+                if (_font != value)
+                {
+                    _font = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public AddNewResource()
         {
             InitializeComponent();
             InitializeData(null);
             this.DataContext = this;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-
+            font = 40;
         }
-        
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         public AddNewResource(ResourceTypeWithResources r)
         {
             InitializeComponent();
@@ -163,7 +184,6 @@ namespace Project.Views
                     break;
                 }
             }
-            
             this.Close();
             MessageBox.Show("You have successfully add new resource.");
         }
