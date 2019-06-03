@@ -24,21 +24,33 @@ namespace Project.Views
     {
         public static ObservableCollection<ResourceTypeWithResources> TypesWithResources { get; set; }
 
-        /*private ResourceUnit _unitFilter;
+        private string minPrice;
 
-        public ResourceUnit UnitFilter
+        private string maxPrice;
+        
+        private string _searchText;
+
+        public string MinPrice
         {
-            get { return _unitFilter; }
+            get { return minPrice; }
             set
             {
-                _unitFilter = value;
+                minPrice = value;
 
-                OnPropertyChanged("UnitFilter");
-                OnPropertyChanged("TypesWithResourcesSearchResult");
+                OnPropertyChanged("MinPrice");               
             }
-        }*/
+        }
 
-        private string _searchText;
+        public string MaxPrice
+        {
+            get { return maxPrice; }
+            set
+            {
+                maxPrice = value;
+
+                OnPropertyChanged("MaxPrice");
+            }
+        }
 
         public string SearchText
         {
@@ -53,7 +65,32 @@ namespace Project.Views
         }
 
         private void DoFilter(object sender, RoutedEventArgs e)
-        {            
+        {
+            if (MaxPrice != null)
+            {
+                try
+                {
+                    int max = Int32.Parse(MaxPrice);
+                } catch (FormatException f)
+                {
+                    MessageBox.Show("Invalid input for maximum price!");
+                    return;
+                }                
+            }
+
+            if (MinPrice != null)
+            {
+                try
+                {
+                    int min = Int32.Parse(MinPrice);
+                }
+                catch (FormatException f)
+                {
+                    MessageBox.Show("Invalid input for minimum price!");
+                    return;
+                }
+            }
+
             OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
@@ -62,6 +99,8 @@ namespace Project.Views
             cmbUnit.SelectedItem = null;
             cmbFrequency.SelectedItem = null;
             cmbRenewable.SelectedItem = null;
+            MinPrice = null;
+            MaxPrice = null;
             OnPropertyChanged("TypesWithResourcesSearchResult");
         }
 
@@ -113,6 +152,22 @@ namespace Project.Views
                                     canAdd = false;
                                 }
                                 
+                            }
+
+                            if (MaxPrice != null)
+                            {
+                                if(Int32.Parse(res.Price) > Int32.Parse(MaxPrice))
+                                {
+                                    canAdd = false;
+                                }
+                            }
+
+                            if (MinPrice != null)
+                            {
+                                if (Int32.Parse(res.Price) < Int32.Parse(MinPrice))
+                                {
+                                    canAdd = false;
+                                }
                             }
                         }
                         if(canAdd)
