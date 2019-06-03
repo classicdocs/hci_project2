@@ -43,10 +43,10 @@
             </Menu>
             <Grid DockPanel.Dock="Bottom">
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Row="0" Grid.Column="0">
@@ -54,54 +54,54 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.075*"></RowDefinition>
+                        <RowDefinition Height="0.1*"></RowDefinition>
                         <RowDefinition Name="RowForFilter" Height="5"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.35*"></ColumnDefinition>
                             <ColumnDefinition Width="0.6*"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>                            
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Margin="0,15,0,0">Search:</Label>
-                        <TextBox Grid.Row="0" Grid.Column="1" Width="100" Margin="0,0,0,0" Height="25" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Click="ShowAdvancedSearch" Grid.Column="2" Height="20" Name="ShowSearch" Content="Advanced Search" Margin="45,0,5,0"></Button>
-                        <Button Click="HideAdvancedSearch" Grid.Column="2" Visibility="Hidden" Height="20" Name="HideSearch" Content="Close advanced search" Margin="25,0,5,0"></Button>
+                        <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" FontSize="22">Search:</Label>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="100" Margin="0,0,0,0" Height="30"  FontSize="20" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Click="ShowAdvancedSearch" Grid.Column="2" Height="30" Name="ShowSearch"   FontSize="20" Content="Advanced search" Margin="0,0,0,0"></Button>
+                        <Button Click="HideAdvancedSearch" Grid.Column="2" Visibility="Hidden" Height="30" Name="HideSearch" Content="Close advanced search" Margin="0,0,0,0"  FontSize="20"></Button>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="0" Visibility="Hidden" Name="AdvancedSearchFields">
                         <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0">Filter by unit:</Label>
-                        <ComboBox Grid.Row="0"  Name="cmbUnit" Margin="20,5,20,5" Grid.Column="1"/>
-                        <Label Grid.Row="1" Grid.Column="0">Filter by frequency:</Label>
-                        <ComboBox Grid.Row="1" Name="cmbFrequency" Margin="20,5,20,5" Grid.Column="1"/>
-                        <Label Grid.Row="2" Grid.Column="0">Filter by renewability:</Label>
-                        <ComboBox Grid.Row="2" Name="cmbRenewable" Margin="20,5,20,5" Grid.Column="1"/>
+                        <Label Grid.Row="0" Grid.Column="0"  FontSize="20">Filter by unit:</Label>
+                        <ComboBox Grid.Row="0"  Name="cmbUnit" Margin="20,5,20,5" Grid.Column="1"  FontSize="20"/>
+                        <Label Grid.Row="1" Grid.Column="0"  FontSize="20">Filter by frequency:</Label>
+                        <ComboBox Grid.Row="1" Name="cmbFrequency" Margin="20,5,20,5" Grid.Column="1"  FontSize="20"/>
+                        <Label Grid.Row="2" Grid.Column="0"  FontSize="20">Filter by renewability:</Label>
+                        <ComboBox Grid.Row="2" Name="cmbRenewable" Margin="20,5,20,5" Grid.Column="1"  FontSize="20"/>
                         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
-                            <Label Grid.Row="3" Grid.Column="0" Margin="0,5,0,0">Minimum price:</Label>
-                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=MinPrice}" Height="20" Width="50"/>
-                            <Label Grid.Row="0" Grid.Column="8" Margin="0,5,0,0">$</Label>
+                            <Label Grid.Row="3" Grid.Column="0" Margin="0,5,0,0"  FontSize="20">Minimum price:</Label>
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=MinPrice}" Height="30" Width="50"  FontSize="20"/>
+                            <Label Grid.Row="0" Grid.Column="8" Margin="0,5,0,0"  FontSize="20">$</Label>
 
-                            <Label Grid.Row="4" Grid.Column="0" Margin="0,5,0,0">Maximum price:</Label>
-                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=MaxPrice}" Height="20" Width="50" />
-                            <Label Grid.Row="0" Grid.Column="11" Margin="0,5,0,0">$</Label>
+                            <Label Grid.Row="4" Grid.Column="0" Margin="0,5,0,0"  FontSize="20">Maximum price:</Label>
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=MaxPrice}" Height="30" Width="50"  FontSize="20" />
+                            <Label Grid.Row="0" Grid.Column="11" Margin="0,5,0,0"  FontSize="20">$</Label>
                         </StackPanel>
-                        <Button Grid.Row="5"  Grid.Column="0" Height="20" Margin="10,0,0,5" Width="50" Click="DoFilter">Filter</Button>
-                        <Button Grid.Row="5"  Grid.Column="1" Height="20" Margin="0,0,0,5" Width="100" Click="RemoveFilters">Remove Filters</Button>
+                        <Button Grid.Row="5"  Grid.Column="0" Height="30" Margin="10,0,0,5" Width="50" Click="DoFilter"  FontSize="20">Filter</Button>
+                        <Button Grid.Row="5"  Grid.Column="1" Height="30" Margin="0,0,0,5" Width="140" Click="RemoveFilters"  FontSize="20">Remove Filters</Button>
                     </Grid>
                     <TreeView Grid.Row="2" Grid.Column="0" Name="trvResources" ItemsSource="{Binding TypesSearchResult}" Width="Auto">
                         <TreeView.ItemContainerStyle>
@@ -129,7 +129,7 @@
                                     </Image>
                                     <StackPanel Orientation="Horizontal" >
                                         <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <TextBlock Text="{Binding Name}" FontSize="40"></TextBlock>
                                         <StackPanel.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="Add new resource" Command="{Binding Add}"></MenuItem>
@@ -165,7 +165,7 @@
                             <DataTemplate DataType="{x:Type local:Resource}">
                                 <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
                                     <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
-                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Name}" FontSize="40"/>
                                     <WrapPanel.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>

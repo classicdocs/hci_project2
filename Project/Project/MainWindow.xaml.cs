@@ -133,7 +133,7 @@ namespace Project
                             if (cmbRenewable.SelectedItem != null)
                             {
                                 bool renewableFilter = false;
-                                if (cmbRenewable.SelectedItem.Equals("Only renewable"))
+                                if (cmbRenewable.SelectedItem.Equals("Renewable"))
                                 {
                                     renewableFilter = true;
                                 }
@@ -188,8 +188,8 @@ namespace Project
             InitializeComponent();
             cmbUnit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
             cmbFrequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
-            cmbRenewable.Items.Add("Only renewable");
-            cmbRenewable.Items.Add("Only nonrenewable");
+            cmbRenewable.Items.Add("Renewable");
+            cmbRenewable.Items.Add("Nonrenewable");
             InitializeData();
             this.DataContext = this;
             LoadData();
@@ -210,6 +210,7 @@ namespace Project
                 AddNewResourceEnabled = true;
             else
                 AddNewResourceEnabled = false;
+            OnPropertyChanged("TypesSearchResult");
         }
 
         private int _font;
@@ -696,7 +697,7 @@ namespace Project
             AdvancedSearchFields.Visibility = Visibility.Visible;
             ShowSearch.Visibility = Visibility.Hidden;
             HideSearch.Visibility = Visibility.Visible;
-            RowForFilter.Height = new GridLength(200);
+            RowForFilter.Height = new GridLength(220);
         }
 
         private void HideAdvancedSearch(object sender, RoutedEventArgs e)
