@@ -35,6 +35,13 @@ namespace Project.Views
             Name.Text = rt.Name;
             FileName.Content = rt.Icon;
             Description.Text = rt.Description;
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
 
         private string _fileName;

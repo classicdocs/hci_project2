@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="EditResource" Height="Auto" Width="300">
+        Title="Edit resource" Height="400" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -23,50 +23,39 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0">Id:</Label>
-        <Label Grid.Row="0" Grid.Column="1" Name="Id"></Label>
-        <Label Grid.Row="1" Grid.Column="0">Name:</Label>
-        <Label Grid.Row="1" Grid.Column="1" Name="Name"></Label>
+        <Label Grid.Row="0" Grid.Column="0">*Id:</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="Id"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0">*Name:</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="Name"></TextBox>
         <Label Grid.Row="2" Grid.Column="0">Description:</Label>
-        <Label Grid.Row="2" Grid.Column="1" Name="Description"></Label>
-        <Label Grid.Row="3" Grid.Column="0">Type:</Label>
-        <Label Grid.Row="3" Grid.Column="1" Name="TypeOfResource"></Label>
-        <Label Grid.Row="4" Grid.Column="0">Frequency:</Label>
-        <Label Grid.Row="4" Grid.Column="1" Name="Frequency"></Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="Description"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0">*Type:</Label>
+        <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=types}" Name="ResourceType">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Grid.Row="4" Grid.Column="0">*Frequency:</Label>
+        <ComboBox Grid.Row="4" Grid.Column="1" Name="Frequency"/>
         <Label Grid.Row="5" Grid.Column="0">Icon:</Label>
-        <Image Grid.Row="5" Grid.Column="1" Name="Icon" Height="20" Width="20"></Image>
-        <Label Grid.Row="6" Grid.Column="0">Renewable:</Label>
-        <Label Grid.Row="6" Grid.Column="1" Name="Renewable"></Label>
-        <Label Grid.Row="7" Grid.Column="0">*Strategic importance:</Label>
-        <CheckBox Grid.Row="7" Grid.Column="1" Name="StrategicImportance"></CheckBox>
-        <Label Grid.Row="8" Grid.Column="0">*Currently exploited:</Label>
-        <CheckBox Grid.Row="8" Grid.Column="1" Name="CurrentlyExploited"></CheckBox>
-        <Label Grid.Row="9" Grid.Column="0">Unit:</Label>
-        <Label Grid.Row="9" Grid.Column="1" Name="Unit"></Label>
-        <Label Grid.Row="10" Grid.Column="0">Price:</Label>
-        <Label Grid.Row="10" Grid.Column="1" Name="Price"></Label>
-        <Label Grid.Row="11" Grid.Column="0">*Date of discovery:</Label>
-        <TextBox Grid.Row="11" Grid.Column="1" Name="DateOfDicovery" Text="{Binding dateOfDiscovery}"></TextBox>
-        <Label Grid.Row="12" Grid.Column="0">Tags:</Label>
-        <ScrollViewer Grid.Row="12" Grid.Column="1">
-            <ListView ItemsSource="{Binding tags}" Name="tagsList" SelectionChanged="tagsList_SelectionChanged">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Tag="{Binding ID}"  IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=IsSelected}"></CheckBox>
-                            <Rectangle Fill="{Binding Color}" Width="16" Height="16" Margin="0,2,5,2"/>
-                            <Label Content="{Binding Name}"></Label>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
-        <Label Grid.Row="13" Grid.Column="0">* Fields you can edit</Label>
-        <Button Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+            <Button Click="ChooseIcon_Click">Choose icon</Button>
+            <Image Name="Icon" Width="20" Height="20"></Image>
+            <Label Content="{Binding Path=icon, Mode=TwoWay}"></Label>
+        </StackPanel>
+        <Label Grid.Row="6" Grid.Column="0">*Renewable:</Label>
+        <CheckBox Grid.Row="6" Grid.Column="1" Name="Renewable"></CheckBox>
+        <Label Grid.Row="7" Grid.Column="0">*Unit:</Label>
+        <ComboBox Grid.Row="7" Grid.Column="1" Name="Unit"/>
+        <Label Grid.Row="8" Grid.Column="0">*Price:</Label>
+        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" >
+            <Label>$</Label>
+            <TextBox Name="Price" MinWidth="40"></TextBox>
+        </StackPanel>
+        <Label Grid.Row="9" Grid.Column="0">* Required fields</Label>
+        <Button Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
     </Grid>
 </Window>

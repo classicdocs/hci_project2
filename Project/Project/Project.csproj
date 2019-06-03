@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DeleteResourceCommand.cs" />
     <Compile Include="Commands\EditResourceCommand.cs" />
+    <Compile Include="Commands\RoutedCommands.cs" />
     <Compile Include="FileHandler\ReadWrite.cs" />
     <Compile Include="Models\ResourcePoint.cs" />
     <Compile Include="Models\ResourceType.cs" />
@@ -76,9 +77,13 @@
     <Compile Include="Views\AddNewType.xaml.cs">
       <DependentUpon>AddNewType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DeleteResource.cs" />
     <Compile Include="Views\DeleteResourceType.cs" />
     <Compile Include="Views\EditResource.xaml.cs">
       <DependentUpon>EditResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditResourceOnMap.xaml.cs">
+      <DependentUpon>EditResourceOnMap.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditResourceType.xaml.cs">
       <DependentUpon>EditResourceType.xaml</DependentUpon>
@@ -121,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditResourceOnMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resource\map.svg" />
+    <Resource Include="Resource\world.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

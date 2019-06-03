@@ -157,6 +157,29 @@ namespace Project.Views
             cmbRenewable.Items.Add("Only nonrenewable");
             this.DataContext = this;
             TypesWithResources = MainWindow.types;
-        }        
+
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            Resource resource = (Resource)((Button)sender).Tag;
+            EditResource dialog = new EditResource(resource);
+            dialog.ShowDialog();
+            OnPropertyChanged("TypesWithResourcesSearchResult");
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Resource resource = (Resource)((Button)sender).Tag;
+            DeleteResource dialog = new DeleteResource(resource);
+            OnPropertyChanged("TypesWithResourcesSearchResult");
+        }
     }
 }

@@ -23,17 +23,19 @@ namespace Project.Models
         }
 
         public Resource resource;
-        public Point point;    
+        public Point point;
+        private PageEnum onPage { get; set; }
 
         public ResourcePoint()
         {
 
         }
 
-        public ResourcePoint(Resource res, Point p)
+        public ResourcePoint(Resource res, Point p, PageEnum onPage)
         {
             resource = res;
             point = p;
+            this.onPage = onPage;
         }
 
         public string ResourceName
@@ -52,5 +54,15 @@ namespace Project.Models
             }
         }
 
+        public PageEnum OnPage
+        {
+            get { return onPage; }
+            set { onPage = value; }
+        }
     }
+
+    public enum PageEnum
+    {
+        First, Second, Third, Fourth, NoInstance
+    };
 }

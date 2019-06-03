@@ -29,7 +29,7 @@ namespace Project.Commands
 
         public void Execute(object parameter)
         {
-            EditResource dialog = new EditResource(resource, point);
+            EditResourceOnMap dialog = new EditResourceOnMap(resource, point);
             dialog.Show();
         }
     }

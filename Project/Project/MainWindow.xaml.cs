@@ -61,10 +61,20 @@ namespace Project
             }
         }
 
+        private void ViewAllResources_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void AllResources_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllResources();
             s.Show();
+        }
+
+        private void ViewAllTypes_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void AllTypes_Click(object sender, RoutedEventArgs e)
@@ -73,10 +83,20 @@ namespace Project
             s.Show();
         }
 
+        private void ViewAllTags_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void AllTags_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllTags();
             s.Show();
+        }
+
+        private void NewResource_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void NewResource_Click(object sender, RoutedEventArgs e)
@@ -84,11 +104,19 @@ namespace Project
             var s = new AddNewResource();
             s.Show();
         }
+        private void NewType_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
         private void NewType_Click(object sender, RoutedEventArgs e)
         {
             var s = new AddNewType();
             s.Show();
+        }
+        private void NewTag_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void NewTag_Click(object sender, RoutedEventArgs e)
@@ -143,7 +171,7 @@ namespace Project
 
         }
 
-        private static  Image drawResource(Resource resource, Point p)
+        private static  Image drawResource(Resource resource, Point p, PageEnum onPage)
         {
             Grid grid = new Grid();
             for (int i = 0; i < 15; i++)
@@ -171,7 +199,7 @@ namespace Project
             grid = tooltipInfo(grid, "Price", resource.Price, 10);
             grid = tooltipInfo(grid, "Date of discovery", resource.DateOfDiscovery, 11);
             grid = tooltipInfo(grid, "Tags", resource.Tags, 12);
-            grid = tooltipInfo(grid, "Page (this is for testing)", resource.OnPage, 13);
+            grid = tooltipInfo(grid, "Page (this is for testing)", onPage, 13);
 
             Image img = new Image()
             {
@@ -190,23 +218,23 @@ namespace Project
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
             Canvas canv = ((MainWindow)Application.Current.MainWindow).Cnv;
-            if (resource.OnPage == (PageEnum)0)
+            if (onPage == (PageEnum)0)
             {
                 canv = ((MainWindow)Application.Current.MainWindow).Cnv;
             }
-            else if (resource.OnPage == (PageEnum)1)
+            else if (onPage == (PageEnum)1)
             {
                 canv = ((MainWindow)Application.Current.MainWindow).Cnv2;
             }
-            else if (resource.OnPage == (PageEnum)2)
+            else if (onPage == (PageEnum)2)
             {
                 canv = ((MainWindow)Application.Current.MainWindow).Cnv3;
             }
-            else if (resource.OnPage == (PageEnum)3)
+            else if (onPage == (PageEnum)3)
             {
                 canv = ((MainWindow)Application.Current.MainWindow).Cnv4;
             }
-            else if (resource.OnPage == (PageEnum)4)            // TEST
+            else if (onPage == (PageEnum)4)            // TEST
             {
                 return null;
             }
@@ -284,17 +312,49 @@ namespace Project
         {
             foreach(ResourcePoint rp in resources)
             {
-                Image img = drawResource(rp.resource, rp.point);
+                Image img = drawResource(rp.resource, rp.point, rp.OnPage);
                 Canvas.SetLeft(img, rp.point.X);
                 Canvas.SetTop(img, rp.point.Y);
             }
-        } 
+        }
 
+        public static void removeAllResources()
+        {
+            List<Canvas> canvases = new List<Canvas>();
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv2);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv3);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv4);
+
+            foreach (var canvas in canvases)
+            {
+                for (int i = canvas.Children.Count - 1; i >= 0; i += -1)
+                {
+                    UIElement Child = canvas.Children[i];
+                    if (Child is Image)
+                        canvas.Children.Remove(Child);
+                }
+            }
+        }
         public static void removeResourceFromMap(ResourcePoint rp)
         {
-            Canvas canvas = MainWindow.getCanvas();
+            Canvas canvas = null;
+            switch(rp.OnPage)
+            {
+                case PageEnum.First: canvas = ((MainWindow)Application.Current.MainWindow).Cnv; break;
+                case PageEnum.Second: canvas = ((MainWindow)Application.Current.MainWindow).Cnv2; break;
+                case PageEnum.Third: canvas = ((MainWindow)Application.Current.MainWindow).Cnv3; break;
+                case PageEnum.Fourth: canvas = ((MainWindow)Application.Current.MainWindow).Cnv4; break;
+            }
+            removeElementFromCanvas(canvas, rp);
+        }
 
+        private static void removeElementFromCanvas(Canvas canvas, ResourcePoint rp)
+        {
             var element = canvas.InputHitTest(rp.point) as UIElement;
+
+            
+
             UIElement parent;
 
             while (element != null &&
@@ -311,7 +371,7 @@ namespace Project
 
         public static void drawOneResource(ResourcePoint rp)
         {
-            Image img = drawResource(rp.resource, rp.point);
+            Image img = drawResource(rp.resource, rp.point, rp.OnPage);
             Canvas.SetLeft(img, rp.point.X);
             Canvas.SetTop(img, rp.point.Y);
         }
@@ -348,7 +408,6 @@ namespace Project
                 if (resource != null)
                 {
                     DataObject dragData = new DataObject("myFormat", resource);
-
                     DragDrop.DoDragDrop(stackPanel, dragData, DragDropEffects.Move);
                 }
             }
@@ -392,40 +451,40 @@ namespace Project
                 addNewResourceDialog = false;
 
                 Resource resource = e.Data.GetData("myFormat") as Resource;
-                var canvas = sender as Canvas;
+                //var currentCanvas = sender as Canvas;
 
                 Canvas currentCanvas = getCanvas();
-
+                PageEnum onPage = PageEnum.NoInstance;
                 switch (currentCanvas.Name)
                 {
                     case "Cnv":
                         {
-                            resource.OnPage = (PageEnum)0;
+                            onPage = PageEnum.First;
                             break;
                         }
                     case "Cnv2":
                         {
-                            resource.OnPage = (PageEnum)1;
+                            onPage = PageEnum.Second;
                             break;
                         }
                     case "Cnv3":
                         {
-                            resource.OnPage = (PageEnum)2;
+                            onPage = PageEnum.Third;
                             break;
                         }
                     case "Cnv4":
                         {
-                            resource.OnPage = (PageEnum)3;
+                            onPage = PageEnum.Fourth;
                             break;
                         }
                 }
 
                 Point p = new Point(e.GetPosition(currentCanvas).X, e.GetPosition(currentCanvas).Y);
-                AddNewResourceDetails add = new AddNewResourceDetails(resource, p);
+                AddNewResourceDetails add = new AddNewResourceDetails(resource, p, onPage);
                 add.ShowDialog();
                 if (addNewResourceDialog)
                 {
-                    Image img = drawResource(resource, p);
+                    Image img = drawResource(resource, p, onPage);
                     Canvas.SetLeft(img, e.GetPosition(currentCanvas).X);
                     Canvas.SetTop(img, e.GetPosition(currentCanvas).Y);
                     
@@ -444,6 +503,17 @@ namespace Project
 
         }
 
+        private void Cnv_DragOver(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || sender != e.Source)
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
+            }
+
+        }
+
+       
     }
 
 }
