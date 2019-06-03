@@ -7,7 +7,23 @@
         mc:Ignorable="d"
         Title="View all types" Height="300" Width="300">
     <Grid>
-        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=TypesWithResources}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">Search:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,0,2"/>
+        </Grid>
+        <DataGrid x:Name="dgrMain" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" MinColumnWidth="30">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

@@ -65,11 +65,11 @@
             <Button Grid.Column="12" Height="20" Margin="10,0,0,5" Width="50" Click="DoFilter">Filter</Button>
             <Button Grid.Column="13" Height="20" Margin="0,0,0,5" Width="100" Click="RemoveFilters">Remove Filters</Button>
         </Grid>
-        <ItemsControl Margin="5" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}">
+        <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <ItemsControl Margin="5" PreviewMouseWheel="View_MouseWheel" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=TypesWithResourcesSearchResult}">
             <ItemsControl.ItemTemplate>
-                <DataTemplate>
-
-                    <StackPanel Background="White" Orientation="Vertical">
+                    <DataTemplate>
+                        <StackPanel Background="White" Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
                             <TextBlock Margin="0,7,0,7" Text="{Binding Name}" HorizontalAlignment="Center" />
@@ -111,6 +111,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
+        </ScrollViewer>
     </Grid>
 </Window>
