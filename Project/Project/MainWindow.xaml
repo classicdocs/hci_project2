@@ -23,16 +23,19 @@
             <Setter Property="MaxHeight" Value="16"/>
             <Setter Property="Margin" Value="1"/>
         </Style>
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="View">
+                <MenuItem Header="View" FontSize="30">
                     <MenuItem Header="All resources" Command="cmd:RoutedCommands.ViewAllResources"></MenuItem>
                     <MenuItem Header="All types" Command="cmd:RoutedCommands.ViewAllTypes"></MenuItem>
                     <MenuItem Header="All tags" Command="cmd:RoutedCommands.ViewAllTags"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Add">
+                <MenuItem Header="Add" FontSize="30">
                     <MenuItem Header="New resource" Command="cmd:RoutedCommands.AddNewResource"></MenuItem>
                     <MenuItem Header="New type" Command="cmd:RoutedCommands.AddNewType"></MenuItem>
                     <MenuItem Header="New tag" Command="cmd:RoutedCommands.AddNewTag"></MenuItem>
@@ -125,7 +128,7 @@
                                         </Image.Style>
                                     </Image>
                                     <StackPanel Orientation="Horizontal" >
-                                        <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                        <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                         <TextBlock Text="{Binding Name}"></TextBlock>
                                         <StackPanel.ContextMenu>
                                             <ContextMenu>
@@ -161,7 +164,7 @@
                             </HierarchicalDataTemplate>
                             <DataTemplate DataType="{x:Type local:Resource}">
                                 <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
-                                    <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                    <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                     <TextBlock Text="{Binding Name}"/>
                                     <WrapPanel.ContextMenu>
                                         <ContextMenu>
@@ -213,7 +216,7 @@
                 </Grid>
                     <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Viewbox Stretch="Fill">
-                        <TabControl TabStripPlacement="Bottom" Name="Tab">
+                        <TabControl TabStripPlacement="Bottom" Name="Tab" FontSize="30">
                             <!--<TabControl.Resources>
                                 <DataTemplate x:Key="First Map" DataType="TabItem">
                                     <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">
@@ -231,38 +234,37 @@
                                 </DataTemplate>
                             </TabControl.Resources>-->
                             <!--<Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" Width="500" Height="500">-->
-                                
-                                <TabItem x:Name ="First" Header="First Map">
-                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver"  Width="500" Height="500">
+
+                            <TabItem x:Name ="First" Header="First Map" FontSize="30">
+                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                         <Canvas.Background>
-                                            <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                            <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>
                                 </Canvas>
                                     </TabItem>
-                            <TabItem x:Name ="Second" Header="Second Map">
-                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Second" Header="Second Map" FontSize="30">
+                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
-                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                        <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Third" Header="Third Map">
-                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Third" Header="Third Map" FontSize="30">
+                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
-                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                        <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Fourth" Header="Fourth Map">
-                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Fourth" Header="Fourth Map" FontSize="30">
+                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
-                                        <ImageBrush ImageSource="Resource/map.jpg" Stretch="Fill"></ImageBrush>
+                                        <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                                 </TabItem>
                             <!--</Canvas>-->
                         </TabControl>
-
                     </Viewbox>
                 </ScrollViewer>
             </Grid>
