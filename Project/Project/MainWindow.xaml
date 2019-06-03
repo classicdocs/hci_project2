@@ -128,7 +128,7 @@
                                         </Image.Style>
                                     </Image>
                                     <StackPanel Orientation="Horizontal" >
-                                        <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                        <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                         <TextBlock Text="{Binding Name}"></TextBlock>
                                         <StackPanel.ContextMenu>
                                             <ContextMenu>
@@ -164,7 +164,7 @@
                             </HierarchicalDataTemplate>
                             <DataTemplate DataType="{x:Type local:Resource}">
                                 <WrapPanel Orientation="Horizontal" PreviewMouseLeftButtonDown="Resourse_PreviewMouseLeftButtonDown" MouseMove="Resource_MouseMove">
-                                    <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                                    <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                     <TextBlock Text="{Binding Name}"/>
                                     <WrapPanel.ContextMenu>
                                         <ContextMenu>
