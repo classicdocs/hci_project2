@@ -110,8 +110,6 @@ namespace Project.Views
 
             this.Close();
             MessageBox.Show("You have successfully add new resource type.", "Added resource", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            MessageBox.Show("You have successfully added a new resource type.");
         }
     }
 

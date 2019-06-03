@@ -110,7 +110,7 @@ namespace Project.Views
 
             if (id.Equals("") || name.Equals("") || price.Equals("") || type == null)
             {
-                MessageBox.Show("You must fill all required fields");
+                MessageBox.Show("You must fill all required fields", "Missing fields", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

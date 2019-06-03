@@ -124,7 +124,8 @@ namespace Project.Views
 
                     MainWindow.drawOneResource(rp);
                     this.Close();
-                    MessageBox.Show("You have successfully edited resource");
+                    MessageBox.Show("You have successfully edited resource", "Successful edit", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
             }
             

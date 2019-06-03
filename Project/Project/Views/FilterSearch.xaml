@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
+        xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
         mc:Ignorable="d"
         Title="FilterSearch" Height="300" Width="300">
     <Grid>
@@ -15,14 +16,35 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Name:</Label>
-        <Label Grid.Row="0" Grid.Column="1" Name="Name"  VerticalAlignment="Center"></Label>
-        <Label Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center">Type:</Label>
-        <Label Grid.Row="1" Grid.Column="1" Name="TypeOfResource"  VerticalAlignment="Center"></Label>
-        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button IsDefault="True" Name="EnterFilter" MinWidth="60" Margin="0,0,10,0">_Filter</Button>
+        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Filter by tag:</Label>
+
+        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=tags}" Name="cmbTags" VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Filter by frequency:</Label>
+        <ComboBox Grid.Row="1" Grid.Column="1" Name="cmbFrequency" VerticalAlignment="Center"/>
+        
+        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Filter by renewability:</Label>
+        <CheckBox Grid.Row="2" Grid.Column="1" Name="checkRenewable" VerticalAlignment="Center">Renewable</CheckBox>
+
+        <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Filter by min price:</Label>
+        <TextBox Name="minPriceBox" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox"/>
+
+        <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">Filter by max price:</Label>
+        <TextBox Name="maxPriceBox" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox"/>
+
+        <WrapPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button IsDefault="True" Name="EnterFilter" MinWidth="60" Margin="0,0,10,0" Click="EnterFilter_Click">_Filter</Button>
             <Button IsCancel="True" MinWidth="60">_Cancel</Button>
         </WrapPanel>
     </Grid>
