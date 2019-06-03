@@ -88,8 +88,10 @@ namespace Project.Views
                     {
                         if (t.Name.Equals(tag.Name) && rp.resource.Renewable == isRenewable)
                         {
-
-                            rpToSHow.Add(rp);
+                            if(checkPrice(rp, minPrice, maxPrice))
+                            {
+                                rpToSHow.Add(rp);
+                            }
                         }
                     }
                 }
@@ -99,16 +101,26 @@ namespace Project.Views
                     {
                         if (t.Name.Equals(tag.Name) && rp.resource.Renewable == isRenewable && rp.resource.Frequency == frequency)
                         {
-                            rpToSHow.Add(rp);
+                            if (checkPrice(rp, minPrice, maxPrice))
+                            {
+                                rpToSHow.Add(rp);
+                            }
                         }
                     }
                 }
                 else if (tag == null && cmbFrequency.SelectedValue != null)
                 {
+                    if (rp.resource.Renewable == isRenewable && rp.resource.Frequency == frequency)
+                    {
+                        if (checkPrice(rp, minPrice, maxPrice))
+                        {
+                            rpToSHow.Add(rp);
+                        }
+                    }
                 } 
-
             }
 
+            int a = 5;
         }
         private bool checkPrice(ResourcePoint rp, int minPrice, int maxPrice)
         { 
@@ -156,6 +168,7 @@ namespace Project.Views
                     return false;
                 }
             }
+            return true;
         }
     }
 }
