@@ -34,41 +34,48 @@ namespace Project.Commands
 
         public void Execute(object parameter)
         {
-            ResourcePoint resToDelete = null;
-
-            foreach(ResourcePoint rp in MainWindow.resources)
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this resource from map?", "Delete resource", MessageBoxButton.YesNo);
+            switch (result)
             {
-                if (rp.resource == resource && rp.point == point)
-                {
-                    resToDelete = rp;
-                    break;
-                }
+                case MessageBoxResult.Yes:
+                    {
+                        ResourcePoint resToDelete = null;
+
+                        foreach (ResourcePoint rp in MainWindow.resources)
+                        {
+                            if (rp.resource == resource && rp.point == point)
+                            {
+                                resToDelete = rp;
+                                break;
+                            }
+                        }
+                        if (resToDelete != null)
+                        {
+                            MainWindow.resources.Remove(resToDelete);
+                            ReadWrite rw = new ReadWrite();
+                            rw.writeToFile("../../Data/resources.json", MainWindow.resources);
+
+                            Canvas canvas = MainWindow.getCanvas();
+                            var element = canvas.InputHitTest(resToDelete.point) as UIElement;
+                            UIElement parent;
+
+                            while (element != null &&
+                                (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+                            {
+                                element = parent;
+                            }
+
+                            if (element != null)
+                            {
+                                canvas.Children.Remove(element);
+                            }
+
+
+                            MessageBox.Show("You have successfully deleted resource");
+                        }
+                        break;
+                    }
             }
-            if (resToDelete != null)
-            {
-                MainWindow.resources.Remove(resToDelete);
-                ReadWrite rw = new ReadWrite();
-                rw.writeToFile("../../Data/resources.json", MainWindow.resources);
-
-                Canvas canvas = MainWindow.getCanvas();
-                var element = canvas.InputHitTest(resToDelete.point) as UIElement;
-                UIElement parent;
-
-                while (element != null &&
-                    (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
-                {
-                    element = parent;
-                }
-
-                if (element != null)
-                {
-                    canvas.Children.Remove(element);
-                }
-
-
-                MessageBox.Show("You have successfully deleted resource");
-            }
-
         }
     }
 }

@@ -64,7 +64,7 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Click="Edit_Click">Edit</Button>
+                                            <Button Click="Edit_Click" Tag="{Binding}">Edit</Button>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

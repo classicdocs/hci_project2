@@ -1,4 +1,5 @@
-﻿using Project.FileHandler;
+﻿using Microsoft.Win32;
+using Project.FileHandler;
 using Project.Models;
 using System;
 using System.Collections.Generic;
@@ -24,47 +25,54 @@ namespace Project.Views
     public partial class EditResource : Window, INotifyPropertyChanged
     {
         private Resource resource { get; set; }
+        public ObservableCollection<ResourceTypeWithResources> types { get; set; }
 
-        public ObservableCollection<Tag> tags { get; set; }
-        public string dateOfDiscovery { get; set; }
+        private string _icon;
+        public string icon
+        {
+            get { return _icon; }
+            set
+            {
+                if (_icon != value)
+                {
+                    _icon = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        private List<Tag> checkedTags = new List<Tag>();
-        private Point point;
-
-        public EditResource(Resource resource, Point p)
+        public EditResource(Resource resource)
         {
             InitializeComponent();
             this.DataContext = this;
-            InitializeData(resource, p);
+            InitializeData(resource);
         }
 
-        private void InitializeData(Resource resource, Point p)
+        private void InitializeData(Resource resource)
         {
-            this.point = p;
             this.resource = resource;
-            tags = MainWindow.tags;
-            Id.Content = resource.Id;
-            Name.Content = resource.Name;
-            Description.Content = resource.Description;
-            TypeOfResource.Content = resource.ResourceType.Name;
-            Icon.Source = new BitmapImage(new Uri(resource.Icon));
-            Renewable.Content = resource.Renewable ? "Yes" : "No";
-            Frequency.Content = resource.Frequency;
-            StrategicImportance.IsChecked = resource.StrategicImportance;
-            CurrentlyExploited.IsChecked = resource.CurrentlyExploited;
-            Unit.Content = resource.Unit;
-            Price.Content = resource.Price;
-            dateOfDiscovery = resource.DateOfDiscovery;
-            foreach (Tag tag in tags) {
-                foreach(Tag tag2 in resource.Tags)
+            types = MainWindow.types;
+            Frequency.ItemsSource = Enum.GetValues(typeof(ResourceFrequency)).Cast<ResourceFrequency>();
+            Id.Text = resource.Id;
+            Name.Text = resource.Name;
+            Description.Text = resource.Description;
+            ResourceTypeWithResources r = null;
+            foreach(ResourceTypeWithResources rt in types)
+            {
+                if (rt.Id == resource.ResourceType.Id)
                 {
-                    if (tag.Id == tag2.Id)
-                    {
-                        tagsList.SelectedItems.Add(tag);
-                    }
-
+                    r = rt;
+                    break;
                 }
             }
+            ResourceType.SelectedItem = r;
+            Frequency.SelectedItem = resource.Frequency;
+            Icon.Source = new BitmapImage(new Uri(resource.Icon));
+            icon = resource.Icon;
+            Renewable.IsChecked = resource.Renewable;
+            Unit.ItemsSource = Enum.GetValues(typeof(ResourceUnit)).Cast<ResourceUnit>();
+            Unit.SelectedItem = resource.Unit;
+            Price.Text = resource.Price;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -76,58 +84,145 @@ namespace Project.Views
             }
         }
 
-        private void tagsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Tag item in e.RemovedItems)
+
+            if (Id.Text.Equals("") || Name.Text.Equals("") || icon.Equals(""))
             {
-                checkedTags.Remove(item);
+                MessageBox.Show("You must fill all required fields");
+                return;
             }
 
-            foreach (Tag item in e.AddedItems)
+            foreach (ResourceTypeWithResources rt in MainWindow.types)
             {
-                checkedTags.Add(item);
+                foreach (Resource res in rt.Resources)
+                {
+                    if (res.Id.Equals(Id.Text) && !Id.Text.Equals(res.Id))
+                    {
+                        MessageBox.Show("Id you entered is already in use. Please choose another.");
+                        return;
+                    }
+                    else if (res.Name.Equals(Name.Text) && !Name.Text.Equals(res.Name))
+                    {
+                        MessageBox.Show("Name you entered is already in use. Please choose another.");
+                        return;
+                    }
+                    else if (res.Icon.Equals(Icon.Source) && !Icon.Source.Equals(res.Icon))
+                    {
+                        MessageBox.Show("Icon you choose is already in use. Please choose another.");
+                        return;
+                    }
+                }
+            }
+
+            editResource();
+        }
+
+        private void editResource()
+        {
+            Resource resourceToChange = null;
+
+            foreach (ResourceTypeWithResources rt in MainWindow.types)
+            {
+                foreach (Resource res in rt.Resources)
+                {
+                    if (res == resource)
+                    {
+                        resourceToChange = res;
+                        break;
+                    }
+                }
+            }
+            if (resourceToChange != null)
+            {
+                resourceToChange.Id = Id.Text;
+                resourceToChange.Name = Name.Text;
+                resourceToChange.Description = Description.Text;
+                ResourceType resourceType = null;
+                foreach(var rt in MainWindow.types)
+                {
+                    if (rt == ResourceType.SelectedItem)
+                    {
+                        resourceType = rt.Resources.First().ResourceType;
+                        break;
+                    }
+                }
+                resourceToChange.ResourceType = resourceType;
+                resourceToChange.Frequency = (ResourceFrequency)Frequency.SelectedItem;
+                resourceToChange.Icon = icon;
+                resourceToChange.Renewable = (bool)Renewable.IsChecked;
+                resourceToChange.Unit = (ResourceUnit)Unit.SelectedItem;
+                resourceToChange.Price = Price.Text;
+            }
+
+            if (ResourceType.SelectedItem != resource.ResourceType)
+            {
+                Resource resourceToDelete = null;
+                ResourceTypeWithResources r = null;
+                foreach (ResourceTypeWithResources rt in MainWindow.types)
+                {
+                    foreach (Resource res in rt.Resources)
+                    {
+                        if (res == resource)
+                        {
+                            resourceToDelete = res;
+                            r = rt;
+                            break;
+                        }
+                    }
+                }
+                if (resourceToDelete != null && r != null)
+                {
+                    r.Resources.Remove(resourceToDelete);
+                }
+                foreach (ResourceTypeWithResources rt in MainWindow.types)
+                {
+                    if (rt.Id == resourceToChange.ResourceType.Id)
+                    {
+                        rt.Resources.Add(resourceToChange);
+                    }
+                }
+
+                refreshView(resourceToChange);
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void refreshView(Resource res)
         {
-            this.resource.StrategicImportance = (bool)StrategicImportance.IsChecked;
-            this.resource.CurrentlyExploited = (bool)CurrentlyExploited.IsChecked;
-            this.resource.Tags = checkedTags;
-            if (dateOfDiscovery.Equals(""))
-                this.resource.DateOfDiscovery = "Unknown";
-            else
-                this.resource.DateOfDiscovery = dateOfDiscovery;
-            foreach(ResourcePoint rp in MainWindow.resources)
+            foreach (var rp in MainWindow.resources)
             {
-                if (rp.resource == resource && rp.point == point)
+                if (rp.resource.ResourceType.Id == resource.ResourceType.Id)
                 {
-                    rp.resource = resource;
-                    ReadWrite rw = new ReadWrite();
-                    rw.writeToFile("../../Data/resources.json", MainWindow.resources);
-
-                    Canvas canvas = MainWindow.getCanvas();
-
-                    var element = canvas.InputHitTest(rp.point) as UIElement;
-                    UIElement parent;
-
-                    while (element != null &&
-                        (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
-                    {
-                        element = parent;
-                    }
-
-                    if (element != null)
-                    {
-                        canvas.Children.Remove(element);
-                    }
-
+                    rp.resource.Id = res.Id;
+                    rp.resource.Name = res.Name;
+                    rp.resource.Description = res.Description;
+                    rp.resource.ResourceType = res.ResourceType;
+                    rp.resource.Frequency = res.Frequency; ;
+                    rp.resource.Icon = res.Icon ;
+                    rp.resource.Renewable = res.Renewable;
+                    rp.resource.Unit = res.Unit;
+                    rp.resource.Price = res.Price;
+                    MainWindow.removeResourceFromMap(rp);
                     MainWindow.drawOneResource(rp);
-                    this.Close();
-                    MessageBox.Show("You have successfully edited resource");
                 }
             }
-            
+            CollectionViewSource.GetDefaultView(MainWindow.types).Refresh();
+            ReadWrite rw = new ReadWrite();
+            rw.writeToFile("../../Data/types.json", MainWindow.types);
+            rw.writeToFile("../../Data/resources.json", MainWindow.resources);
+            this.Close();
+            MessageBox.Show("You have successfully edited resource");
+        }
+
+        private void ChooseIcon_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            bool? res = fileDialog.ShowDialog();
+            if (res.HasValue == res.Value)
+            {
+                icon = fileDialog.FileName;
+                Icon.Source = new BitmapImage(new Uri(icon));
+            }
         }
 
     }

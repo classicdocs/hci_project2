@@ -35,7 +35,7 @@ namespace Project.Views
         public ResourceUnit unit { get; set; }
         public string price { get; set; }
         public bool? renewable { get; set; }
-        public string _icon;
+        private string _icon;
         public string icon
         {
             get { return _icon; }

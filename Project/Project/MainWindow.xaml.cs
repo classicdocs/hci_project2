@@ -290,10 +290,28 @@ namespace Project
             }
         } 
 
+        public static void removeResourceFromAllMaps(ResourcePoint rp)
+        {
+            List<Canvas> canvases = new List<Canvas>();
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv2);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv3);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv4);
+
+            foreach(var canvas in canvases)
+            {
+                removeElementFromCanvas(canvas, rp);
+            }
+        }
+
         public static void removeResourceFromMap(ResourcePoint rp)
         {
-            Canvas canvas = MainWindow.getCanvas();
+            Canvas canvas = getCanvas();
+            removeElementFromCanvas(canvas, rp);
+        }
 
+        private static void removeElementFromCanvas(Canvas canvas, ResourcePoint rp)
+        {
             var element = canvas.InputHitTest(rp.point) as UIElement;
             UIElement parent;
 

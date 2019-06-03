@@ -1,11 +1,14 @@
 ﻿using Project.Commands;
+using Project.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Project.Models
 {
@@ -29,6 +32,8 @@ namespace Project.Models
 
         public Resource() {
             this.tags = new List<Tag>();
+            Edit = new EditCommand(this);
+            Delete = new DeleteCommand(this);
         }
 
         public Resource(string id, string name, string description, ResourceType type, ResourceFrequency frequency, ResourceUnit unit,
@@ -48,8 +53,10 @@ namespace Project.Models
             this.price = price;
             this.tags = new List<Tag>();
 
-
             this.onPage = onPage;
+
+            Edit = new EditCommand(this);
+            Delete = new DeleteCommand(this);
 
         }
 
@@ -58,12 +65,6 @@ namespace Project.Models
             get { return id; }
             set { id = value; }
         }
-
-       /* public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }*/
 
         public string Name
         {
@@ -163,6 +164,42 @@ namespace Project.Models
             get { return onPage; }
             set { onPage = value; }
         }
+
+        private EditCommand _edit;
+        [ScriptIgnore]
+        public EditCommand Edit
+        {
+            get
+            {
+                return _edit;
+            }
+            set
+            {
+                if (_edit != value)
+                {
+                    _edit = value;
+                    OnPropertyChanged("Edit");
+                }
+            }
+        }
+        private DeleteCommand _delete;
+        [ScriptIgnore]
+        public DeleteCommand Delete
+        {
+            get
+            {
+                return _delete;
+            }
+            set
+            {
+                if (_delete != value)
+                {
+                    _delete = value;
+                    OnPropertyChanged("Delete");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -170,6 +207,49 @@ namespace Project.Models
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public class EditCommand : ICommand
+        {
+            private Resource resource;
+            public EditCommand(Resource r)
+            {
+                resource = r;
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged;
+
+            public void Execute(object parameter)
+            {
+                EditResource dialog = new EditResource(resource);
+                dialog.Show();
+            }
+        }
+
+        public class DeleteCommand : ICommand
+        {
+            private Resource resource;
+            public DeleteCommand(Resource r)
+            {
+                resource = r;
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged;
+
+            public void Execute(object parameter)
+            {
+                DeleteResource dialog = new DeleteResource(resource);
             }
         }
 

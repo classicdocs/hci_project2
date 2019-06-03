@@ -133,7 +133,12 @@ namespace Project.Views
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            
+            Resource resource = (Resource)((Button)sender).Tag;
+            EditResource dialog = new EditResource(resource);
+            dialog.ShowDialog();
+            CollectionViewSource.GetDefaultView(TypesWithResourcesSearchResult).Refresh();
+            CollectionViewSource.GetDefaultView(TypesWithResources).Refresh();
+            CollectionViewSource.GetDefaultView(MainWindow.types).Refresh();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
