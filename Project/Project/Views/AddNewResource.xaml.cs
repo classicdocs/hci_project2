@@ -164,7 +164,7 @@ namespace Project.Views
                 }
             }
             
-            this.Close();
+            this.Close();          
             MessageBox.Show("You have successfully add new resource.");
         }
        
