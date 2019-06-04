@@ -30,6 +30,42 @@ namespace Project.Views
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string minPrice;
+
+        private string maxPrice;
+
+        public string MinPrice
+        {
+            get { return minPrice; }
+            set
+            {
+                minPrice = value;
+
+                OnPropertyChanged("MinPrice");
+            }
+        }
+
+        private void OnPropertyChanged(string v)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(v));
+            }
+        }
+
+        public string MaxPrice
+        {
+            get { return maxPrice; }
+            set
+            {
+                maxPrice = value;
+
+                OnPropertyChanged("MaxPrice");
+            }
+        }
+
+
+
         public FilterSearch()
         {
             InitializeComponent();
@@ -48,47 +84,62 @@ namespace Project.Views
             Regex regex = new Regex("[^0-9]+"); 
             e.Handled = regex.IsMatch(e.Text) ;
         }
+
+
         private void EnterFilter_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<ResourcePoint> currentlyShown = MainWindow.searchShownResources;
-            ObservableCollection<ResourcePoint> rpToSHow = MainWindow.searchShownResources;
+            ObservableCollection<ResourcePoint> rpToSHow = new ObservableCollection<ResourcePoint>();
 
             Tag tag = (Tag) cmbTags.SelectedValue;
             bool isRenewable = (bool)checkRenewable.IsChecked;
-            int minPrice = -1;
-            int maxPrice = -1;
+            int min = 0, max = 0;
+
 
             if (cmbFrequency.SelectedValue != null)
             {
                 frequency = (ResourceFrequency)cmbFrequency.SelectedValue;
             }
 
-            if(minPriceBox.Text != null)
+            
+            try
             {
-                minPrice = Int32.Parse(minPriceBox.Text);
+                max = Int32.Parse(maxPriceBox.Text);
+            }
+            catch (FormatException f)
+            {
+                MessageBox.Show("Invalid input for maximum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
-            if (maxPriceBox.Text != null)
+            try
             {
-                maxPrice = Int32.Parse(maxPriceBox.Text);
+                min = Int32.Parse(minPriceBox.Text);
             }
+            catch (FormatException f)
+            {
+                MessageBox.Show("Invalid input for minimum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            OnPropertyChanged("TypesWithResourcesSearchResult");
 
 
             foreach (ResourcePoint rp in currentlyShown)
             {
-                if (tag == null && cmbFrequency.SelectedValue == null)
+                //if (tag == null && cmbFrequency.SelectedValue == null)
+                //{
+                //    /*Ukoliko nije nista izabrao*/
+                //    MessageBox.Show("There were no filter parameters, so there are no changes on map.", "No parameters", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
+                if (tag != null && cmbFrequency.SelectedValue == null)
                 {
-                    /*Ukoliko nije nista izabrao*/
-                    MessageBox.Show("There were no filter parameters, so there are no changes on map.", "No parameters", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else if (tag != null && cmbFrequency.SelectedValue == null)
-                {
-
+                    /*Ukoliko je izabrao tag ali ne i frekvenciju*/
                     foreach (Tag t in rp.resource.Tags)
                     {
                         if (t.Name.Equals(tag.Name) && rp.resource.Renewable == isRenewable)
                         {
-                            if(checkPrice(rp, minPrice, maxPrice))
+                            if(checkPrice(rp, min, max))
                             {
                                 rpToSHow.Add(rp);
                             }
@@ -97,11 +148,12 @@ namespace Project.Views
                 }
                 else if (tag != null && cmbFrequency.SelectedValue != null)
                 {
+                    /*Ukoliko je izabrao tag i frekvenciju*/
                     foreach (Tag t in rp.resource.Tags)
                     {
                         if (t.Name.Equals(tag.Name) && rp.resource.Renewable == isRenewable && rp.resource.Frequency == frequency)
                         {
-                            if (checkPrice(rp, minPrice, maxPrice))
+                            if(checkPrice(rp, min, max))
                             {
                                 rpToSHow.Add(rp);
                             }
@@ -110,9 +162,10 @@ namespace Project.Views
                 }
                 else if (tag == null && cmbFrequency.SelectedValue != null)
                 {
+                    /*Ukoliko nije izabrao tag ali jeste frekvenciju*/
                     if (rp.resource.Renewable == isRenewable && rp.resource.Frequency == frequency)
                     {
-                        if (checkPrice(rp, minPrice, maxPrice))
+                        if (checkPrice(rp, min, max))
                         {
                             rpToSHow.Add(rp);
                         }
@@ -120,8 +173,41 @@ namespace Project.Views
                 } 
             }
 
-            int a = 5;
+            foreach (ResourcePoint rp in MainWindow.searchShownResources)
+            {
+                if (!rpToSHow.Contains(rp))
+                {
+                    //Canvas canvas = MainWindow.getCanvas();
+                    List<Canvas> canvases = MainWindow.getAllCanvases();
+                    foreach (Canvas canvas in canvases)
+                    {
+                        var element = canvas.InputHitTest(rp.point) as UIElement;
+                        UIElement parent;
+                        while (element != null &&
+                        (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+                        {
+                            element = parent;
+                        }
+
+                        if (element != null)
+                        {
+                            canvas.Children.Remove(element);
+                        }
+                    }
+                }
+            }
+            this.Close();
+
         }
+
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
+
+
         private bool checkPrice(ResourcePoint rp, int minPrice, int maxPrice)
         { 
             if(rp.resource.Price == null)
