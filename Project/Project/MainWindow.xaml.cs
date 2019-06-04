@@ -823,6 +823,7 @@ namespace Project
                 ((MainWindow)Application.Current.MainWindow).filterSearch.Visibility = Visibility.Hidden;
                 ((MainWindow)Application.Current.MainWindow).closeSearchBtn.Visibility = Visibility.Hidden;
                 ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = false;
+                MainWindow.searchShownResources = null;
                 searchIsActive = false;
                 LoadData();
             }
@@ -849,7 +850,8 @@ namespace Project
             {
                 if (searchIsActive)
                 {
-                    this.closeSearch(null, null);
+                    int a = 5;
+                    //this.closeSearch(null, null);
                 }
             }
         }

@@ -22,7 +22,7 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-
+        
         <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Filter by tag:</Label>
 
         <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=tags}" Name="cmbTags" VerticalAlignment="Center">

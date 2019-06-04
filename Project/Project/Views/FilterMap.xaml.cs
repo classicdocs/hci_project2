@@ -27,6 +27,8 @@ namespace Project.Views
 
         public ObservableCollection<Tag> tags { get; set; }
         public ResourceFrequency frequency { get; set; }
+        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -200,28 +202,35 @@ namespace Project.Views
                 }
             }
 
-            foreach (ResourcePoint rp in MainWindow.searchShownResources)
-            {
-                if (!rpToSHow.Contains(rp))
-                {
-                    //Canvas canvas = MainWindow.getCanvas();
-                    List<Canvas> canvases = MainWindow.getAllCanvases();
-                    foreach (Canvas canvas in canvases)
-                    {
-                        var element = canvas.InputHitTest(rp.point) as UIElement;
-                        UIElement parent;
-                        while (element != null &&
-                        (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
-                        {
-                            element = parent;
-                        }
+            //foreach (ResourcePoint rp in MainWindow.searchShownResources)
+            //{
+            //    if (!rpToSHow.Contains(rp))
+            //    {
+            //        //Canvas canvas = MainWindow.getCanvas();
+            //        List<Canvas> canvases = MainWindow.getAllCanvases();
+            //        foreach (Canvas canvas in canvases)
+            //        {
+            //            var element = canvas.InputHitTest(rp.point) as UIElement;
+            //            UIElement parent;
+            //            while (element != null &&
+            //            (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+            //            {
+            //                element = parent;
+            //            }
 
-                        if (element != null)
-                        {
-                            canvas.Children.Remove(element);
-                        }
-                    }
-                }
+            //            if (element != null)
+            //            {
+            //                canvas.Children.Remove(element);
+            //            }
+            //        }
+            //    }
+            //}
+            MainWindow.removeAllResources();
+
+
+            foreach (ResourcePoint rp in rpToSHow)
+            {
+                MainWindow.drawOneResource(rp);
             }
             this.Close();
 
