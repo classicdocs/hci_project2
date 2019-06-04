@@ -60,8 +60,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DeleteResourceCommand.cs" />
+    <Compile Include="Commands\DemoCommands.cs" />
     <Compile Include="Commands\EditResourceCommand.cs" />
     <Compile Include="Commands\RoutedCommands.cs" />
+    <Compile Include="Demos\AddNewTypeDemo.xaml.cs">
+      <DependentUpon>AddNewTypeDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\AddNewTagDemo.xaml.cs">
+      <DependentUpon>AddNewTagDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\ViewAllResourcesDemo.xaml.cs">
+      <DependentUpon>ViewAllResourcesDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\ViewAllTypesDemo.xaml.cs">
+      <DependentUpon>ViewAllTypesDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\ViewAllTagsDemo.xaml.cs">
+      <DependentUpon>ViewAllTagsDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileHandler\ReadWrite.cs" />
     <Compile Include="Models\ResourcePoint.cs" />
     <Compile Include="Models\ResourceType.cs" />
@@ -80,6 +96,9 @@
     <Compile Include="Views\DeleteResource.cs" />
     <Compile Include="Views\DeleteResourceType.cs" />
     <Compile Include="Views\DeleteTag.cs" />
+    <Compile Include="Demos\AddNewResourceDemo.xaml.cs">
+      <DependentUpon>AddNewResourceDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditResource.xaml.cs">
       <DependentUpon>EditResource.xaml</DependentUpon>
     </Compile>
@@ -107,6 +126,26 @@
     <Compile Include="Views\ViewAllTypes.xaml.cs">
       <DependentUpon>ViewAllTypes.xaml</DependentUpon>
     </Compile>
+    <Page Include="Demos\AddNewTypeDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\AddNewTagDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\ViewAllResourcesDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\ViewAllTypesDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\ViewAllTagsDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddNewType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\AddNewResourceDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

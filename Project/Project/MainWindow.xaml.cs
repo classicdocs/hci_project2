@@ -317,6 +317,7 @@ namespace Project
         }
 
 
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name = null)
         {
@@ -778,11 +779,20 @@ namespace Project
             FilterOn = false;
             OnPropertyChanged("TypesSearchResult");
         }
+        private void search_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
         private void SearchMap_Click(object sender, RoutedEventArgs e)
         {
             var s = new SearchMap();
-            s.Show();
+            s.ShowDialog();
+        }
+
+        private void clear_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void closeSearch(object sender, RoutedEventArgs e)
@@ -826,6 +836,11 @@ namespace Project
             ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = true;
         }
 
+        private void filter_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void FilterSearch_Click(object sender, RoutedEventArgs e)
         {
             var s = new FilterSearch();
@@ -845,24 +860,109 @@ namespace Project
             }
         }
 
-
-
+        private void mapOne_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
         private void mapOne_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 0;
         }
+
+        private void mapTwo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void mapTwo_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 1;
         }
+
+        private void mapThree_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void mapThree_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 2;
         }
+
+        private void mapFour_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void mapFour_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 3;
+        }
+
+        private void ViewAllResourcesDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void AllResourcesDemo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAllResourcesDemo dialog = new ViewAllResourcesDemo();
+            dialog.ShowDialog();
+        }
+
+        private void ViewAllTypesDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+            
+        }
+
+        private void AllTypesDemo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAllTypesDemo dialog = new ViewAllTypesDemo();
+            dialog.ShowDialog();
+        }
+
+        private void ViewAllTagsDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void AllTagsDemo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAllTagsDemo dialog = new ViewAllTagsDemo();
+            dialog.ShowDialog();
+        }
+
+        private void NewResourceDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = AddNewResourceEnabled;
+        }
+
+        private void NewResourceDemo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewResourceDemo d = new AddNewResourceDemo();
+            d.ShowDialog();
+        }
+        private void NewTypeDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void NewTypeDemo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewTypeDemo d = new AddNewTypeDemo();
+            d.ShowDialog();
+        }
+        private void NewTagDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void NewTagDemo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewTagDemo d = new AddNewTagDemo();
+            d.ShowDialog();
         }
 
     }
