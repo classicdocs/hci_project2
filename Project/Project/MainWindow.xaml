@@ -18,6 +18,7 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewAllResources" CanExecute="ViewAllResources_CanExecute" Executed="AllResources_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTypes" CanExecute="ViewAllTypes_CanExecute" Executed="AllTypes_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTags" CanExecute="ViewAllTags_CanExecute" Executed="AllTags_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Demo" CanExecute="Demo_CanExecute" Executed="Demo_Click"></CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="SmallIcon" TargetType="Image">
@@ -42,6 +43,9 @@
                     <MenuItem Header="New resource" Command="cmd:RoutedCommands.AddNewResource"></MenuItem>
                     <MenuItem Header="New type" Command="cmd:RoutedCommands.AddNewType"></MenuItem>
                     <MenuItem Header="New tag" Command="cmd:RoutedCommands.AddNewTag"></MenuItem>
+                </MenuItem>
+                <MenuItem HorizontalAlignment="Right" Header="Help" FontSize="30">
+                    <MenuItem Header="View demo" Command="cmd:RoutedCommands.Demo"></MenuItem>
                 </MenuItem>
                 <Button x:Name="searchMapBtn" Content="Search map" Width="auto" Click="SearchMap_Click" BorderThickness="0"   FontSize="30"/>
                 <Button x:Name="filterSearch" Content="Filter search" Width="auto" Click="FilterSearch_Click" Visibility="Hidden" BorderThickness="0"   FontSize="30"/>

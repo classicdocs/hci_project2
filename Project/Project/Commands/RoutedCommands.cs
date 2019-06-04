@@ -63,5 +63,14 @@ namespace Project.Commands
                  new KeyGesture(Key.G, ModifierKeys.Alt),
             }
             );
+        public static readonly RoutedUICommand Demo = new RoutedUICommand(
+            "Demo",
+            "Demo",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                 new KeyGesture(Key.D, ModifierKeys.Alt),
+            }
+            );
     }
 }
