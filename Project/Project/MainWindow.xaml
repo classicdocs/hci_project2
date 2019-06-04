@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Models"
         xmlns:cmd="clr-namespace:Project.Commands"
-
+        xmlns:demo="clr-namespace:Project.Commands"
         mc:Ignorable="d"
         Title="Managing the evidence of the map of world resources" WindowState="Maximized" 
         MinHeight="800"
@@ -19,7 +19,22 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewAllResources" CanExecute="ViewAllResources_CanExecute" Executed="AllResources_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTypes" CanExecute="ViewAllTypes_CanExecute" Executed="AllTypes_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTags" CanExecute="ViewAllTags_CanExecute" Executed="AllTags_Click"></CommandBinding>
-        <CommandBinding Command="cmd:RoutedCommands.Demo" CanExecute="Demo_CanExecute" Executed="Demo_Click"></CommandBinding>
+
+        <CommandBinding Command="cmd:RoutedCommands.Search" CanExecute="search_CanExecute" Executed="SearchMap_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ClearSearch" CanExecute="clear_CanExecute" Executed="closeSearch"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Filter" CanExecute="filter_CanExecute" Executed="FilterSearch_Click"></CommandBinding>
+        
+        <CommandBinding Command="cmd:RoutedCommands.Map1" CanExecute="mapOne_CanExecute" Executed="mapOne_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Map2" CanExecute="mapTwo_CanExecute" Executed="mapTwo_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Map3" CanExecute="mapThree_CanExecute" Executed="mapThree_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Map4" CanExecute="mapFour_CanExecute" Executed="mapFour_Click"></CommandBinding>
+
+        <CommandBinding Command="demo:DemoCommands.AddNewResource" CanExecute="NewResourceDemo_CanExecute" Executed="NewResourceDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.AddNewType" CanExecute="NewTypeDemo_CanExecute"  Executed="NewTypeDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.AddNewTag" CanExecute="NewTagDemo_CanExecute" Executed="NewTagDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.ViewAllResources" CanExecute="ViewAllResourcesDemo_CanExecute" Executed="AllResourcesDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.ViewAllTypes" CanExecute="ViewAllTypesDemo_CanExecute" Executed="AllTypesDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.ViewAllTags" CanExecute="ViewAllTagsDemo_CanExecute" Executed="AllTagsDemo_Click"></CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="SmallIcon" TargetType="Image">
@@ -46,16 +61,53 @@
                     <MenuItem Header="New tag" Command="cmd:RoutedCommands.AddNewTag"></MenuItem>
                 </MenuItem>
                 <MenuItem HorizontalAlignment="Right" Header="Help" FontSize="30">
-                    <MenuItem Header="View demo" Command="cmd:RoutedCommands.Demo"></MenuItem>
+                    <MenuItem Header="View demo for">
+                        <MenuItem Header="Adding new resource" Command="demo:DemoCommands.AddNewResource"></MenuItem>
+                        <MenuItem Header="Adding new type" Command="demo:DemoCommands.AddNewType"></MenuItem>
+                        <MenuItem Header="Adding new tag" Command="demo:DemoCommands.AddNewTag"></MenuItem>
+                        <MenuItem Header="Resources overview" Command="demo:DemoCommands.ViewAllResources"></MenuItem>
+                        <MenuItem Header="Types overview" Command="demo:DemoCommands.ViewAllTypes"></MenuItem>
+                        <MenuItem Header="Tags overview" Command="demo:DemoCommands.ViewAllTags"></MenuItem>
+                    </MenuItem>
                 </MenuItem>
-                <Button x:Name="searchMapBtn" Content="Search map" Width="auto" Click="SearchMap_Click" BorderThickness="0"   FontSize="30"/>
-                <Button x:Name="filterSearch" Content="Filter search" Width="auto" Click="FilterSearch_Click" Visibility="Hidden" BorderThickness="0"   FontSize="30"/>
-                <Button x:Name="closeSearchBtn" IsHitTestVisible="False" HorizontalAlignment="Right" Content="Revert search" Width="auto" Click="closeSearch" Visibility="Hidden" BorderThickness="0"   FontSize="30"/>
+                <Button x:Name="searchMapBtn" Content="Search map" Width="auto"  BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Search">
+                    <Button.ToolTip>
+                        <Label>Shortcut: Ctrl+S</Label>
+                    </Button.ToolTip>
+                </Button>
+                <Button x:Name="filterSearch" Content="Filter search" Width="auto"  Visibility="Hidden" 
+                        BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Filter">
+                    <Button.ToolTip>
+                        <Label>Shortcut: Ctrl+F</Label>
+                    </Button.ToolTip>
+                </Button>
+                <Button x:Name="closeSearchBtn" IsHitTestVisible="False" HorizontalAlignment="Right" Content="Revert search" Width="auto"
+                        Visibility="Hidden" BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.ClearSearch">
+                    <Button.ToolTip>
+                        <Label>Shortcut: Ctrl+H</Label>
+                    </Button.ToolTip>
+                </Button>
 
-                <Button Name="map_one" Click="mapOne_Click" BorderThickness="0"   FontSize="30">Map 1</Button>
-                <Button Name="map_two" Click="mapTwo_Click" BorderThickness="0"   FontSize="30">Map 2</Button>
-                <Button Name="map_three" Click="mapThree_Click" BorderThickness="0"   FontSize="30">Map 3</Button>
-                <Button Name="map_four" Click="mapFour_Click" BorderThickness="0"   FontSize="30">Map 4</Button>
+                <Button Name="map_one" Click="mapOne_Click" BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Map1">Map 1
+                    <Button.ToolTip>
+                        <Label>Shortcut: Alt+1</Label>
+                    </Button.ToolTip>
+                </Button>
+                <Button Name="map_two" Click="mapTwo_Click" BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Map2">Map 2
+                    <Button.ToolTip>
+                        <Label>Shortcut: Alt+2</Label>
+                    </Button.ToolTip>
+                </Button>
+                <Button Name="map_three" Click="mapThree_Click" BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Map3">Map 3
+                    <Button.ToolTip>
+                        <Label>Shortcut: Alt+3</Label>
+                    </Button.ToolTip>
+                </Button>
+                <Button Name="map_four" Click="mapFour_Click" BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Map4">Map 4
+                    <Button.ToolTip>
+                        <Label>Shortcut: Alt+4</Label>
+                    </Button.ToolTip>
+                </Button>
             </Menu>
             <Grid DockPanel.Dock="Bottom">
                 <Grid.RowDefinitions>
@@ -86,8 +138,10 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" FontSize="22">Search:</Label>
                         <TextBox Grid.Row="0" Grid.Column="1" Width="100" Margin="0,0,0,0" Height="30"  FontSize="20" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Click="ShowAdvancedSearch" Grid.Column="2" Height="30" Name="ShowSearch"   FontSize="20" Content="Advanced search" Margin="0,0,0,0"></Button>
-                        <Button Click="HideAdvancedSearch" Grid.Column="2" Visibility="Hidden" Height="30" Name="HideSearch" Content="Close advanced search" Margin="0,0,0,0"  FontSize="20"></Button>
+                        <Button Click="ShowAdvancedSearch" Grid.Column="2" Height="30" Name="ShowSearch"   FontSize="20" Content="Advanced search" Margin="0,0,0,0" >
+                        </Button>
+                        <Button Click="HideAdvancedSearch" Grid.Column="2" Visibility="Hidden" Height="30" Name="HideSearch" Content="Close advanced search" Margin="0,0,0,0"  FontSize="20">
+                        </Button>
                     </Grid>
                     <Grid Grid.Row="1" Grid.Column="0" Visibility="Hidden" Name="AdvancedSearchFields">
                         <Grid.RowDefinitions>

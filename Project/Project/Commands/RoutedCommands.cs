@@ -72,5 +72,69 @@ namespace Project.Commands
                  new KeyGesture(Key.D, ModifierKeys.Alt),
             }
             );
+        public static readonly RoutedUICommand Map1 = new RoutedUICommand(
+            "Map1",
+            "Map1",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                 new KeyGesture(Key.D1, ModifierKeys.Alt),
+            }
+            );
+        public static readonly RoutedUICommand Map2 = new RoutedUICommand(
+            "Map2",
+            "Map2",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                 new KeyGesture(Key.D2, ModifierKeys.Alt),
+            }
+            );
+        public static readonly RoutedUICommand Map3 = new RoutedUICommand(
+            "Map3",
+            "Map3",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                 new KeyGesture(Key.D3, ModifierKeys.Alt),
+            }
+            );
+        public static readonly RoutedUICommand Map4 = new RoutedUICommand(
+            "Map4",
+            "Map4",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.D4, ModifierKeys.Alt),
+            }
+            );
+        public static readonly RoutedUICommand Search = new RoutedUICommand(
+            "Search",
+            "Search",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.S, ModifierKeys.Control),
+            }
+            );
+        public static readonly RoutedUICommand Filter = new RoutedUICommand(
+            "Filter",
+            "Filter",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.F, ModifierKeys.Control),
+            }
+            );
+        public static readonly RoutedUICommand ClearSearch = new RoutedUICommand(
+            "ClearSearch",
+            "ClearSearch",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.H, ModifierKeys.Control),
+            }
+            );
+
     }
 }
