@@ -844,6 +844,26 @@ namespace Project
             }
         }
 
+
+
+
+        private void mapOne_Click(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 0;
+        }
+        private void mapTwo_Click(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 1;
+        }
+        private void mapThree_Click(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 2;
+        }
+        private void mapFour_Click(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 3;
+        }
+
     }
 
 }
