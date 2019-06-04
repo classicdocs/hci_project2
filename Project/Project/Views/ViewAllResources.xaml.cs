@@ -73,7 +73,7 @@ namespace Project.Views
                     int max = Int32.Parse(MaxPrice);
                 } catch (FormatException f)
                 {
-                    MessageBox.Show("Invalid input for maximum price!");
+                    MessageBox.Show("Invalid input for maximum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }                
             }
@@ -86,7 +86,7 @@ namespace Project.Views
                 }
                 catch (FormatException f)
                 {
-                    MessageBox.Show("Invalid input for minimum price!");
+                    MessageBox.Show("Invalid input for minimum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
