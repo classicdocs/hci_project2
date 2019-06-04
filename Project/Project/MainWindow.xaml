@@ -65,6 +65,7 @@
                         <MenuItem Header="Adding new resource" Command="demo:DemoCommands.AddNewResource"></MenuItem>
                         <MenuItem Header="Adding new type" Command="demo:DemoCommands.AddNewType"></MenuItem>
                         <MenuItem Header="Adding new tag" Command="demo:DemoCommands.AddNewTag"></MenuItem>
+                        <Separator></Separator>
                         <MenuItem Header="Resources overview" Command="demo:DemoCommands.ViewAllResources"></MenuItem>
                         <MenuItem Header="Types overview" Command="demo:DemoCommands.ViewAllTypes"></MenuItem>
                         <MenuItem Header="Tags overview" Command="demo:DemoCommands.ViewAllTags"></MenuItem>
@@ -342,7 +343,8 @@
                         <TabControl TabStripPlacement="Bottom" Name="Tab" FontSize="30" SelectionChanged="TabControl_SelectionChanged">
 
                             <TabItem x:Name ="First" Header="First Map" FontSize="30"  Visibility="Hidden">
-                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
+                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500"
+                                        >
                                         <Canvas.Background>
                                             <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>

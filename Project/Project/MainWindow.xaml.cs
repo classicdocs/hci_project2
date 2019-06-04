@@ -400,8 +400,8 @@ namespace Project
             Image img = new Image()
             {
                 Source = new BitmapImage(new Uri(resource.Icon)),
-                Width = 20,
-                Height = 20,
+                Width = 40,
+                Height = 40,
                 ToolTip = grid
             };
 
@@ -792,7 +792,7 @@ namespace Project
 
         private void clear_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute = searchIsActive;
         }
 
         private void closeSearch(object sender, RoutedEventArgs e)
@@ -838,7 +838,7 @@ namespace Project
 
         private void filter_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute = searchIsActive;
         }
 
         private void FilterSearch_Click(object sender, RoutedEventArgs e)
@@ -964,6 +964,8 @@ namespace Project
             AddNewTagDemo d = new AddNewTagDemo();
             d.ShowDialog();
         }
+
+
 
     }
 

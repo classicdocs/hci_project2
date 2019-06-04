@@ -254,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Resource\Demos\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Icons\icons8-copper-bars-48.png" />
