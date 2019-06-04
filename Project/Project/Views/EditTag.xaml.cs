@@ -3,12 +3,10 @@ using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,38 +19,24 @@ using System.Windows.Shapes;
 namespace Project.Views
 {
     /// <summary>
-    /// Interaction logic for AddNewTag.xaml
+    /// Interaction logic for EditTag.xaml
     /// </summary>
-    public partial class AddNewTag : Window, INotifyPropertyChanged
+    public partial class EditTag : Window, INotifyPropertyChanged
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
 
-        public AddNewTag()
+        public EditTag() { }
+
+        private Tag tag { get; set; }
+        public EditTag(Tag tag)
         {
+            this.tag = tag;
             InitializeComponent();
-            this.DataContext = this;
-            id = "";
-            name = "";
-            description = "";
+            Id.Text = tag.Id;
+            Name.Text = tag.Name;
+            Description.Text = tag.Description;
             cmbColors.ItemsSource = typeof(Colors).GetProperties();
-            font = 40;
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-        }
 
-        private int _font;
-        public int font
-        {
-            get { return _font; }
-            set
-            {
-                if (_font != value)
-                {
-                    _font = value;
-                    OnPropertyChanged("Font");
-                }
-            }
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -72,39 +56,65 @@ namespace Project.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (id.Equals("") || name.Equals("") || cmbColors.SelectedItem == null)
+            if (Id.Equals("") || Name.Equals("") || cmbColors.SelectedItem == null)
             {
                 MessageBox.Show("You must fill all required fields");
                 return;
             }
             Color selectedColor = (Color)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
 
-            Tag tag = new Tag(id, name, selectedColor.ToString(),description);
             foreach (Tag t in MainWindow.tags)
             {
-                if (t.Id == tag.Id)
+                if (t.Id == Id.Text && tag.Id != Id.Text)
                 {
                     MessageBox.Show("Id you entered is already in use. Please choose another.");
                     return;
                 }
-                else if (t.Name == tag.Name)
+                else if (t.Name == Name.Text && tag.Name != Name.Text)
                 {
                     MessageBox.Show("Name you entered is already in use. Please choose another.");
                     return;
                 }
-                else if (t.Color == tag.Color)
+                else if (t.Color == selectedColor.ToString() && tag.Color != selectedColor.ToString())
                 {
                     MessageBox.Show("Color you choose is already in use. Please choose another.");
                     return;
                 }
             }
-            MainWindow.tags.Add(tag);
+
+            foreach(Tag t in MainWindow.tags)
+            {
+                if (t.Id == tag.Id)
+                {
+                    t.Id = Id.Text;
+                    t.Name = Name.Text;
+                    t.Description = Description.Text;
+                    t.Color = selectedColor.ToString();
+                }
+            }
+
+            foreach(ResourcePoint rp in MainWindow.resources)
+            {
+                foreach(Tag t in rp.resource.Tags)
+                {
+                    if (t.Id == tag.Id)
+                    {
+                        t.Id = Id.Text;
+                        t.Name = Name.Text;
+                        t.Description = Description.Text;
+                        t.Color = selectedColor.ToString();
+                    }
+                }
+            }
+            MainWindow.removeAllResources();
+            MainWindow.drawResources();
 
             ReadWrite rw = new ReadWrite();
             rw.writeToFile("../../Data/tags.json", MainWindow.tags);
+            rw.writeToFile("../../Data/resources.json", MainWindow.resources);
 
             this.Close();
-            MessageBox.Show("You have successfully add new resource type.");
+            MessageBox.Show("You have successfully edited tag.");
         }
     }
 }

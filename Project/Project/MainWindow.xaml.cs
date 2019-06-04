@@ -62,6 +62,8 @@ namespace Project
 
         private string minPrice;
 
+        private bool FilterOn { get; set; }
+
         private string maxPrice;
 
         public string SearchText
@@ -109,18 +111,16 @@ namespace Project
 
                 SearchText.Trim();
 
-                if (SearchText.Equals(""))
+                if (SearchText.Equals("") && !FilterOn)
                 {
                     RowForSearch.Height = new GridLength(5);
                 }
                 else
                 {
                     RowForSearch.Height = new GridLength(170);
+                    SearchText.Trim();
                 }
-
-                
-
-                //ObservableCollection<ResourceTypeWithResources> result = new ObservableCollection<ResourceTypeWithResources>();
+                                                                           
                 ObservableCollection<Resource> resources = new ObservableCollection<Resource>();
 
                 foreach (ResourceTypeWithResources r in types)
@@ -260,7 +260,7 @@ namespace Project
         private void AllResources_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllResources();
-            s.Show();
+            s.ShowDialog();
         }
 
         private void ViewAllTypes_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -271,7 +271,7 @@ namespace Project
         private void AllTypes_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllTypes();
-            s.Show();
+            s.ShowDialog();
         }
 
         private void ViewAllTags_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -282,7 +282,7 @@ namespace Project
         private void AllTags_Click(object sender, RoutedEventArgs e)
         {
             var s = new ViewAllTags();
-            s.Show();
+            s.ShowDialog();
         }
 
         private void NewResource_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -303,7 +303,7 @@ namespace Project
         private void NewType_Click(object sender, RoutedEventArgs e)
         {
             var s = new AddNewType();
-            s.Show();
+            s.ShowDialog();
         }
         private void NewTag_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -313,7 +313,7 @@ namespace Project
         private void NewTag_Click(object sender, RoutedEventArgs e)
         {
             var s = new AddNewTag();
-            s.Show();
+            s.ShowDialog();
         }
 
 
@@ -381,7 +381,6 @@ namespace Project
             grid.ColumnDefinitions.Add(cd1);
             ColumnDefinition cd2 = new ColumnDefinition();
             grid.ColumnDefinitions.Add(cd2);
-
             grid = tooltipInfo(grid, "Id", resource.Id, 0);
             grid = tooltipInfo(grid, "Name", resource.Name, 1);
             grid = tooltipInfo(grid, "Description", resource.Description, 2);
@@ -406,7 +405,7 @@ namespace Project
             };
 
             ContextMenu contextMenu = new ContextMenu();
-
+            contextMenu.FontSize = 40;
             MenuItem edit = new MenuItem();
             edit.Header = "Edit";
             edit.Command = new EditResourceCommand(resource, p);
@@ -468,8 +467,8 @@ namespace Project
                     var converter = new System.Windows.Media.BrushConverter();
                     var brush = (Brush)converter.ConvertFromString(tag.Color);
                     rect.Fill = brush;
-                    rect.Width = 20;
-                    rect.Height = 20;
+                    rect.Width = 40;
+                    rect.Height = 40;
 
                     stack2.Children.Add(rect);
                     stack2.Children.Add(la);
@@ -763,6 +762,8 @@ namespace Project
                 }
             }
 
+            FilterOn = true;
+
             OnPropertyChanged("TypesSearchResult");
         }
 
@@ -773,6 +774,8 @@ namespace Project
             cmbRenewable.SelectedItem = null;
             MinPrice = null;
             MaxPrice = null;
+            SearchText = null;
+            FilterOn = false;
             OnPropertyChanged("TypesSearchResult");
         }
 

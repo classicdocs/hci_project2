@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Height="800"
         Width="1400"
+        ResizeMode="NoResize"
         WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>

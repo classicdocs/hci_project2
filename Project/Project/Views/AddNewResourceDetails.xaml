@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Height="800"
         Width="1400"
+        ResizeMode="NoResize"
         WindowStyle="ToolWindow">
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
         <Grid ScrollViewer.CanContentScroll="True" >
@@ -71,8 +72,12 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox Tag="{Binding ID}" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=IsSelected}"></CheckBox>
-                                <Rectangle Fill="{Binding Color}" Width="16" Height="16" Margin="0,2,5,2"/>
+                                <CheckBox Tag="{Binding ID}" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=IsSelected}" Margin="0,10,0,0">
+                                    <CheckBox.LayoutTransform>
+                                        <ScaleTransform ScaleX="3" ScaleY="3" />
+                                    </CheckBox.LayoutTransform>
+                                </CheckBox>
+                                <Rectangle Fill="{Binding Color}" Width="30" Height="30" Margin="0,2,5,2"/>
                                 <Label Content="{Binding Name}"></Label>
                             </StackPanel>
                         </DataTemplate>

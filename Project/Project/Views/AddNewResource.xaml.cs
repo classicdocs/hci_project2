@@ -85,6 +85,7 @@ namespace Project.Views
             InitializeData(r);
             this.DataContext = this;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            font = 40;
 
         }
 

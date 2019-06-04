@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Project.Models"
         xmlns:cmd="clr-namespace:Project.Commands"
         mc:Ignorable="d"
-        Title="Managing the evidence of the map of world resources" WindowState="Maximized" ResizeMode="CanMinimize"
+        Title="Managing the evidence of the map of world resources" WindowState="Maximized" 
+        MinHeight="800"
+        MinWidth="1400"
         Icon="Resource/world.png"
         >
     <Window.CommandBindings>
@@ -188,7 +190,7 @@
                                         <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                         <TextBlock Text="{Binding Name}" FontSize="40"></TextBlock>
                                         <StackPanel.ContextMenu>
-                                            <ContextMenu>
+                                            <ContextMenu FontSize="40">
                                                 <MenuItem Header="Add new resource" Command="{Binding Add}"></MenuItem>
                                                 <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
                                                 <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
@@ -224,7 +226,7 @@
                                     <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                                     <TextBlock Text="{Binding Name}" FontSize="40"/>
                                     <WrapPanel.ContextMenu>
-                                        <ContextMenu>
+                                        <ContextMenu  FontSize="40">
                                             <MenuItem Header="Edit" Command="{Binding Edit}"></MenuItem>
                                             <MenuItem Header="Delete" Command="{Binding Delete}"></MenuItem>
                                         </ContextMenu>
