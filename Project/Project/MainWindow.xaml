@@ -19,6 +19,7 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewAllResources" CanExecute="ViewAllResources_CanExecute" Executed="AllResources_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTypes" CanExecute="ViewAllTypes_CanExecute" Executed="AllTypes_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTags" CanExecute="ViewAllTags_CanExecute" Executed="AllTags_Click"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Documentation" CanExecute="Documentation_CanExecute" Executed="Documentation_Click"></CommandBinding>
 
         <CommandBinding Command="cmd:RoutedCommands.Search" CanExecute="search_CanExecute" Executed="SearchMap_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ClearSearch" CanExecute="clear_CanExecute" Executed="closeSearch"></CommandBinding>
@@ -70,6 +71,7 @@
                         <MenuItem Header="Types overview" Command="demo:DemoCommands.ViewAllTypes"></MenuItem>
                         <MenuItem Header="Tags overview" Command="demo:DemoCommands.ViewAllTags"></MenuItem>
                     </MenuItem>
+                    <MenuItem Header="Documentation" Command="cmd:RoutedCommands.Documentation"></MenuItem>
                 </MenuItem>
                 <Button x:Name="searchMapBtn" Content="Search map" Width="auto"  BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Search">
                     <Button.ToolTip>

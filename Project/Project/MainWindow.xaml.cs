@@ -965,7 +965,17 @@ namespace Project
             d.ShowDialog();
         }
 
+        private void Documentation_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
+        private void Documentation_Click(object sender, RoutedEventArgs e)
+        {
+            //System.Diagnostics.Process.Start("Resource/Documentation/Documentation.html");
+            System.Diagnostics.Process.Start("C:/Temp/hci/Documentation/Documentation.html");
+
+        }
 
     }
 

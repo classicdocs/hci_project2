@@ -145,6 +145,15 @@ namespace Project.Commands
                     new KeyGesture(Key.Scroll, ModifierKeys.Control),
             }
             );
+        public static readonly RoutedUICommand Documentation = new RoutedUICommand(
+            "Documentation",
+            "Documentation",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.Home, ModifierKeys.Control),
+            }
+            );
 
     }
 }

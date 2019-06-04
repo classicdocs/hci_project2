@@ -255,6 +255,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Resource\Demos\" />
+    <Folder Include="Resource\Documentation\images\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Icons\icons8-copper-bars-48.png" />
@@ -267,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\filter.png" />
+    <Content Include="Resource\Documentation\Documentation.html" />
     <Content Include="Resource\map.svg" />
     <Resource Include="Resource\search.png" />
     <Resource Include="Resource\world-map.png" />
