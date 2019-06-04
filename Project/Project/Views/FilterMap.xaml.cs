@@ -115,8 +115,14 @@ namespace Project.Views
             }
             catch (FormatException f)
             {
-                MessageBox.Show("Invalid input for maximum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                if (!maxPriceBox.Text.Equals(""))
+                {
+                    MessageBox.Show("Invalid input for maximum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }else
+                {
+                    max = Int32.MaxValue;
+                }
             }
 
             try
@@ -125,8 +131,15 @@ namespace Project.Views
             }
             catch (FormatException f)
             {
-                MessageBox.Show("Invalid input for minimum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                if (!minPriceBox.Text.Equals(""))
+                {
+                    MessageBox.Show("Invalid input for minimum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    min = -2;
+                }
             }
 
             OnPropertyChanged("TypesWithResourcesSearchResult");
@@ -134,11 +147,18 @@ namespace Project.Views
 
             foreach (ResourcePoint rp in currentlyShown)
             {
-                //if (tag == null && cmbFrequency.SelectedValue == null)
-                //{
-                //    /*Ukoliko nije nista izabrao*/
-                //    MessageBox.Show("There were no filter parameters, so there are no changes on map.", "No parameters", MessageBoxButton.OK, MessageBoxImage.Error);
-                //}
+                if (tag == null && cmbFrequency.SelectedValue == null)
+                {
+                    /*Ukoliko nije nista izabrao*/
+                    if (rp.resource.Renewable == isRenewable && rp.resource.Frequency == frequency)
+                    {
+                        if (checkPrice(rp, min, max))
+                        {
+                            rpToSHow.Add(rp);
+                        }
+                    }
+                    //MessageBox.Show("There were no filter parameters, so there are no changes on map.", "No parameters", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 if (tag != null && cmbFrequency.SelectedValue == null)
                 {
                     /*Ukoliko je izabrao tag ali ne i frekvenciju*/
