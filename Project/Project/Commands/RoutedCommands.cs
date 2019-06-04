@@ -136,5 +136,15 @@ namespace Project.Commands
             }
             );
 
+        public static readonly RoutedUICommand Zoom = new RoutedUICommand(
+            "Zoom",
+            "Zoom",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.Scroll, ModifierKeys.Control),
+            }
+            );
+
     }
 }
