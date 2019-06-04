@@ -86,7 +86,7 @@
                 </ListView>
             </ScrollViewer>
             <Label Grid.Row="13" Grid.Column="0">* Fields you can edit</Label>
-            <Button Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
+            <Button Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click"  IsDefault="True">Submit</Button>
         </Grid>
     </ScrollViewer>
 </Window>

@@ -37,6 +37,6 @@
         <Label Grid.Row="3" Grid.Column="0" >Description:</Label>
         <TextBox Grid.Row="3" Grid.Column="1" Name="Description" ></TextBox>
         <Label Grid.Row="4" Grid.Column="0" >* Required fields</Label>
-        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click" >Submit</Button>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click"  IsDefault="True" >Submit</Button>
     </Grid>
 </Window>
