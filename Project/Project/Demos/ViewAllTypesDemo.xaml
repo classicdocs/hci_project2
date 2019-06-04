@@ -9,6 +9,6 @@
         ResizeMode="NoResize"
         Title="Types overview demo" Height="300" Width="300">
     <Grid>
-        <MediaElement Source="C:\Users\classicsdocs\Desktop\isamrsDEMO2\ISAMRS19_cp2.mp4" LoadedBehavior="Manual" Name="mePlayer" MediaEnded="mePlayer_MediaEnded"  />
+        <MediaElement Source="C:\Temp\hci\Demos\ViewAllTypes.webm" LoadedBehavior="Manual" Name="mePlayer" MediaEnded="mePlayer_MediaEnded"  />
     </Grid>
 </Window>
