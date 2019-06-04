@@ -342,7 +342,8 @@
                         <TabControl TabStripPlacement="Bottom" Name="Tab" FontSize="30" SelectionChanged="TabControl_SelectionChanged">
 
                             <TabItem x:Name ="First" Header="First Map" FontSize="30"  Visibility="Hidden">
-                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
+                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500"
+                                        >
                                         <Canvas.Background>
                                             <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>
