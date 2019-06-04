@@ -400,8 +400,8 @@ namespace Project
             Image img = new Image()
             {
                 Source = new BitmapImage(new Uri(resource.Icon)),
-                Width = 20,
-                Height = 20,
+                Width = 40,
+                Height = 40,
                 ToolTip = grid
             };
 
