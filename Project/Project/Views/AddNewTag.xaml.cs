@@ -74,7 +74,7 @@ namespace Project.Views
         {
             if (id.Equals("") || name.Equals("") || cmbColors.SelectedItem == null)
             {
-                MessageBox.Show("You must fill all required fields");
+                MessageBox.Show("You must fill all required fields", "Missing fields", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             Color selectedColor = (Color)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
@@ -84,17 +84,17 @@ namespace Project.Views
             {
                 if (t.Id == tag.Id)
                 {
-                    MessageBox.Show("Id you entered is already in use. Please choose another.");
+                    MessageBox.Show("Id you entered is already in use. Please choose another one.", "Invalid id", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else if (t.Name == tag.Name)
                 {
-                    MessageBox.Show("Name you entered is already in use. Please choose another.");
+                    MessageBox.Show("Name you entered is already in use. Please choose another one.", "Invalid name", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else if (t.Color == tag.Color)
                 {
-                    MessageBox.Show("Color you choose is already in use. Please choose another.");
+                    MessageBox.Show("Icon you choose is already in use. Please choose another one.", "Invalid icon", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -104,7 +104,7 @@ namespace Project.Views
             rw.writeToFile("../../Data/tags.json", MainWindow.tags);
 
             this.Close();
-            MessageBox.Show("You have successfully add new resource type.");
+            MessageBox.Show("You have successfully added a new tag.", "Added tag", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

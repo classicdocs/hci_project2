@@ -46,7 +46,8 @@ namespace Project.Views
                         ReadWrite rw = new ReadWrite();
                         rw.writeToFile("../../Data/tags.json", MainWindow.tags);
                         rw.writeToFile("../../Data/resources.json", MainWindow.resources);
-                        MessageBox.Show("You have successfully deleted tag called " + tag.Name);
+
+                        MessageBox.Show("You have successfully deleted tag called " + tag.Name, "Deleted tag", MessageBoxButton.OK, MessageBoxImage.Information);
 
                         break;
                     }

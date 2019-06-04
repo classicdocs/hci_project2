@@ -140,7 +140,8 @@ namespace Project.Views
 
             if (id.Equals("") || name.Equals("") || price.Equals("") || type == null)
             {
-                MessageBox.Show("You must fill all required fields");
+
+                MessageBox.Show("You must fill all required fields", "Missing fields", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -153,17 +154,17 @@ namespace Project.Views
                 {
                     if (r.Id == resource.Id)
                     {
-                        MessageBox.Show("Id you entered is already in use. Please choose another.");
+                        MessageBox.Show("Id you entered is already in use. Please choose another one.", "Invalid id", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     else if (r.Name == resource.Name)
                     {
-                        MessageBox.Show("Name you entered is already in use. Please choose another.");
+                        MessageBox.Show("Name you entered is already in use. Please choose another one.", "Invalid name", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     else if (r.Icon == resource.Icon && resource.Icon != rt.Icon)
                     {
-                        MessageBox.Show("Icon you choose is already in use. Please choose another.");
+                        MessageBox.Show("Icon you choose is already in use. Please choose another one.", "Invalid icon", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
@@ -186,7 +187,7 @@ namespace Project.Views
                 }
             }
             this.Close();
-            MessageBox.Show("You have successfully add new resource.");
+            MessageBox.Show("You have successfully added a new resource.", "Added resource", MessageBoxButton.OK, MessageBoxImage.Information);
         }
        
 

@@ -682,9 +682,8 @@ namespace Project
                     Image img = drawResource(resource, p, onPage);
                     Canvas.SetLeft(img, e.GetPosition(currentCanvas).X);
                     Canvas.SetTop(img, e.GetPosition(currentCanvas).Y);
-                    
 
-                    MessageBox.Show("You have successfully added new resource on map.");
+                    MessageBox.Show("You have successfully added a new resource on map..", "Added resource", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
@@ -744,7 +743,7 @@ namespace Project
                 }
                 catch (FormatException f)
                 {
-                    MessageBox.Show("Invalid input for maximum price!");
+                    MessageBox.Show("Invalid input for maximum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -757,7 +756,7 @@ namespace Project
                 }
                 catch (FormatException f)
                 {
-                    MessageBox.Show("Invalid input for minimum price!");
+                    MessageBox.Show("Invalid input for minimum price!", "Invalid input", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -829,7 +828,7 @@ namespace Project
         private void FilterSearch_Click(object sender, RoutedEventArgs e)
         {
             var s = new FilterSearch();
-            s.Show();
+            s.ShowDialog();
         }
 
 
