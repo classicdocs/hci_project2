@@ -94,7 +94,7 @@ namespace Project
             }
         }
 
-        public ObservableCollection<ResourceTypeWithResources> TypesSearchResult
+        public ObservableCollection<Resource> TypesSearchResult
         {
             get
             {
@@ -103,7 +103,20 @@ namespace Project
                     SearchText = "";
                 }
 
-                ObservableCollection<ResourceTypeWithResources> result = new ObservableCollection<ResourceTypeWithResources>();
+                SearchText.Trim();
+
+                if (SearchText.Equals(""))
+                {
+                    RowForSearch.Height = new GridLength(5);
+                }
+                else
+                {
+                    RowForSearch.Height = new GridLength(170);
+                }
+
+                
+
+                //ObservableCollection<ResourceTypeWithResources> result = new ObservableCollection<ResourceTypeWithResources>();
                 ObservableCollection<Resource> resources = new ObservableCollection<Resource>();
 
                 foreach (ResourceTypeWithResources r in types)
@@ -166,20 +179,20 @@ namespace Project
                         }
                     }
 
-                    ResourceTypeWithResources newr = new ResourceTypeWithResources();
+                    /*ResourceTypeWithResources newr = new ResourceTypeWithResources();
                     newr.Id = r.Id;
                     newr.Icon = r.Icon;
                     newr.Name = r.Name;
                     newr.Resources = resources;
-
-                    if (resources.Count > 0)
+                    */
+                    /*if (resources.Count > 0)
                     {
-                        result.Add(newr);
-                    }
+                        resources.Add(res);
+                    }*/
 
-                    resources = new ObservableCollection<Resource>();
+                    //resources = new ObservableCollection<Resource>();
                 }
-                return result;
+                return resources;
             }
         }
 
