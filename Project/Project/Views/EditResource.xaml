@@ -67,7 +67,7 @@
                 <TextBox Name="Price" MinWidth="250"  MaxWidth="250" MaxLength="10"  PreviewTextInput="NumberValidationTextBox"></TextBox>
             </StackPanel>
             <Label Grid.Row="9" Grid.Column="0">* Required fields</Label>
-            <Button Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
+            <Button Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click"  IsDefault="True">Submit</Button>
         </Grid>
     </ScrollViewer>
 </Window>

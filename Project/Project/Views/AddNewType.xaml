@@ -36,6 +36,6 @@
         <Label Grid.Row="3" Grid.Column="0" FontSize="{Binding font}">Description:</Label>
         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=description}" FontSize="{Binding font}"></TextBox>
         <Label Grid.Row="4" Grid.Column="0" FontSize="{Binding font}">* Required fields</Label>
-        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Submit_Click" FontSize="{Binding font}">Submit</Button>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Submit_Click"  IsDefault="True" FontSize="{Binding font}">Submit</Button>
     </Grid>
 </Window>
