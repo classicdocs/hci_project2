@@ -979,13 +979,14 @@ namespace Project
         {
             //System.Diagnostics.Process.Start("Resource/Documentation/Documentation.html");
             System.Diagnostics.Process.Start("C:/Temp/hci/Documentation/Documentation.html");
+        }
         private void EditResource_Click(object sender, RoutedEventArgs e)
         {
             EditResourceDemo d = new EditResourceDemo();
             d.ShowDialog();
         }
 
-        }
+        
 
         private void EditResourceType_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
