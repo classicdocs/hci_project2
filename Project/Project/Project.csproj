@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Views\DeleteResource.cs" />
     <Compile Include="Views\DeleteResourceType.cs" />
+    <Compile Include="Views\DeleteTag.cs" />
     <Compile Include="Views\EditResource.xaml.cs">
       <DependentUpon>EditResource.xaml</DependentUpon>
     </Compile>
@@ -87,6 +88,9 @@
     </Compile>
     <Compile Include="Views\EditResourceType.xaml.cs">
       <DependentUpon>EditResourceType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditTag.xaml.cs">
+      <DependentUpon>EditTag.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewAllResources.xaml.cs">
       <DependentUpon>ViewAllResources.xaml</DependentUpon>
@@ -136,6 +140,10 @@
     <Page Include="Views\EditResourceType.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ViewAllResources.xaml">
       <SubType>Designer</SubType>

@@ -35,6 +35,7 @@ namespace Project.Views
             Name.Text = rt.Name;
             FileName.Content = rt.Icon;
             Description.Text = rt.Description;
+            Icon.Source = new BitmapImage(new Uri(rt.Icon));
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
@@ -43,6 +44,7 @@ namespace Project.Views
             if (e.Key == Key.Escape)
                 Close();
         }
+        
 
         private string _fileName;
         public string fileName
@@ -74,6 +76,7 @@ namespace Project.Views
             if (res.HasValue == res.Value)
             {
                 fileName = fileDialog.FileName;
+                Icon.Source = new BitmapImage(new Uri(fileName));
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
