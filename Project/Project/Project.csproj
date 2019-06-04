@@ -69,6 +69,27 @@
     <Compile Include="Demos\AddNewTagDemo.xaml.cs">
       <DependentUpon>AddNewTagDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Demos\DeleteResourceDemo.xaml.cs">
+      <DependentUpon>DeleteResourceDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\DeleteResourceTypeDemo.xaml.cs">
+      <DependentUpon>DeleteResourceTypeDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\DragAndDrop.xaml.cs">
+      <DependentUpon>DragAndDrop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\EditResourceDemo.xaml.cs">
+      <DependentUpon>EditResourceDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\EditResourceTypeDemo.xaml.cs">
+      <DependentUpon>EditResourceTypeDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\SearchAndFilter.xaml.cs">
+      <DependentUpon>SearchAndFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\SearchTreeViewDemo.xaml.cs">
+      <DependentUpon>SearchTreeViewDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Demos\ViewAllResourcesDemo.xaml.cs">
       <DependentUpon>ViewAllResourcesDemo.xaml</DependentUpon>
     </Compile>
@@ -133,6 +154,34 @@
     <Page Include="Demos\AddNewTagDemo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\DeleteResourceDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\DeleteResourceTypeDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\DragAndDrop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\EditResourceDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\EditResourceTypeDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\SearchAndFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\SearchTreeViewDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Demos\ViewAllResourcesDemo.xaml">
       <Generator>MSBuild:Compile</Generator>

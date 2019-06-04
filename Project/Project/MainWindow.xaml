@@ -36,6 +36,13 @@
         <CommandBinding Command="demo:DemoCommands.ViewAllResources" CanExecute="ViewAllResourcesDemo_CanExecute" Executed="AllResourcesDemo_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.ViewAllTypes" CanExecute="ViewAllTypesDemo_CanExecute" Executed="AllTypesDemo_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.ViewAllTags" CanExecute="ViewAllTagsDemo_CanExecute" Executed="AllTagsDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.EditResource" CanExecute="EditResource_CanExecute" Executed="EditResource_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.EditResourceType" CanExecute="EditResourceType_CanExecute" Executed="EditResourceType_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.DeleteResource" CanExecute="DeleteResource_CanExecute" Executed="DeleteResource_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.DeleteResourceType" CanExecute="DeleteResourceType_CanExecute" Executed="DeleteResourceType_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.SearchTreeView" CanExecute="SearchTreeView_CanExecute" Executed="SearchTreeView_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.SearchAndFilter" CanExecute="SearchAndFilter_CanExecute" Executed="SearchAndFilter_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.DragAndDrop" CanExecute="DragAndDrop_CanExecute" Executed="DragAndDrop_Click"></CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="SmallIcon" TargetType="Image">
@@ -64,12 +71,23 @@
                 <MenuItem HorizontalAlignment="Right" Header="Help" FontSize="30">
                     <MenuItem Header="View demo for">
                         <MenuItem Header="Adding new resource" Command="demo:DemoCommands.AddNewResource"></MenuItem>
-                        <MenuItem Header="Adding new type" Command="demo:DemoCommands.AddNewType"></MenuItem>
+                        <MenuItem Header="Adding new resource type" Command="demo:DemoCommands.AddNewType"></MenuItem>
                         <MenuItem Header="Adding new tag" Command="demo:DemoCommands.AddNewTag"></MenuItem>
                         <Separator></Separator>
                         <MenuItem Header="Resources overview" Command="demo:DemoCommands.ViewAllResources"></MenuItem>
-                        <MenuItem Header="Types overview" Command="demo:DemoCommands.ViewAllTypes"></MenuItem>
+                        <MenuItem Header="Resource types overview" Command="demo:DemoCommands.ViewAllTypes"></MenuItem>
                         <MenuItem Header="Tags overview" Command="demo:DemoCommands.ViewAllTags"></MenuItem>
+                        <Separator></Separator>
+                        <MenuItem Header="Editting resource" Command="demo:DemoCommands.EditResource"></MenuItem>
+                        <MenuItem Header="Editting resource type" Command="demo:DemoCommands.EditResourceType"></MenuItem>
+                        <Separator></Separator>
+                        <MenuItem Header="Deleting resource" Command="demo:DemoCommands.DeleteResource"></MenuItem>
+                        <MenuItem Header="Deleting resource type" Command="demo:DemoCommands.DeleteResourceType"></MenuItem>
+                        <Separator></Separator>
+                        <MenuItem Header="Searching resources in tree view" Command="demo:DemoCommands.SearchTreeView"></MenuItem>
+                        <MenuItem Header="Searching and filtering resources" Command="demo:DemoCommands.SearchAndFilter"></MenuItem>
+                        <Separator></Separator>
+                        <MenuItem Header="Drag and drop" Command="demo:DemoCommands.DragAndDrop"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Documentation" Command="cmd:RoutedCommands.Documentation"></MenuItem>
                 </MenuItem>
