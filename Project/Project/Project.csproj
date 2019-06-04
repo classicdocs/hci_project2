@@ -75,11 +75,17 @@
     <Compile Include="Demos\DeleteResourceTypeDemo.xaml.cs">
       <DependentUpon>DeleteResourceTypeDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Demos\DragAndDrop.xaml.cs">
+      <DependentUpon>DragAndDrop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Demos\EditResourceDemo.xaml.cs">
       <DependentUpon>EditResourceDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demos\EditResourceTypeDemo.xaml.cs">
       <DependentUpon>EditResourceTypeDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\SearchAndFilter.xaml.cs">
+      <DependentUpon>SearchAndFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demos\SearchTreeViewDemo.xaml.cs">
       <DependentUpon>SearchTreeViewDemo.xaml</DependentUpon>
@@ -157,11 +163,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Demos\DragAndDrop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Demos\EditResourceDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Demos\EditResourceTypeDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\SearchAndFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,8 +320,10 @@
     <Content Include="Resource\Demos\AddNewType.webm" />
     <Content Include="Resource\Demos\DeleteResource.webm" />
     <Content Include="Resource\Demos\DeleteResourceType.webm" />
+    <Content Include="Resource\Demos\DragAndDrop.webm" />
     <Content Include="Resource\Demos\EditResource.webm" />
     <Content Include="Resource\Demos\EditResourceType.webm" />
+    <Content Include="Resource\Demos\SearchAndFilter.webm" />
     <Content Include="Resource\Demos\SearchTreeView.webm" />
     <Content Include="Resource\Demos\ViewAllMinerals.webm" />
     <Content Include="Resource\Demos\ViewAllResources.webm" />

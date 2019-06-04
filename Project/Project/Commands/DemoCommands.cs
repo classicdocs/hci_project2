@@ -108,5 +108,23 @@ namespace Project.Commands
                  new KeyGesture(Key.F11,  ModifierKeys.Control ),
            }
            );
+        public static readonly RoutedUICommand SearchAndFilter = new RoutedUICommand(
+           "Search and filter",
+           "SearchAndFilter",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F12,  ModifierKeys.Control ),
+           }
+           );
+        public static readonly RoutedUICommand DragAndDrop = new RoutedUICommand(
+           "Drag and drop",
+           "DragAndDrop",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F1,  ModifierKeys.Control | ModifierKeys.Alt),
+           }
+           );
     }
 }

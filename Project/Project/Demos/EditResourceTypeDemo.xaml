@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         ResizeMode="NoResize"
-        Title="EditResourceTypeDemo" Height="300" Width="300">
+        Title="Edit resource type demo" Height="300" Width="300">
     <Grid>
         <MediaElement Source="C:\Temp\hci\Demos\EditResourceType.webm" LoadedBehavior="Manual" Name="mePlayer" MediaEnded="mePlayer_MediaEnded"  />
 

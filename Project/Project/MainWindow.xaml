@@ -35,12 +35,13 @@
         <CommandBinding Command="demo:DemoCommands.ViewAllResources" CanExecute="ViewAllResourcesDemo_CanExecute" Executed="AllResourcesDemo_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.ViewAllTypes" CanExecute="ViewAllTypesDemo_CanExecute" Executed="AllTypesDemo_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.ViewAllTags" CanExecute="ViewAllTagsDemo_CanExecute" Executed="AllTagsDemo_Click"></CommandBinding>
-
         <CommandBinding Command="demo:DemoCommands.EditResource" CanExecute="EditResource_CanExecute" Executed="EditResource_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.EditResourceType" CanExecute="EditResourceType_CanExecute" Executed="EditResourceType_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.DeleteResource" CanExecute="DeleteResource_CanExecute" Executed="DeleteResource_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.DeleteResourceType" CanExecute="DeleteResourceType_CanExecute" Executed="DeleteResourceType_Click"></CommandBinding>
         <CommandBinding Command="demo:DemoCommands.SearchTreeView" CanExecute="SearchTreeView_CanExecute" Executed="SearchTreeView_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.SearchAndFilter" CanExecute="SearchAndFilter_CanExecute" Executed="SearchAndFilter_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.DragAndDrop" CanExecute="DragAndDrop_CanExecute" Executed="DragAndDrop_Click"></CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="SmallIcon" TargetType="Image">
@@ -83,6 +84,9 @@
                         <MenuItem Header="Deleting resource type" Command="demo:DemoCommands.DeleteResourceType"></MenuItem>
                         <Separator></Separator>
                         <MenuItem Header="Searching resources in tree view" Command="demo:DemoCommands.SearchTreeView"></MenuItem>
+                        <MenuItem Header="Searching and filtering resources" Command="demo:DemoCommands.SearchAndFilter"></MenuItem>
+                        <Separator></Separator>
+                        <MenuItem Header="Drag and drop" Command="demo:DemoCommands.DragAndDrop"></MenuItem>
                     </MenuItem>
                 </MenuItem>
                 <Button x:Name="searchMapBtn" Content="Search map" Width="auto"  BorderThickness="0"   FontSize="30" Command="cmd:RoutedCommands.Search">

@@ -1021,6 +1021,26 @@ namespace Project
             d.ShowDialog();
         }
 
+        private void SearchAndFilter_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void SearchAndFilter_Click(object sender, RoutedEventArgs e)
+        {
+            SearchAndFilter d = new SearchAndFilter();
+            d.ShowDialog();
+        }
+        private void DragAndDrop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void DragAndDrop_Click(object sender, RoutedEventArgs e)
+        {
+            DragAndDrop d = new DragAndDrop();
+            d.ShowDialog();
+        }
 
 
 
