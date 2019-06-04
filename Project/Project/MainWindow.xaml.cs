@@ -779,11 +779,20 @@ namespace Project
             FilterOn = false;
             OnPropertyChanged("TypesSearchResult");
         }
+        private void search_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
         private void SearchMap_Click(object sender, RoutedEventArgs e)
         {
             var s = new SearchMap();
             s.ShowDialog();
+        }
+
+        private void clear_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
         private void closeSearch(object sender, RoutedEventArgs e)
@@ -827,6 +836,11 @@ namespace Project
             ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = true;
         }
 
+        private void filter_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void FilterSearch_Click(object sender, RoutedEventArgs e)
         {
             var s = new FilterSearch();
@@ -846,21 +860,41 @@ namespace Project
             }
         }
 
-
-
+        private void mapOne_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
         private void mapOne_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 0;
         }
+
+        private void mapTwo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void mapTwo_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 1;
         }
+
+        private void mapThree_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void mapThree_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 2;
         }
+
+        private void mapFour_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
         private void mapFour_Click(object sender, RoutedEventArgs e)
         {
             Tab.SelectedIndex = 3;
