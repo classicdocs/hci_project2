@@ -69,6 +69,21 @@
     <Compile Include="Demos\AddNewTagDemo.xaml.cs">
       <DependentUpon>AddNewTagDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Demos\DeleteResourceDemo.xaml.cs">
+      <DependentUpon>DeleteResourceDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\DeleteResourceTypeDemo.xaml.cs">
+      <DependentUpon>DeleteResourceTypeDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\EditResourceDemo.xaml.cs">
+      <DependentUpon>EditResourceDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\EditResourceTypeDemo.xaml.cs">
+      <DependentUpon>EditResourceTypeDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\SearchTreeViewDemo.xaml.cs">
+      <DependentUpon>SearchTreeViewDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Demos\ViewAllResourcesDemo.xaml.cs">
       <DependentUpon>ViewAllResourcesDemo.xaml</DependentUpon>
     </Compile>
@@ -133,6 +148,26 @@
     <Page Include="Demos\AddNewTagDemo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\DeleteResourceDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\DeleteResourceTypeDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\EditResourceDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\EditResourceTypeDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\SearchTreeViewDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Demos\ViewAllResourcesDemo.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -254,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Resource\Demos\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Icons\icons8-copper-bars-48.png" />
@@ -267,6 +301,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\filter.png" />
+    <Content Include="Resource\Demos\AddNewResource.webm" />
+    <Content Include="Resource\Demos\AddNewTag.webm" />
+    <Content Include="Resource\Demos\AddNewType.webm" />
+    <Content Include="Resource\Demos\DeleteResource.webm" />
+    <Content Include="Resource\Demos\DeleteResourceType.webm" />
+    <Content Include="Resource\Demos\EditResource.webm" />
+    <Content Include="Resource\Demos\EditResourceType.webm" />
+    <Content Include="Resource\Demos\SearchTreeView.webm" />
+    <Content Include="Resource\Demos\ViewAllMinerals.webm" />
+    <Content Include="Resource\Demos\ViewAllResources.webm" />
+    <Content Include="Resource\Demos\ViewAllTags.webm" />
     <Content Include="Resource\map.svg" />
     <Resource Include="Resource\search.png" />
     <Resource Include="Resource\world-map.png" />

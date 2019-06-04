@@ -63,5 +63,50 @@ namespace Project.Commands
                  new KeyGesture(Key.F6,  ModifierKeys.Control ),
             }
             );
+        public static readonly RoutedUICommand EditResource = new RoutedUICommand(
+           "Edit resource",
+           "Edit resource",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F7,  ModifierKeys.Control ),
+           }
+           );
+        public static readonly RoutedUICommand EditResourceType = new RoutedUICommand(
+           "Edit resource type",
+           "EditResourceType",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F8,  ModifierKeys.Control ),
+           }
+           );
+        public static readonly RoutedUICommand DeleteResource = new RoutedUICommand(
+           "Delete resource",
+           "DeleteResource",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F9,  ModifierKeys.Control ),
+           }
+           );
+        public static readonly RoutedUICommand DeleteResourceType = new RoutedUICommand(
+           "Delete resource type",
+           "DeleteResourceType",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F10,  ModifierKeys.Control ),
+           }
+           );
+        public static readonly RoutedUICommand SearchTreeView = new RoutedUICommand(
+           "Search tree view",
+           "SearchTreeView",
+           typeof(RoutedCommands),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.F11,  ModifierKeys.Control ),
+           }
+           );
     }
 }

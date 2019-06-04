@@ -1,4 +1,5 @@
 ﻿using Project.Commands;
+using Project.Demos;
 using Project.Models;
 using Project.Views;
 using System;
@@ -936,7 +937,7 @@ namespace Project
 
         private void NewResourceDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = AddNewResourceEnabled;
+            e.CanExecute = true;
         }
 
         private void NewResourceDemo_Click(object sender, RoutedEventArgs e)
@@ -964,6 +965,62 @@ namespace Project
             AddNewTagDemo d = new AddNewTagDemo();
             d.ShowDialog();
         }
+
+        private void EditResource_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void EditResource_Click(object sender, RoutedEventArgs e)
+        {
+            EditResourceDemo d = new EditResourceDemo();
+            d.ShowDialog();
+        }
+
+        private void EditResourceType_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void EditResourceType_Click(object sender, RoutedEventArgs e)
+        {
+            EditResourceTypeDemo d = new EditResourceTypeDemo();
+            d.ShowDialog();
+        }
+
+        private void DeleteResource_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void DeleteResource_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteResourceDemo d = new DeleteResourceDemo();
+            d.ShowDialog();
+        }
+
+        private void DeleteResourceType_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void DeleteResourceType_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteResourceTypeDemo d = new DeleteResourceTypeDemo();
+            d.ShowDialog();
+        }
+
+        private void SearchTreeView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void SearchTreeView_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTreeViewDemo d = new SearchTreeViewDemo();
+            d.ShowDialog();
+        }
+
 
 
 
