@@ -316,16 +316,6 @@ namespace Project
             s.ShowDialog();
         }
 
-        private void Demo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Demo_Click(object sender, RoutedEventArgs e)
-        {
-            Demo dialog = new Demo();
-            dialog.ShowDialog();
-        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -854,6 +844,71 @@ namespace Project
                     //this.closeSearch(null, null);
                 }
             }
+        }
+
+        private void ViewAllResourcesDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void AllResourcesDemo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAllResourcesDemo dialog = new ViewAllResourcesDemo();
+            dialog.ShowDialog();
+        }
+
+        private void ViewAllTypesDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+            
+        }
+
+        private void AllTypesDemo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAllTypesDemo dialog = new ViewAllTypesDemo();
+            dialog.ShowDialog();
+        }
+
+        private void ViewAllTagsDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void AllTagsDemo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewAllTagsDemo dialog = new ViewAllTagsDemo();
+            dialog.ShowDialog();
+        }
+
+        private void NewResourceDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = AddNewResourceEnabled;
+        }
+
+        private void NewResourceDemo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewResourceDemo d = new AddNewResourceDemo();
+            d.ShowDialog();
+        }
+        private void NewTypeDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void NewTypeDemo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewTypeDemo d = new AddNewTypeDemo();
+            d.ShowDialog();
+        }
+        private void NewTagDemo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void NewTagDemo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewTagDemo d = new AddNewTagDemo();
+            d.ShowDialog();
         }
 
     }

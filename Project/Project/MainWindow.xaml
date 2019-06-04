@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Models"
         xmlns:cmd="clr-namespace:Project.Commands"
-
+        xmlns:demo="clr-namespace:Project.Commands"
         mc:Ignorable="d"
         Title="Managing the evidence of the map of world resources" WindowState="Maximized" 
         MinHeight="800"
@@ -19,7 +19,13 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewAllResources" CanExecute="ViewAllResources_CanExecute" Executed="AllResources_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTypes" CanExecute="ViewAllTypes_CanExecute" Executed="AllTypes_Click"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewAllTags" CanExecute="ViewAllTags_CanExecute" Executed="AllTags_Click"></CommandBinding>
-        <CommandBinding Command="cmd:RoutedCommands.Demo" CanExecute="Demo_CanExecute" Executed="Demo_Click"></CommandBinding>
+
+        <CommandBinding Command="demo:DemoCommands.AddNewResource" CanExecute="NewResourceDemo_CanExecute" Executed="NewResourceDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.AddNewType" CanExecute="NewTypeDemo_CanExecute"  Executed="NewTypeDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.AddNewTag" CanExecute="NewTagDemo_CanExecute" Executed="NewTagDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.ViewAllResources" CanExecute="ViewAllResourcesDemo_CanExecute" Executed="AllResourcesDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.ViewAllTypes" CanExecute="ViewAllTypesDemo_CanExecute" Executed="AllTypesDemo_Click"></CommandBinding>
+        <CommandBinding Command="demo:DemoCommands.ViewAllTags" CanExecute="ViewAllTagsDemo_CanExecute" Executed="AllTagsDemo_Click"></CommandBinding>
     </Window.CommandBindings>
     <Window.Resources>
         <Style x:Key="SmallIcon" TargetType="Image">
@@ -46,7 +52,14 @@
                     <MenuItem Header="New tag" Command="cmd:RoutedCommands.AddNewTag"></MenuItem>
                 </MenuItem>
                 <MenuItem HorizontalAlignment="Right" Header="Help" FontSize="30">
-                    <MenuItem Header="View demo" Command="cmd:RoutedCommands.Demo"></MenuItem>
+                    <MenuItem Header="View demo for">
+                        <MenuItem Header="Adding new resource" Command="demo:DemoCommands.AddNewResource"></MenuItem>
+                        <MenuItem Header="Adding new type" Command="demo:DemoCommands.AddNewType"></MenuItem>
+                        <MenuItem Header="Adding new tag" Command="demo:DemoCommands.AddNewTag"></MenuItem>
+                        <MenuItem Header="Resources overview" Command="demo:DemoCommands.ViewAllResources"></MenuItem>
+                        <MenuItem Header="Types overview" Command="demo:DemoCommands.ViewAllTypes"></MenuItem>
+                        <MenuItem Header="Tags overview" Command="demo:DemoCommands.ViewAllTags"></MenuItem>
+                    </MenuItem>
                 </MenuItem>
                 <Button x:Name="searchMapBtn" Content="Search map" Width="auto" Click="SearchMap_Click" BorderThickness="0"   FontSize="30"/>
                 <Button x:Name="filterSearch" Content="Filter search" Width="auto" Click="FilterSearch_Click" Visibility="Hidden" BorderThickness="0"   FontSize="30"/>

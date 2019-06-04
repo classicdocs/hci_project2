@@ -18,13 +18,11 @@ namespace Project.Views
     /// <summary>
     /// Interaction logic for Demo.xaml
     /// </summary>
-    public partial class Demo : Window
+    public partial class ViewAllTagsDemo : Window
     {
-        public bool play { get; set; }
 
-        public Demo()
+        public ViewAllTagsDemo()
         {
-            play = true;
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             MessageBox.Show("To exit demo mode press Esc or click on Exit button");
