@@ -58,6 +58,8 @@ namespace Project
 
         private string minPrice;
 
+        private bool FilterOn { get; set; }
+
         private string maxPrice;
 
         public string SearchText
@@ -105,18 +107,16 @@ namespace Project
 
                 SearchText.Trim();
 
-                if (SearchText.Equals(""))
+                if (SearchText.Equals("") && !FilterOn)
                 {
                     RowForSearch.Height = new GridLength(5);
                 }
                 else
                 {
                     RowForSearch.Height = new GridLength(170);
+                    SearchText.Trim();
                 }
-
-                
-
-                //ObservableCollection<ResourceTypeWithResources> result = new ObservableCollection<ResourceTypeWithResources>();
+                                                                           
                 ObservableCollection<Resource> resources = new ObservableCollection<Resource>();
 
                 foreach (ResourceTypeWithResources r in types)
@@ -749,6 +749,8 @@ namespace Project
                 }
             }
 
+            FilterOn = true;
+
             OnPropertyChanged("TypesSearchResult");
         }
 
@@ -759,6 +761,8 @@ namespace Project
             cmbRenewable.SelectedItem = null;
             MinPrice = null;
             MaxPrice = null;
+            SearchText = null;
+            FilterOn = false;
             OnPropertyChanged("TypesSearchResult");
         }
     }
