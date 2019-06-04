@@ -731,6 +731,7 @@ namespace Project
             ShowSearch.Visibility = Visibility.Visible;
             HideSearch.Visibility = Visibility.Hidden;
             RowForFilter.Height = new GridLength(5);
+            RemoveFilters(sender, e);
         }
 
         private void DoFilter(object sender, RoutedEventArgs e)
@@ -773,7 +774,7 @@ namespace Project
             cmbRenewable.SelectedItem = null;
             MinPrice = null;
             MaxPrice = null;
-            SearchText = null;
+            //SearchText = null;
             FilterOn = false;
             OnPropertyChanged("TypesSearchResult");
         }
