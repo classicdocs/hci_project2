@@ -793,7 +793,7 @@ namespace Project
         private void SearchMap_Click(object sender, RoutedEventArgs e)
         {
             var s = new SearchMap();
-            s.Show();
+            s.ShowDialog();
         }
 
         private void closeSearch(object sender, RoutedEventArgs e)
