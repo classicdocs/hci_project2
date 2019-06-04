@@ -316,6 +316,17 @@ namespace Project
             s.ShowDialog();
         }
 
+        private void Demo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void Demo_Click(object sender, RoutedEventArgs e)
+        {
+            Demo dialog = new Demo();
+            dialog.ShowDialog();
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name = null)
@@ -782,7 +793,7 @@ namespace Project
         private void SearchMap_Click(object sender, RoutedEventArgs e)
         {
             var s = new SearchMap();
-            s.Show();
+            s.ShowDialog();
         }
 
         private void closeSearch(object sender, RoutedEventArgs e)
