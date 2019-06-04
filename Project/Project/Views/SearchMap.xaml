@@ -31,7 +31,8 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Label Name="resources_label" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Choose resource</Label>
-            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=resources}" Name="cmbResources" VerticalAlignment="Center">
+            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=resources}" Name="cmbResources" VerticalAlignment="Center"
+                      SelectionChanged="resources_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"/>
@@ -39,7 +40,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-                <Button IsDefault="True" Name="EnterSearch" Click="EnterSearch_Click" MinWidth="60" Margin="0,0,10,0">_Search</Button>
+                <Button IsDefault="True" Name="EnterSearch" Click="EnterSearch_Click" MinWidth="60" Margin="0,0,10,0" IsEnabled="False">_Search</Button>
             </WrapPanel>
         </Grid>
     </Grid>

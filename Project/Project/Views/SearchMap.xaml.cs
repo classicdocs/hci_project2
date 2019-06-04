@@ -117,58 +117,66 @@ namespace Project.Views
                 }
             }
 
-            foreach (ResourcePoint rp in MainWindow.resources)
+            //foreach (ResourcePoint rp in MainWindow.resources)
+            //{
+            //    //if (!resourcePointsToShow.Contains(rp))
+            //    //{
+            //        //Canvas canvas = MainWindow.getCanvas();
+            //        List<Canvas> canvases = MainWindow.getAllCanvases();
+            //        //switch (rp.OnPage)
+            //        //{
+            //        //    case 
+            //        //    PageEnum.First: 
+            //        //        {
+            //        //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv;
+            //        //            break;
+            //        //        }
+            //        //    case
+            //        //    PageEnum.Second:
+            //        //        {
+            //        //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv2;
+            //        //            break;
+            //        //        }
+            //        //    case
+            //        //    PageEnum.Third:
+            //        //        {
+            //        //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv3;
+            //        //            break;
+            //        //        }
+            //        //    case
+            //        //    PageEnum.Fourth:
+            //        //        {
+            //        //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv4;
+            //        //            break;
+            //        //        }
+            //        //}
+
+            //        foreach (Canvas canvas in canvases)
+            //        {
+            //            var element = canvas.InputHitTest(rp.point) as UIElement;
+            //            UIElement parent;
+            //            while (element != null &&
+            //            (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+            //            {
+            //                element = parent;
+            //            }
+
+            //            if (element != null)
+            //            {
+            //                canvas.Children.Remove(element);
+            //            }
+            //        }
+            //    //}
+            //}
+            MainWindow.removeAllResources();
+
+
+            foreach(ResourcePoint rp in resourcePointsToShow)
             {
-                if (!resourcePointsToShow.Contains(rp))
-                {
-                    //Canvas canvas = MainWindow.getCanvas();
-                    List<Canvas> canvases = MainWindow.getAllCanvases();
-                    //switch (rp.OnPage)
-                    //{
-                    //    case 
-                    //    PageEnum.First: 
-                    //        {
-                    //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv;
-                    //            break;
-                    //        }
-                    //    case
-                    //    PageEnum.Second:
-                    //        {
-                    //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv2;
-                    //            break;
-                    //        }
-                    //    case
-                    //    PageEnum.Third:
-                    //        {
-                    //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv3;
-                    //            break;
-                    //        }
-                    //    case
-                    //    PageEnum.Fourth:
-                    //        {
-                    //            canvas = ((MainWindow)Application.Current.MainWindow).Cnv4;
-                    //            break;
-                    //        }
-                    //}
-
-
-                    foreach (Canvas canvas in canvases)
-                    {
-                        var element = canvas.InputHitTest(rp.point) as UIElement;
-                        UIElement parent;
-                        while (element != null &&
-                        (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
-                        {
-                            element = parent;
-                        }
-
-                        if (element != null)
-                        {
-                            canvas.Children.Remove(element);
-                        }
-                    }
-                }
+                MainWindow.drawOneResource(rp);
             }
+
+
             MainWindow.searchIsActive = true;
             MainWindow.showCloseBtn();
             MainWindow.searchShownResources = resourcePointsToShow;
@@ -189,6 +197,16 @@ namespace Project.Views
                 ResourceTypeWithResources rtwr = (ResourceTypeWithResources)e.AddedItems[0];
                 resources = rtwr.Resources;
                 cmbResources.ItemsSource = resources;
+                EnterSearch.IsEnabled = true;
+            }
+        }
+
+        
+        private void resources_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                EnterSearch.IsEnabled = true;
             }
         }
     }
