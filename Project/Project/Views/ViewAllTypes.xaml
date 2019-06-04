@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="View all types" Height="300" Width="300">
+        Title="View all types"
+        WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="1400"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        FontSize="40"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -28,7 +35,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Icon}" Width="20" Height="20"></Image>
+                            <Image Source="{Binding Icon}" Width="40" Height="40"></Image>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
