@@ -103,7 +103,7 @@ namespace Project.Views
 
             if (Id.Text.Equals("") || Name.Text.Equals("") || icon.Equals(""))
             {
-                MessageBox.Show("You must fill all required fields");
+                MessageBox.Show("You must fill all required fields", "Missing fields", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -113,17 +113,17 @@ namespace Project.Views
                 {
                     if (res.Id.Equals(Id.Text) && !Id.Text.Equals(res.Id))
                     {
-                        MessageBox.Show("Id you entered is already in use. Please choose another.");
+                        MessageBox.Show("Id you entered is already in use. Please choose another.", "Invalid id", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     else if (res.Name.Equals(Name.Text) && !Name.Text.Equals(res.Name))
                     {
-                        MessageBox.Show("Name you entered is already in use. Please choose another.");
+                        MessageBox.Show("Name you entered is already in use. Please choose another one.", "Invalid name", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     else if (res.Icon.Equals(Icon.Source) && !Icon.Source.Equals(res.Icon))
                     {
-                        MessageBox.Show("Icon you choose is already in use. Please choose another.");
+                        MessageBox.Show("Icon you choose is already in use. Please choose another one.", "Invalid icon", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
@@ -226,7 +226,7 @@ namespace Project.Views
             rw.writeToFile("../../Data/types.json", MainWindow.types);
             rw.writeToFile("../../Data/resources.json", MainWindow.resources);
             this.Close();
-            MessageBox.Show("You have successfully edited resource");
+            MessageBox.Show("You have successfully edited resource", "Successfull edit", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ChooseIcon_Click(object sender, RoutedEventArgs e)

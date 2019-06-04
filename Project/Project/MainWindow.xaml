@@ -51,6 +51,11 @@
                 <Button x:Name="searchMapBtn" Content="Search map" Width="auto" Click="SearchMap_Click" BorderThickness="0"   FontSize="30"/>
                 <Button x:Name="filterSearch" Content="Filter search" Width="auto" Click="FilterSearch_Click" Visibility="Hidden" BorderThickness="0"   FontSize="30"/>
                 <Button x:Name="closeSearchBtn" IsHitTestVisible="False" HorizontalAlignment="Right" Content="Revert search" Width="auto" Click="closeSearch" Visibility="Hidden" BorderThickness="0"   FontSize="30"/>
+
+                <Button Name="map_one" Click="mapOne_Click" BorderThickness="0"   FontSize="30">Map 1</Button>
+                <Button Name="map_two" Click="mapTwo_Click" BorderThickness="0"   FontSize="30">Map 2</Button>
+                <Button Name="map_three" Click="mapThree_Click" BorderThickness="0"   FontSize="30">Map 3</Button>
+                <Button Name="map_four" Click="mapFour_Click" BorderThickness="0"   FontSize="30">Map 4</Button>
             </Menu>
             <Grid DockPanel.Dock="Bottom">
                 <Grid.RowDefinitions>
@@ -281,29 +286,29 @@
                     <ScrollViewer  Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Viewbox Stretch="Fill">
                         <TabControl TabStripPlacement="Bottom" Name="Tab" FontSize="30" SelectionChanged="TabControl_SelectionChanged">
-                            
-                            <TabItem x:Name ="First" Header="First Map" FontSize="30">
-                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+
+                            <TabItem x:Name ="First" Header="First Map" FontSize="30"  Visibility="Hidden">
+                                <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                         <Canvas.Background>
                                             <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Second" Header="Second Map" FontSize="30">
-                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Second" Header="Second Map" FontSize="30"  Visibility="Hidden">
+                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Third" Header="Third Map" FontSize="30">
-                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
+                            <TabItem x:Name ="Third" Header="Third Map" FontSize="30" Visibility="Hidden">
+                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
                                 </Canvas>
                             </TabItem>
-                            <TabItem x:Name ="Fourth" Header="Fourth Map" FontSize="30">
+                            <TabItem x:Name ="Fourth" Header="Fourth Map" FontSize="30"  Visibility="Hidden">
                                 <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="1500" Height="1500">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>

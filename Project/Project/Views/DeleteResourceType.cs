@@ -56,8 +56,8 @@ namespace Project.Views
                             ReadWrite rw = new ReadWrite();
                             rw.writeToFile("../../Data/types.json", MainWindow.types);
                             rw.writeToFile("../../Data/resources.json", MainWindow.resources);
-                            
-                            MessageBox.Show("You have successfully deleted resource type called " + resourceType.Name + "!");
+                            MessageBox.Show("You have successfully deleted resource type called " + resourceType.Name + "!", "Deleted type", MessageBoxButton.OK, MessageBoxImage.Information);
+
                         }
                         break;
                     }
