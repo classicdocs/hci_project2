@@ -77,7 +77,7 @@ namespace Project.Views
             {
                 /*Ukoliko nije nista izabrao*/
                 MessageBox.Show("There were no search parameters, so there are no changes on map.", "No parameters", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                return;
             }
             else if (selectedType != null && selectedResource == null)
             {

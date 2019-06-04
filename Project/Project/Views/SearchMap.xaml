@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
         Title="SearchMap" Height="300" Width="300" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resource/search.png">
     <Grid>
         <Grid Margin="15">
             <Grid.ColumnDefinitions>

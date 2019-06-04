@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="FilterSearch" Height="300" Width="300">
+        Title="FilterSearch" Height="300" Width="300"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resource/filter.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />

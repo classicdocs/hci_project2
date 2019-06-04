@@ -26,6 +26,7 @@
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="FontSize" Value="20"/>
         </Style>
+        
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -280,7 +281,7 @@
                                             <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>
                                 </Canvas>
-                                    </TabItem>
+                            </TabItem>
                             <TabItem x:Name ="Second" Header="Second Map" FontSize="30">
                                 <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="500" Height="500">
                                     <Canvas.Background>
