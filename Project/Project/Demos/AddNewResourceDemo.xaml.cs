@@ -25,7 +25,7 @@ namespace Project.Views
         {
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            MessageBox.Show("To exit demo mode press Esc or click on Exit button");
+            MessageBox.Show("To exit demo mode press Esc or click on Exit button", "Demo for adding new resource");
             mePlayer.Play();
         }
 
