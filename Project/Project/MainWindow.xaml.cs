@@ -28,7 +28,11 @@ namespace Project
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public static ObservableCollection<ResourceTypeWithResources> types { get; set; }
-       
+
+        public static ObservableCollection<ResourcePoint> searchShownResources { get; set; }
+        public static bool searchIsActive { get; set; }
+
+
         private bool _enable;
         public bool AddNewResourceEnabled
         {
@@ -684,6 +688,16 @@ namespace Project
                 }
             }
         }
+        public static List<Canvas> getAllCanvases()
+        {
+            List<Canvas> canvases = new List<Canvas>();
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv2);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv3);
+            canvases.Add(((MainWindow)Application.Current.MainWindow).Cnv4);
+            return canvases;
+
+        }
 
         private void Cnv_DragEnter(object sender, DragEventArgs e)
         {
@@ -764,6 +778,71 @@ namespace Project
             FilterOn = false;
             OnPropertyChanged("TypesSearchResult");
         }
+
+        private void SearchMap_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new SearchMap();
+            s.Show();
+        }
+
+        private void closeSearch(object sender, RoutedEventArgs e)
+        {
+            
+            if (searchShownResources != null)
+            {
+                foreach (ResourcePoint rp in searchShownResources)
+                {
+                    Canvas canvas = getCanvas();
+                    var element = canvas.InputHitTest(rp.point) as UIElement;
+                    UIElement parent;
+                    while (element != null &&
+                    (parent = VisualTreeHelper.GetParent(element) as UIElement) != canvas)
+                    {
+                        element = parent;
+                    }
+
+                    if (element != null)
+                    {
+                        canvas.Children.Remove(element);
+                    }
+                }
+
+
+                MessageBox.Show("Your search results have been removed. All resources are now on the map", "Reverted search", MessageBoxButton.OK, MessageBoxImage.Information);
+                ((MainWindow)Application.Current.MainWindow).filterSearch.Visibility = Visibility.Hidden;
+                ((MainWindow)Application.Current.MainWindow).closeSearchBtn.Visibility = Visibility.Hidden;
+                ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = false;
+                searchIsActive = false;
+                LoadData();
+            }
+
+        }
+
+        public static void showCloseBtn()
+        {
+            ((MainWindow)Application.Current.MainWindow).filterSearch.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).closeSearchBtn.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).closeSearchBtn.IsHitTestVisible = true;
+        }
+
+        private void FilterSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new FilterSearch();
+            s.Show();
+        }
+
+
+        void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.Source is TabControl)
+            {
+                if (searchIsActive)
+                {
+                    this.closeSearch(null, null);
+                }
+            }
+        }
+
     }
 
 }

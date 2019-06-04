@@ -89,6 +89,12 @@
     <Compile Include="Views\EditResourceType.xaml.cs">
       <DependentUpon>EditResourceType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FilterMap.xaml.cs">
+      <DependentUpon>FilterMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchMap.xaml.cs">
+      <DependentUpon>SearchMap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditTag.xaml.cs">
       <DependentUpon>EditTag.xaml</DependentUpon>
     </Compile>
@@ -140,6 +146,14 @@
     <Page Include="Views\EditResourceType.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FilterMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditTag.xaml">
       <SubType>Designer</SubType>
@@ -208,7 +222,9 @@
     <Resource Include="Resource\Icons\ecological.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\filter.png" />
     <Content Include="Resource\map.svg" />
+    <Resource Include="Resource\search.png" />
     <Resource Include="Resource\world-map.png" />
     <Resource Include="Resource\world.png" />
   </ItemGroup>
