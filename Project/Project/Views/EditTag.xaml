@@ -24,18 +24,16 @@
         <Label Grid.Row="1" Grid.Column="0" >*Name:</Label>
         <TextBox Grid.Row="1" Grid.Column="1" Name="Name" ></TextBox>
         <Label Grid.Row="2" Grid.Column="0" >*Color:</Label>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <ComboBox Name="cmbColors" >
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2"/>
-                            <TextBlock Text="{Binding Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </StackPanel>
+        <ComboBox Grid.Row="2" Grid.Column="1" Name="cmbColors" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2"/>
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <Label Grid.Row="3" Grid.Column="0" >Description:</Label>
         <TextBox Grid.Row="3" Grid.Column="1" Name="Description" ></TextBox>
         <Label Grid.Row="4" Grid.Column="0" >* Required fields</Label>
