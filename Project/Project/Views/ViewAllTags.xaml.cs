@@ -111,5 +111,20 @@ namespace Project.Views
             this.cmbColors.SelectedItem = null;
             OnPropertyChanged("allTagsSearchResult");
         }
+
+        private void Edit_Clicked(object sender, RoutedEventArgs e)
+        {
+            Tag tag = (Tag)((Button)sender).Tag;
+            EditTag dialog = new EditTag(tag);
+            dialog.ShowDialog();
+            OnPropertyChanged("allTagsSearchResult");
+        }
+
+        private void Delete_Clicked(object sender, RoutedEventArgs e)
+        {
+            Tag tag = (Tag)((Button)sender).Tag;
+            DeleteTag dialog = new DeleteTag(tag);
+            OnPropertyChanged("allTagsSearchResult");
+        }
     }
 }

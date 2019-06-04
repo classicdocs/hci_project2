@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="View all tags" Height="300" Width="500">
+        Title="View all tags"
+        WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="1400"
+        WindowStyle="ToolWindow"
+        FontSize="40"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"></RowDefinition>
@@ -17,15 +23,15 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.15*"></ColumnDefinition>
-                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="0.18*"></ColumnDefinition>
                 <ColumnDefinition Width="0.3*"></ColumnDefinition>
                 <ColumnDefinition Width="0.4*"></ColumnDefinition>
                 <ColumnDefinition Width="0.4*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0">Search:</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,8"/>
-            <Label Grid.Row="0" Grid.Column="2">Search by color:</Label>
-            <ComboBox Grid.Row="0" Margin="0,4,10,7" Grid.Column="3" Name="cmbColors" SelectionChanged="tagsList_SelectionChanged">
+            <Label Grid.Row="0" Grid.Column="0"  Margin="0,10,0,8">Search:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,8" Height="50" Width="150"/>
+            <Label Grid.Row="0" Grid.Column="2" Margin="0,10,0,8">Search by color:</Label>
+            <ComboBox Grid.Row="0" Margin="0,4,10,7" Grid.Column="3" Name="cmbColors" SelectionChanged="tagsList_SelectionChanged" Height="50">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -35,7 +41,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Grid.Row="0" Margin="12,7,12,7" Grid.Column="4" Click="Clear_Color">Clear color</Button>
+            <Button Grid.Row="0" Margin="12,7,12,7" Grid.Column="4" Click="Clear_Color" Height="50">Clear color</Button>
         </Grid>
         <DataGrid Grid.Row="2" Grid.Column="0" x:Name="dgrMain" ItemsSource="{Binding Path=allTagsSearchResult}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
             <DataGrid.Columns>
@@ -52,14 +58,14 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>Edit</Button>
+                            <Button Click="Edit_Clicked" Tag="{Binding}">Edit</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>Delete</Button>
+                            <Button Click="Delete_Clicked" Tag="{Binding}">Delete</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

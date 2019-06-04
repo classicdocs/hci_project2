@@ -5,32 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         mc:Ignorable="d"
-        Title="Edit resource type" Height="300" Width="300">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0">*Id:</Label>
-        <TextBox Grid.Row="0" Grid.Column="1"  Name="Id"></TextBox>
-        <Label Grid.Row="1" Grid.Column="0">*Name:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1"  Name="Name"></TextBox>
-        <Label Grid.Row="2" Grid.Column="0">*Icon:</Label>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <Button Click="ChooseIcon_Click">Choose icon</Button>
-            <Label  Name="FileName"></Label>
-        </StackPanel>
-        <Label Grid.Row="3" Grid.Column="0">Description:</Label>
-        <TextBox Grid.Row="3" Grid.Column="1"  Name="Description"></TextBox>
-        <Label Grid.Row="4" Grid.Column="0">* Required fields</Label>
-        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
-    </Grid>
+        Title="Edit resource type"
+        WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="1400"
+        FontSize="40"
+        ResizeMode="NoResize"
+        WindowStyle="ToolWindow">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid ScrollViewer.CanContentScroll="True" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0">*Id:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1"  Name="Id"></TextBox>
+            <Label Grid.Row="1" Grid.Column="0">*Name:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1"  Name="Name"></TextBox>
+            <Label Grid.Row="2" Grid.Column="0">*Icon:</Label>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                <Button Click="ChooseIcon_Click">Choose icon</Button>
+                <Image Name="Icon" Width="50" Height="50"></Image>
+                <Label  Name="FileName"></Label>
+            </StackPanel>
+            <Label Grid.Row="3" Grid.Column="0">Description:</Label>
+            <TextBox Grid.Row="3" Grid.Column="1"  Name="Description"></TextBox>
+            <Label Grid.Row="4" Grid.Column="0">* Required fields</Label>
+            <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click">Submit</Button>
+        </Grid>
+    </ScrollViewer>
 </Window>
