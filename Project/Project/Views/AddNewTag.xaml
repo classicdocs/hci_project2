@@ -24,9 +24,9 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.Column="0" FontSize="{Binding font}" >*Id:</Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=id}" FontSize="{Binding font}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=id}" FontSize="{Binding font}"  MaxLength="10"></TextBox>
         <Label Grid.Row="1" Grid.Column="0" FontSize="{Binding font}">*Name:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}" FontSize="{Binding font}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}" FontSize="{Binding font}"  MaxLength="30"></TextBox>
         <Label Grid.Row="2" Grid.Column="0" FontSize="{Binding font}">*Color:</Label>
         <ComboBox Grid.Row="2" Grid.Column="1" Name="cmbColors" FontSize="{Binding font}">
             <ComboBox.ItemTemplate>
@@ -39,7 +39,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label Grid.Row="3" Grid.Column="0" FontSize="{Binding font}">Description:</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=description}" FontSize="{Binding font}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=description}" FontSize="{Binding font}"  MaxLength="50"></TextBox>
         <Label Grid.Row="4" Grid.Column="0" FontSize="{Binding font}">* Required fields</Label>
         <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click"  IsDefault="True" FontSize="{Binding font}">Submit</Button>
     </Grid>

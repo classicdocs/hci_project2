@@ -1053,7 +1053,32 @@ namespace Project
             d.ShowDialog();
         }
 
-
+        const double ScaleRate = 1.1;
+        private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                st.ScaleX *= ScaleRate;
+                st.ScaleY *= ScaleRate;
+                st2.ScaleX *= ScaleRate;
+                st2.ScaleY *= ScaleRate;
+                st3.ScaleX *= ScaleRate;
+                st3.ScaleY *= ScaleRate;
+                st1.ScaleX *= ScaleRate;
+                st1.ScaleY *= ScaleRate;
+            }
+            else
+            {
+                st.ScaleX /= ScaleRate;
+                st.ScaleY /= ScaleRate;
+                st1.ScaleX /= ScaleRate;
+                st1.ScaleY /= ScaleRate;
+                st2.ScaleX /= ScaleRate;
+                st2.ScaleY /= ScaleRate;
+                st3.ScaleX /= ScaleRate;
+                st3.ScaleY /= ScaleRate;
+            }
+        }
 
     }
 

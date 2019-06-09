@@ -364,31 +364,43 @@
 
                             <TabItem x:Name ="First" Header="First Map" FontSize="30"  Visibility="Hidden">
                                 <Canvas x:Name="Cnv"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500"
-                                        >
-                                        <Canvas.Background>
+                                        MouseWheel="Canvas_MouseWheel">
+                                    <Canvas.RenderTransform>
+                                        <ScaleTransform x:Name="st"/>
+                                    </Canvas.RenderTransform>
+                                    <Canvas.Background>
                                             <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                         </Canvas.Background>
                                 </Canvas>
                             </TabItem>
                             <TabItem x:Name ="Second" Header="Second Map" FontSize="30"  Visibility="Hidden">
-                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
+                                <Canvas x:Name="Cnv2"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500" MouseWheel="Canvas_MouseWheel">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
+                                    <Canvas.RenderTransform>
+                                        <ScaleTransform x:Name="st1"/>
+                                    </Canvas.RenderTransform>
                                 </Canvas>
                             </TabItem>
                             <TabItem x:Name ="Third" Header="Third Map" FontSize="30" Visibility="Hidden">
-                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500">
+                                <Canvas x:Name="Cnv3"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter" DragOver="Cnv_DragOver" Width="1500" Height="1500" MouseWheel="Canvas_MouseWheel">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
+                                    <Canvas.RenderTransform>
+                                        <ScaleTransform x:Name="st2"/>
+                                    </Canvas.RenderTransform>
                                 </Canvas>
                             </TabItem>
                             <TabItem x:Name ="Fourth" Header="Fourth Map" FontSize="30"  Visibility="Hidden">
-                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="1500" Height="1500">
+                                <Canvas x:Name="Cnv4"  AllowDrop="True" Drop="Cnv_Drop" DragEnter="Cnv_DragEnter"  DragOver="Cnv_DragOver" Width="1500" Height="1500" MouseWheel="Canvas_MouseWheel">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resource/world-map.png" Stretch="Fill"></ImageBrush>
                                     </Canvas.Background>
+                                    <Canvas.RenderTransform>
+                                        <ScaleTransform x:Name="st3"/>
+                                    </Canvas.RenderTransform>
                                 </Canvas>
                                 </TabItem>
                             <!--</Canvas>-->

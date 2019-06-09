@@ -33,11 +33,11 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" FontSize="{Binding font}">*Id:</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=id}" FontSize="{Binding font}"></TextBox>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=id}" FontSize="{Binding font}" MaxLength="10"></TextBox>
             <Label Grid.Row="1" Grid.Column="0" FontSize="{Binding font}">*Name:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}" FontSize="{Binding font}"></TextBox>
-            <Label Grid.Row="2" Grid.Column="0" FontSize="{Binding font}">Description:</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=description}" FontSize="{Binding font}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}" FontSize="{Binding font}" MaxLength="30"></TextBox>
+            <Label Grid.Row="2" Grid.Column="0" FontSize="{Binding font}" >Description:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=description}" FontSize="{Binding font}" MaxLength="50"></TextBox>
             <Label Grid.Row="3" Grid.Column="0" FontSize="{Binding font}">*Type:</Label>
             <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Path=types}" Name="cmbType" FontSize="{Binding font}" >
                 <ComboBox.ItemTemplate>

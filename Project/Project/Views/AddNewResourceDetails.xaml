@@ -65,7 +65,7 @@
             <Label Grid.Row="10" Grid.Column="0" FontSize="{Binding font}">Price:</Label>
             <Label Grid.Row="10" Grid.Column="1" Name="Price" FontSize="{Binding font}"></Label>
             <Label Grid.Row="11" Grid.Column="0" FontSize="{Binding font}">*Date of discovery:</Label>
-            <TextBox Grid.Row="11" Grid.Column="1" Name="DateOfDicovery" Text="{Binding dateOfDiscovery}" FontSize="{Binding font}"></TextBox>
+            <TextBox Grid.Row="11" Grid.Column="1" Name="DateOfDicovery" Text="{Binding dateOfDiscovery}" FontSize="{Binding font}" MaxLength="4" PreviewTextInput="NumberValidationTextBox"></TextBox>
             <Label Grid.Row="12" Grid.Column="0" FontSize="{Binding font}">Tags:</Label>
             <ScrollViewer Grid.Row="12" Grid.Column="1">
                 <ListView ItemsSource="{Binding tags}" Name="tagsList" SelectionChanged="tagsList_SelectionChanged" FontSize="{Binding font}">
